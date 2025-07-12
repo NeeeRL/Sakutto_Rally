@@ -22,3 +22,20 @@ lost+found/
 *.tmp
 *~
 *.log
+
+# node
+node_modules/
+dist/
+build/
+out/
+.tmp/
+.cache/
+.env
+.env.*
+
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
