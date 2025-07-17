@@ -1,8 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+
 import App from './App.tsx'
-import Header from './header.tsx'
+import Load from './loadFiles.tsx'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,12 +14,15 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     errorElement: <h1>エラー</h1>
+  },
+  {
+    path: '/load',
+    element: <Load />
   }
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Header />
     <RouterProvider router={router}/>
   </StrictMode>,
 )
