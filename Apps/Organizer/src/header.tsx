@@ -9,7 +9,6 @@ function header(props: {text: string}) {
 
   return (
     <>
-      {/* ヘッダー */}
       <div className="flex items-center h-15 w-full">
         {/* 戻るアイコン */}
         {!isReturnButton && (
