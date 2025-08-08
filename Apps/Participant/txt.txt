@@ -1,0 +1,89 @@
+# A
+
+#include<bits/stdc++.h>
+
+int main()
+{
+    int n;
+    std::string s;
+    int a, b;
+
+    std::cin >> n >> a >> b >> s;
+
+    bool isok = true;
+
+    for(int i = a-1; i < b; i++) {
+        if(s[i] != 'o') isok = false;
+    }
+
+    if(isok) {
+        std::cout << "Yes" << std::endl;
+    }else {
+        std::cout << "No" << std::endl;
+    }
+
+    return 0;
+}
+
+# B
+#include<bits/stdc++.h>
+
+int main()
+{
+    std::string s;
+    std::cin >> s;
+
+    int a = s.size();
+
+    std::vector<char> t(a,'.');
+
+    for(int i = 0; i < a; i++) {
+        if(s[i] == '#') {
+            t[i] = '#';
+
+            // segmentation taisaku
+            if ((i != 0) && (i != a - 1)) {
+                if(t[i - 1] != '#') t[i - 1] = 'o';
+                if(t[i + 1] != '#') t[i + 1] = 'o';
+            }else if (i == 0) {
+                if(t[i + 1] != '#') t[i + 1] = 'o';
+            }else {
+                if(t[i - 1] != '#') t[i - 1] = 'o';
+
+            }
+        }
+    }
+
+    bool isok = false; 
+    for(int i = 0; i < a; i++) {       
+        if(isok) {
+            if(t[i] == 'o') {
+                t[i] = '.';
+            }
+            if(t[i] == '#') {
+                isok = false;
+            }
+        }
+        if(t[i] == 'o') {
+            isok = true;
+        }
+    }
+
+    
+    // isok を再利用する
+    isok = true;
+    for(int i = 0; i < a; i++) {
+        if(t[i] != '.') isok = false;
+    }
+
+    if(isok) t[0] = 'o';
+
+    for(int i = 0; i < a; i++) {
+        std::cout << t[i];
+    }
+
+    std::cout << std::endl;
+
+    return 0;
+}
+
