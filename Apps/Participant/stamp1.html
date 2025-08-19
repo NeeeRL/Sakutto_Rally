@@ -12,6 +12,10 @@
 
     <script>
         localStorage.setItem('stamp1', 'true');
+        if (localStorage.getItem('stamp2') === 'true' && localStorage.getItem('stamp3') === 'true') {
+            window.location.href = 'clear.html';
+            
+        }
     </script>
 </body>
 </html>

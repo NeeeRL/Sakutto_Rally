@@ -12,6 +12,12 @@
 
     <script>
         localStorage.setItem('stamp2', 'true');
+
+        // 実装の際、正直自分含めってところだから正直この場合はstamp２を確認するのを脳死でやってもいいかも
+        if (localStorage.getItem('stamp1') === 'true' && localStorage.getItem('stamp3') === 'true') {
+            window.location.href = 'clear.html';
+            
+        }
     </script>
 </body>
 </html>
