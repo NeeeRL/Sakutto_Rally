@@ -1,6 +1,6 @@
 export interface checkPoint {
     id: string
-    text: string
+    name: string
 }
 
 export interface eventData {

@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 
 interface CheckPoint {
   id: string
-  text: string
+  name: string
 }
 
 function addCheckPoints () {
@@ -16,7 +16,7 @@ function addCheckPoints () {
     const addCheckPoint = (event: React.FormEvent) => {
         event.preventDefault()
         if (newCheckPoint.trim() === "") return
-        setCheckPoints([...checkPoints, { id: nanoid(), text: newCheckPoint }])
+        setCheckPoints([...checkPoints, { id: nanoid(), name: newCheckPoint }])
         setNewCheckPoint("")
     }
 
@@ -54,7 +54,7 @@ function addCheckPoints () {
                                 key={checkPoint.id}
                                 className="flex items-start py-1.5 px-2.5 justify-between w-full"
                             >
-                                <span className="text-sm">{checkPoint.text}{checkPoint.id}</span>
+                                <span className="text-sm">{checkPoint.name}{checkPoint.id}</span>
                                 <button
                                     onClick={() => removeCheckPoint(checkPoint.id)}
                                     className="flex h-full items-center my-auto"
