@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>title!!!!</title>
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="src/index.css" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="contents!!!!!">
@@ -28,28 +28,38 @@
             <img src="img/map.png" alt="スタンプラリーの地図" class="w-full h-auto border">
 
         </main>
-        <footer class="h-[9vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-around" id="fotter-items">
-        <a href="map.html" class="w-[30vw] flex flex-col items-center justify-center pt-3 pb-3 text-blue-600 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
-            <p class="text-3xl">地図</p>
-        </a>
-        <a href="index.html" class="w-[30vw] flex flex-col items-center justify-center pt-3 pb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            <p class="text-3xl">ホーム</p>
-        </a>
-        <a href="progress.html" class="w-[30vw] flex flex-col items-center justify-center pt-3 pb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-            </svg>
-            <p class="text-3xl">進捗</p>
-        </a>
-    </footer>
+        <footer class="h-[9vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-around " id="fotter-items">
+            <a href="index.html" class="relative w-[27vw] h-[73%] pt-3 pb-3 mr-[1vw] ml-[2vw] flex items-center justify-center">
+            <!-- 左上 -->
+            <div class="absolute top-0 left-0 w-23 h-14 border-t-4 border-l-4 border-black "></div>
+            <!-- 右上 -->
+            <div class="absolute top-0 right-0 w-23 h-14 border-t-4 border-r-4 border-black "></div>
+            <!-- 左下 -->
+            <div class="absolute bottom-0 left-0 w-23 h-14 border-b-4 border-l-4 border-black "></div>
+            <!-- 右下 -->
+            <div class="absolute bottom-0 right-0 w-23 h-14 border-b-4 border-r-4 border-black "></div>
+            
+            <div class="flex flex-col items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                    <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
+                </svg>
 
+                <p class="text-4xl">地図</p>
+            </div>
+        </a>
+            <a href="index.html" class="w-[27vw] flex flex-col items-center justify-center pt-3 pb-3 mr-[1vw] ml-[1vw] ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                   <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <p class="text-3xl">ホーム</p>
+            </a>
+            <a href="progress.html" class="w-[27vw] flex flex-col items-center justify-center pt-3 pb-3 mr-[2vw] ml-[1vw]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                </svg>
+                <p class="text-3xl">進捗</p>
+            </a>
+        </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const fotter = document.getElementById('fotter-items');
