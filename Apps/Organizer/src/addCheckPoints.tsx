@@ -54,7 +54,8 @@ function addCheckPoints () {
                                 key={checkPoint.id}
                                 className="flex items-start py-1.5 px-2.5 justify-between w-full"
                             >
-                                <span className="text-sm">{checkPoint.name}{checkPoint.id}</span>
+                                {/* デバッグ用に赤い文字でIDを出力している */}
+                                <span className="text-sm">{checkPoint.name}<span className='text-red-600'>{checkPoint.id}</span></span>
                                 <button
                                     onClick={() => removeCheckPoint(checkPoint.id)}
                                     className="flex h-full items-center my-auto"
