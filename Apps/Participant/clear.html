@@ -10,25 +10,25 @@
     </head>
     <body class="bg-gray-50">
         <header>
-            <div class="relative rounded-full mt-9 h-[8vh] shadow-xl mr-5 ml-5 flex items-center bg-white" >
-                <h1 class="text-6xl py-9 absolute left-1/2 -translate-x-1/2">
+            <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white" >
+                <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
                    クリア!!
                 </h1>    
             </div>
         </header>
-        <main class="mr-15 mb-15 ml-15 mt-20 ">
-            <div class="mt-5 mp-5">
-                <h1 class="text-6xl text-center pb-7">🎉 報酬を獲得!! 🎉</h1>
+        <main class="mr-16 mb-16 ml-16 mt-20 ">
+            <div class="mt-6 mp-5">
+                <h1 class="text-6xl text-center pb-8">🎉 報酬を獲得!! 🎉</h1>
                 <p class="text-3xl text-center ">この画面を係員に見せて景品と交換してね!!</p>
             </div>
             <img src="img/map.png" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
-            <div id="clear-button" class="rounded-full bg-yellow-300 hover:bg-yellow-500 cursor-pointer pt-5 pb-5 transition-colors duration-300">
-                <p class="text-5xl text-center font-bold">景品と交換する</p>
+             <div class="flex items-center justify-center">
+            <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-full ">
+                <p  class="text-5xl text-center font-bold pt-3">景品と交換する</p>
+                <p class="text-3xl text-center ">※スタンプラリーデータは削除されます</p>
+
             </div>
-            <div id="clear-localstorage-button" class="mt-15 rounded-full bg-yellow-300 hover:bg-yellow-500 cursor-pointer pt-5 pb-5 transition-colors duration-300">
-                <p  class="text-5xl text-center font-bold">LocalStorage Clear suru</p>
-            </div>
-        </main>
+        </div> 
         <footer class="h-[8vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-around " id="fotter-items">
         <a href="map.html" class="w-[27vw] flex flex-col items-center justify-center pt-3 pb-3 mr-[1vw] ml-[2vw]">
             <div class="flex flex-col items-center justify-center">
@@ -65,14 +65,14 @@
             
             
         </a>
-    </footer>
+        </footer>
 
         <script>
             document.getElementById('clear-localstorage-button').addEventListener('click', () => {
-                if (confirm('clear ok?')) {
+                if (confirm('本当に全部のスタンプのデータを削除しても問題ないですか？')) {
                     localStorage.clear();
-                    alert('clear shita o^^');
-                    window.location.href = 'index.html'; // 進捗ページにリダイレクト
+                    alert('削除しました。ホームページへ戻ります');
+                    window.location.href = 'index.html'; // ホームページにリダイレクト
                 }
             });
         </script>
