@@ -6,7 +6,8 @@ import type { eventData } from './types/event'
 function createEvent () {
 
     const [ eventName, setEventName ] = useState<string>("")
-    const [ date, setDate ] = useState<string>("")
+    const [ startDate, setStartDate ] = useState<string>("")
+    const [ endDate, setEndDate ] = useState<string>("")
     // mapは画像
     // const [ map, setMap ] = useState<string>("")
     const [ description, setDescription ] = useState<string>("")
@@ -23,7 +24,8 @@ function createEvent () {
         const newData: eventData = {
             // ...data,
             eventName: eventName,
-            date: date,
+            startDate: startDate,
+            endDate: endDate,
             description: description,
             //チェックポイントは初期値あったほうがいいのでは？例として。今はnullを入れるために形をnull許容にしている。
             checkPoints: null
@@ -53,11 +55,19 @@ function createEvent () {
                         type="text" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" placeholder="イベントの名称を入力"
                     />
-                    <label htmlFor="date" className="mt-6 my-2 block">イベントの終了日</label>
+                    <label htmlFor="startDate" className="mt-6 my-2 block">イベントの開始日</label>
                     <input 
-                        id="date" 
-                        value={date}
-                        onChange={ (event) => setDate(event.target.value) }
+                        id="startDate" 
+                        value={startDate}
+                        onChange={ (event) => setStartDate(event.target.value) }
+                        type="date" 
+                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
+                    />
+                    <label htmlFor="endDate" className="mt-6 my-2 block">イベントの終了日</label>
+                    <input 
+                        id="endDate" 
+                        value={endDate}
+                        onChange={ (event) => setEndDate(event.target.value) }
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />

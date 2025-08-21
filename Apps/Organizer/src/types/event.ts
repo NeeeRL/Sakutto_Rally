@@ -5,7 +5,8 @@ export interface checkPoint {
 
 export interface eventData {
     eventName: string
-    date: string
+    startDate: string
+    endDate: string
     description: string
     checkPoints: checkPoint | null
 }
