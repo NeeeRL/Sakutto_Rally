@@ -67,14 +67,66 @@
         </a>
         </footer>
 
+        <!-- boyake ha koko -->
+        <div id="pop-up" class="fixed inset-0 z-30 hidden backdrop-blur-[2px] shadow-2xl flex justify-center items-center ">
+            <div class="relative w-[70vw] h-[58vh] px-2 py-2 z-50  bg-white rounded-4xl shadow-xl p-10 border-10 flex flex-col justify-between items-center">
+
+                <div class="w-[85%]  mt-76">  
+                    <div class="flex items-center mb-16 border-b pb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-18">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                        </svg>
+                        <h1 id="popup-message" class="text-7xl py-10 absolute left-1/2 -translate-x-1/2">確認</h1>
+                    </div>
+                    <p id="popup-message-2" class="text-5xl mx-3">本当にスタンプのすべてのデータを削除しても大丈夫でしょうか？</p>
+                </div>
+                <div class="w-[85%] flex justify-center items-center flex-col mb-76">
+                    <div class="flex justify-center mt-8 w-full">
+                        <button id="yes-pop" class="rounded-full bg-gray-300 w-full py-4 text-5xl font-bold my-6">はい</button>
+                    </div>
+                    <div class="flex justify-center mt-8 w-full">
+                        <button id="no-pop" class="rounded-full bg-gray-300 w-full text-5xl py-4 font-bold">いいえ</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
         <script>
-            document.getElementById('clear-localstorage-button').addEventListener('click', () => {
-                if (confirm('本当に全部のスタンプのデータを削除しても問題ないですか？')) {
-                    localStorage.clear();
-                    alert('削除しました。ホームページへ戻ります');
-                    window.location.href = 'index.html'; // ホームページにリダイレクト
-                }
+            const popup = document.getElementById('pop-up');
+            const YesPop = document.getElementById('yes-pop');
+            const NoPopup = document.getElementById('no-pop');
+            const body = document.body;
+            const popup_message = document.getElementById('popup-message');
+            const popup_message2 = document.getElementById('popup-message2');
+
+
+            // もう少し頭いい書き方あるかも…頭が回らないので一旦これで保留
+
+            // ok
+            YesPop.addEventListener('click', () => {
+                localStorage.clear();
+                body.classList.remove('overflow-hidden');
+                popup.classList.toggle('hidden');
+
+                window.location.href = 'index.html'
             });
+            // iie
+            NoPopup.addEventListener('click', () => {
+                popup.classList.toggle('hidden');
+                body.classList.remove('overflow-hidden');
+            });
+            // hiraku
+            document.getElementById('clear-localstorage-button').addEventListener('click', () => {
+                popup.classList.remove('hidden');
+                body.classList.add('overflow-hidden');
+            });
+            // haikei
+            popup.addEventListener('click', () => {
+                popup.classList.add('hidden');
+                body.classList.remove('overflow-hidden');
+            })
+            
         </script>
     </body>
 </html>
