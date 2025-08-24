@@ -96,7 +96,7 @@
         <p>ffff</p>
         <p>ffff</p>
         <div class="flex items-center justify-center">
-            <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-[90%] ">
+            <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6  w-[90%] ">
                 <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
             </div>
         </div>
@@ -144,8 +144,8 @@
 
 
     <!-- boyake ha koko -->
-<div id="pop-up" class="hidden fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
-    <div id="pop-bar" class=" w-full h-[38vh] bg-white rounded-t-4xl shadow-2xl p-6 flex flex-col justify-between items-center">
+<div id="pop-up" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
+    <div id="pop-bar" class=" w-full h-[38vh] bg-white rounded-t-4xl shadow-2xl p-6 flex flex-col justify-between items-center transition-transform translate-y-full">
         <div class="flex justify-center items-center flex-col">
             <div class="flex justify-center w-full">
                 <div class="w-[20vw] h-4 bg-gray-300 rounded-full"></div>
@@ -175,7 +175,7 @@
             let FotterHeight = fotter.offsetHeight;
 
             const mainElement = document.getElementById('mains');
-            // 10vhを示している。10をxとして、変更していいお
+            // 10vhを示している。10をxとして、変更していいお　追記：　７vh　なう
             const amari = (window.innerHeight * 7) / 100;
             mainElement.style.marginBottom = `${FotterHeight + amari }px`;
 
@@ -192,23 +192,28 @@
             const popBar = document.getElementById('pop-bar');
 
 
-            // もう少し頭いい書き方あるかも…頭が回らないので一旦これで保留
+            // hiddenを解雇してオパシティで管理する 閉じる関数作ればよかったね後悔
 
             // ok
             YesPop.addEventListener('click', () => {
                 localStorage.clear();
                 body.classList.remove('overflow-hidden');
-                popup.classList.toggle('hidden');
             });
             // iie
             NoPopup.addEventListener('click', () => {
-                popup.classList.toggle('hidden');
-                body.classList.remove('overflow-hidden');
+                console.log('a');
+                popup.classList.remove('hidden');
+
             });
             // hiraku
             document.getElementById('clear-localstorage-button').addEventListener('click', () => {
-                popup.classList.remove('hidden');
+                popup.classList.remove('opacity-0',  'pointer-events-none');
                 body.classList.add('overflow-hidden');
+                popup.addEventListener('transitionend', () => {
+                    popBar.classList.remove('translate-y-full');
+                    popBar.classList.add('translate-y-0', 'duration-250', 'ease-in');
+                }, { once: true });
+                
             });
             // haikei
             popup.addEventListener('click', () => {
@@ -248,23 +253,25 @@
                 popBar.style.transform = '';
                 popBar.classList.remove('transition-none');
 
-                popBar.classList.add('transition-transform', 'duration-300', 'ease-in');
-
+                popBar.classList.add('transition-transform', 'duration-250', 'ease-in');
+                
+                // shita ni sagaru
                 if(kyori > lengthLine) {
-                    popBar.classList.add('transition-transform', 'duration-300', 'ease-in');
+                    popBar.classList.add('transition-transform', 'duration-250', 'ease-in');
                     popBar.classList.add('translate-y-full');
 
                     popBar.addEventListener('transitionend', () => {
-                        popup.classList.add('hidden');
+                        popup.classList.add('opacity-0',  'pointer-events-none');
+                        popBar.classList.add('translate-y-full');
                         body.classList.remove('overflow-hidden');
-                        popBar.classList.remove('transition-transform', 'duration-300', 'ease-in', 'translate-y-full');
+                        popBar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
                     }, { once: true });
                 }else {
-                    popBar.classList.add('transition-transform', 'duration-300', 'ease-in');
+                    popBar.classList.add('transition-transform', 'duration-250', 'ease-in');
 
                     popBar.classList.add('translate-y-0');
                     popBar.addEventListener('transitionend', () => {
-             popBar.classList.remove('transition-transform', 'duration-300', 'ease-in', 'translate-y-0');
+             popBar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
         }, { once: true });
                 }
 
