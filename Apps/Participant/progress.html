@@ -19,6 +19,11 @@
                 </h1>    
             </div>
         </header>
+        
+        <noscript class="mr-16 ml-16 mt-10">
+        <p class="text-4xl ">JSが有効でないようです。このサイトを満足に使うにはJavaScriptを有効にしてください。</p>
+    </noscript>
+
     <main class="mr-16 mb-16 ml-16 mt-20" id="mains">
         <div>
             <h1 class="text-7xl mb-16">チェック済み</h1>
@@ -78,7 +83,6 @@
             let FotterHeight = fotter.offsetHeight;
 
             const mainElement = document.getElementById('mains');
-            // 10vhを示している。10をxとして、変更していいお
             const amari = (window.innerHeight * 7) / 100;
             mainElement.style.marginBottom = `${FotterHeight + amari }px`;
 

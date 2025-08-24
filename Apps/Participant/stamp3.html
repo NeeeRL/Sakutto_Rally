@@ -16,6 +16,11 @@
                 </h1>    
             </div>
         </header>
+
+        <noscript class="mr-16 ml-16 mt-10">
+        <p class="text-4xl ">JSが有効でないようです。このサイトを満足に使うにはJavaScriptを有効にしてください。</p>
+    </noscript>
+    
         <main class="mr-16 mb-16 ml-16 mt-20 ">
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">スタンプを獲得しました</h1>
@@ -64,6 +69,7 @@
     </footer>
 
       <script>
+                document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('stamp3', 'true');
         if (localStorage.getItem('stamp1') === 'true' && localStorage.getItem('stamp2') === 'true') {
             window.location.href = 'clear.html';
@@ -74,6 +80,7 @@
         clear_button.addEventListener('click', () => {
             window.location.href = 'progress.html';
         });
+    });
     </script> 
     </body>
 </html>
