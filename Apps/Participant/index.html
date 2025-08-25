@@ -196,12 +196,10 @@
                 popBar.classList.add('translate-y-full');
                 body.classList.remove('overflow-hidden');
 
-                popBar.addEventListener('transitionend', () => {
+                setTimeout(() => {
                     popup.classList.add('opacity-0',  'pointer-events-none');
-                    //念の為リセット
                     popBar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
-
-                }, { once: true });
+                }, 300);
             }
 
 
@@ -231,7 +229,7 @@
                 if (e.target === popup) {
                     closePopup();
                 }
-            })
+            });
             
 
             
@@ -272,7 +270,7 @@
                 } else {
                     popBar.classList.add('translate-y-0');
                     popBar.addEventListener('transitionend', () => {
-                        popBar.classList.remove('transition-transform', 'duration-250', 'ease-in');
+                        popBar.classList.remove('transition-transform', 'ease-in');
                     }, { once: true });
                 }
 
