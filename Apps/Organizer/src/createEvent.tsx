@@ -1,33 +1,48 @@
 import Header from './header.tsx'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import type { eventData } from './types/event'
+import type { preEventData } from './types/event'
 
-function createEvent () {
+const getInitialValue = (key: string) => {
+    const stored = localStorage.getItem("eventData")
+    if (!stored) {
+        return null
+    }
 
-    const [ eventName, setEventName ] = useState<string>("")
-    const [ startDate, setStartDate ] = useState<string>("")
-    const [ endDate, setEndDate ] = useState<string>("")
+    try {
+        const parsedData = JSON.parse(stored)
+        return parsedData[key] ? parsedData[key] : null
+    }
+    catch (event) {
+        console.error("JSON is not formatted", event)
+    }
+}
+
+const createEvent = () => {
+
+    const [ eventName, setEventName ] = useState<string>(getInitialValue("eventName"))
+    const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")))
+    const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate"))
     // mapは画像
     // const [ map, setMap ] = useState<string>("")
-    const [ description, setDescription ] = useState<string>("")
+    const [ description, setDescription ] = useState<string>(getInitialValue("description"))
     // thumbnailは画像
     // const [ thumbnail, setThumbnail ] = useState<string>("")
 
-    const handleSave = () => {
-        //ここは後で空の場合の判別で使う
-        const stored = localStorage.getItem("eventData")
+    const saveInput = () => {
+        //ここは後で空の場合の判別で使う？使わないかも
+        // const stored = localStorage.getItem("eventData")
         //これはデバッグ用
         // console.log(stored)
         // const data: eventData = stored ? JSON.parse(stored) : {} as eventData
 
-        const newData: eventData = {
+        const newData: preEventData = {
             // ...data,
             eventName: eventName,
             startDate: startDate,
             endDate: endDate,
             description: description,
-            //チェックポイントは初期値あったほうがいいのでは？例として。今はnullを入れるために形をnull許容にしている。
+            //今はnullを入れるために形をnull許容にしている。
             checkPoints: null
         }
 
@@ -96,7 +111,7 @@ function createEvent () {
                 </div>
                 <Link 
                     to="/checkpoints" 
-                    onClick={handleSave}
+                    onClick={saveInput}
                     className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
                 >
                     イベントを作成
