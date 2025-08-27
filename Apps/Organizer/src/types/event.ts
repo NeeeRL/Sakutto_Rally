@@ -9,7 +9,7 @@ export interface preEventData {
     startDate: string
     endDate: string
     description: string
-    checkPoints: checkPoint | null
+    checkPoints: checkPoint[] | null
 }
 
 export interface eventData {
@@ -17,5 +17,5 @@ export interface eventData {
     startDate: string
     endDate: string
     description: string
-    checkPoints: checkPoint
+    checkPoints: checkPoint[]
 }

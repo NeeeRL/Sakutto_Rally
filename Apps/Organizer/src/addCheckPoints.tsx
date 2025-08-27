@@ -7,7 +7,7 @@ import type { checkPoint, eventData } from './types/event.ts'
 const getInitialValue = (key: string) => {
     const stored = localStorage.getItem("eventData")
     if (!stored) {
-        return null
+        return []
     }
 
     try {
@@ -16,6 +16,7 @@ const getInitialValue = (key: string) => {
     }
     catch (event) {
         console.error("JSON is not formatted", event)
+        return []
     }
 }
 
