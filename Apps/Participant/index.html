@@ -145,8 +145,8 @@
                 alert("このサイトではスマホでの使用を推奨しています。");
             }
 
-            screen.orientation.lock('portrait').catch(error => {
-                
+            screen.orientation.lock("portrait-primary").catch(error => {
+                console.log('Orientation lock failed:', error);
             });
 
 
