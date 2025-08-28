@@ -25,7 +25,7 @@
     </noscript>
 
 
-    <main class="mr-16 ml-16 mt-20" id="mains">
+    <main class="mr-16 ml-16 mt-20 mb-[20vh]">
         <div class="flex items-center flex-col">
             <h1 class="text-7xl py-2 my-2">スタンプラリー</h1>
             <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
@@ -122,7 +122,6 @@
                 </svg>
                 <h1 class="text-7xl font-bold my-4">確認</h1>
                 <p class="text-5xl mt-4 text-gray-600">本当にスタンプのすべてのデータを削除しても大丈夫でしょうか？</p>
-                <p class="text-4xl mt-6 text-center">※この操作は取り消せません</p>
             </div>
         </div>
         
@@ -137,8 +136,6 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const fotter = document.getElementById('fotter-items');
-            let FotterHeight = fotter.offsetHeight;
 
            const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
             if (isPC) {
@@ -152,13 +149,6 @@
                 
             });
  
-
-
-            const mainElement = document.getElementById('mains');
-            // 10vhを示している。10をxとして、変更していいお　追記：　７vh　なう
-            const amari = (window.innerHeight * 7) / 100;
-            mainElement.style.marginBottom = `${FotterHeight + amari }px`;
-
 
 
             const popup = document.getElementById('pop-up');
