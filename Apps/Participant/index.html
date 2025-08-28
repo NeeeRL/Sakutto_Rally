@@ -147,11 +147,9 @@
 
             window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
                 if (e.matches) {
-                    console.log("横長に変わりました");
-                    alert("tatenaga");
-                } else {
-                    console.log("縦長に変わりました");
-                }
+                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
+                } 
+                
             });
  
 
