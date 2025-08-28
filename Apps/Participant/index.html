@@ -145,10 +145,8 @@
                 alert("このサイトではスマホでの使用を推奨しています。");
             }
 
-            window.addEventListener("orientationchange", () => {
-                if(window.innerWidth > window.innerHeight ) {
-                    alert("このサイトでは縦向きでの使用を推奨しています。");
-                }
+            screen.orientation.lock('portrait').catch(error => {
+                
             });
 
 
