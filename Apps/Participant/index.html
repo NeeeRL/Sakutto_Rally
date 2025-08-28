@@ -27,80 +27,45 @@
 
     <main class="mr-16 ml-16 mt-20" id="mains">
         <div class="flex items-center flex-col">
-            <h1 class="text-7xl py-2 my-2">とあるスタンプラリー</h1>
+            <h1 class="text-7xl py-2 my-2">スタンプラリー</h1>
             <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-13 pr-2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
                 </svg>
-                <p class="text-5xl">期間: mm/ddからMM/DDまで</p>
+                <p class="text-5xl">期間: 8/30から8/31まで</p>
             </div>
         </div>
         
-        <div class="flex justify-center mt-16 mb-10">
-            <img src="img/bg.png" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
+        <div class="flex justify-center mt-16 mb-16">
+            <img src="img/stamp_rally_boy.png" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
         </div>
-        <p class="text-4xl">このページはスタンプラリーのシミュレーションです。以下のリンクをクリックしてスタンプを集めましょう。</p>
+        <p class="text-5xl w-[90%] m-auto">スタンプラリーの参加、ありがとうございます。早速QRコードをスキャンして、スタンプラリーをクリアしましょう!!</p>
 
-        <div class="text-8xl border p-10">
-            <h2>dev-tools</h2>
-            <a href="stamp1.html" class="border-b">stamp1</a>
-            <a href="stamp2.html" class="border-b">stamp2</a>
-            <a href="stamp3.html" class="border-b">stamp3</a>
+        <div class="text-4xl border mt-4">
+            <div class="m-6 ">
+                <h2 class="text-5xl">カメラが動かない方はこちら</h2>
+                <ul>
+                    <li class="m-6">
+                        <a class="text-5xl" href="stamp1.html" class="border-b">stamp1</a>
+                    </li>
+                    <li class="m-6">
+                        <a class="text-5xl" href="stamp2.html" class="border-b">stamp2</a>
+                    </li>
+                    <li class="m-6">
+                        <a class="text-5xl" href="stamp3.html" class="border-b">stamp3</a>
+                    </li>
+                </ul>
+            </div>
+            
         </div>
-        <p>ffff</p>
-                <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
-        <p>ffff</p>
+        
         <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6  w-[90%] ">
                 <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
             </div>
         </div>
          
+        
      </main>
 
     <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-around " id="fotter-items">
@@ -145,7 +110,7 @@
 
     <!-- boyake ha koko -->
 <div id="pop-up" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
-    <div id="pop-bar" class=" w-full h-[38vh] bg-white rounded-t-4xl shadow-2xl p-6 flex flex-col justify-between items-center transition-transform translate-y-full">
+    <div id="pop-bar" class=" w-full h-[40vh] bg-white rounded-t-4xl shadow-2xl p-6 flex flex-col justify-between items-center transition-transform translate-y-full">
         <div class="flex justify-center items-center flex-col">
             <div class="flex justify-center w-full">
                 <div class="w-[20vw] h-4 bg-gray-300 rounded-full"></div>
@@ -157,6 +122,7 @@
                 </svg>
                 <h1 class="text-7xl font-bold my-4">確認</h1>
                 <p class="text-5xl mt-4 text-gray-600">本当にスタンプのすべてのデータを削除しても大丈夫でしょうか？</p>
+                <p class="text-4xl mt-6 text-center">※この操作は取り消せません</p>
             </div>
         </div>
         
