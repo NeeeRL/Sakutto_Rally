@@ -25,7 +25,7 @@
     </noscript>
 
 
-    <main class="mr-16 ml-16 mt-20 mb-[20vh]">
+    <main class="mr-16 ml-16 mt-20" id="mains">
         <div class="flex items-center flex-col">
             <h1 class="text-7xl py-2 my-2">スタンプラリー</h1>
             <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
@@ -137,18 +137,27 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
+            
+
            const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
             if (isPC) {
                 alert("このサイトではスマホでの使用を推奨しています。");
             }
 
             window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
+                if ((!isPC)&&(e.matches)) {
                     alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
                 } 
                 
             });
- 
+            
+            const fotter = document.getElementById('fotter-items');
+            let FotterHeight = fotter.offsetHeight;
+
+            const mainElement = document.getElementById('mains');
+            // 7vh
+            const amari = (window.innerHeight * 7) / 100;
+            mainElement.style.marginBottom = `${FotterHeight + amari }px`;
 
 
             const popup = document.getElementById('pop-up');
