@@ -140,14 +140,20 @@
             const fotter = document.getElementById('fotter-items');
             let FotterHeight = fotter.offsetHeight;
 
-            const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
+           const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
             if (isPC) {
                 alert("このサイトではスマホでの使用を推奨しています。");
             }
 
-            screen.orientation.lock("portrait-primary").catch(error => {
-                console.log('Orientation lock failed:', error);
+            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+                if (e.matches) {
+                    console.log("横長に変わりました");
+                    alert("tatenaga");
+                } else {
+                    console.log("縦長に変わりました");
+                }
             });
+ 
 
 
             const mainElement = document.getElementById('mains');
