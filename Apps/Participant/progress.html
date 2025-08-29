@@ -26,26 +26,32 @@
 
     <main class="mr-16 mb-16 ml-16 mt-20" id="mains">
         <div>
-            <div class="flex items-center mb-10">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                </svg>
+            <div class="flex items-center mb-10 pointer-events-none" id="check">
+                <div id="ico">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+</svg>
+
+                </div>
                 <h1 class="text-7xl ml-8">チェック済み</h1>
 
             </div>
-            <div id="checked-list" class=" py-12">
+            <div id="checked-list" class="duration-200 ease-in">
                 
             </div>
         </div>
         <div class="mt-16">
-            <div class="flex items-center mb-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                </svg>
+            <div class="flex items-center mb-10 pointer-events-none" id="uncheck">
+                <div id="unico">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+</svg>
+
+                </div>
  
                 <h1 class="text-7xl ml-8">未チェック</h1>
             </div>
-            <div id="unchecked-list" class=" py-16">
+            <div id="unchecked-list" class="duration-200 ease-in">
                 
             </div>
         </div>
@@ -114,6 +120,65 @@
             const checkedList = document.getElementById('checked-list');
             const uncheckedList = document.getElementById('unchecked-list');
 
+            const check = document.getElementById('check');
+            const uncheck = document.getElementById('uncheck');
+
+            let isCheckHide = false;
+            const ico = document.getElementById('ico');
+            const unico = document.getElementById('unico');
+
+            check.addEventListener('click', () => {
+                if(isCheckHide) {
+                    const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+                    
+
+                    checkedList.classList.remove('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        ico.innerHTML = ` ${checkIcon} `;
+                        checkedList.classList.toggle('hidden');
+                        isCheckHide = false;
+                    }, 210);
+
+                }else {
+                    const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" /></svg>';
+
+                    checkedList.classList.add('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        ico.innerHTML = ` ${checkIcon} `; 
+                        checkedList.classList.add('hidden');
+                        isCheckHide = true;
+                    }, 210);
+                }
+                
+            });
+
+            let isUnCheckHide = false;
+
+            uncheck.addEventListener('click', () => {
+                if(isUnCheckHide) {
+                    const uncheckIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+
+                    uncheckedList.classList.remove('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        unico.innerHTML = ` ${uncheckIcon} `;
+
+                        uncheckedList.classList.remove('hidden');
+                        isUnCheckHide = false;
+                    }, 210);
+                }else {
+                    const uncheckIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" /></svg>';
+
+                    uncheckedList.classList.add('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        unico.innerHTML = ` ${uncheckIcon} `;
+
+                        uncheckedList.classList.add('hidden');
+                        isUnCheckHide = true;
+                    }, 210);
+                }
+                
+            });
+
             checkpoints.forEach(checkpoint => {
                 const isChecked = localStorage.getItem(checkpoint.id) === 'true';
                 const listContainer = isChecked ? checkedList : uncheckedList;
@@ -122,6 +187,15 @@
                     ? `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16 text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`
                     : `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`;
 
+                if(isChecked) {
+                    checkedList.classList.add('py-12');
+                    ico.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+                    check.classList.remove('pointer-events-none');
+                }else {
+                    uncheckedList.classList.add('py-12');
+                    unico.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+                    uncheck.classList.remove('pointer-events-none');
+                }
                 const element = document.createElement('div');
                 element.className = 'flex items-center pt-8 pb-8 mb-8 rounded-full ring-4 ring-black';
                 element.innerHTML = `
