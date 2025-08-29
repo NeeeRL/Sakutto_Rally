@@ -70,6 +70,12 @@
 
       <script>
                 document.addEventListener('DOMContentLoaded', () => {
+                window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+                if (e.matches) {
+                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
+                } 
+                
+            });
         localStorage.setItem('stamp2', 'true');
         if (localStorage.getItem('stamp1') === 'true' && localStorage.getItem('stamp3') === 'true') {
             window.location.href = 'clear.html';

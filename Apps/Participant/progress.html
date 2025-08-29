@@ -86,6 +86,12 @@
             const amari = (window.innerHeight * 7) / 100;
             mainElement.style.marginBottom = `${FotterHeight + amari }px`;
 
+            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+                if (e.matches) {
+                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
+                } 
+                
+            });
 
             const checkpoints = [
                 { id: 'stamp1', name: 'チェックポイント１' },
