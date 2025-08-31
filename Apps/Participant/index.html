@@ -41,12 +41,29 @@
         </div>
         <p class="text-5xl w-[90%] m-auto">スタンプラリーの参加、ありがとうございます。早速QRコードをスキャンして、スタンプラリーをクリアしましょう!!</p>
 
-        
+        <div>
+            <h1>進捗</h1>
+            <div>
+                <div>現在0/3のスタンプを獲得</div>
+                <div></div>
+            </div>
+            <div class="flex items-center w-full rounded-full overflow-hidden bg-gray-200 h-16">
+                <div id="stamp-bar" class="bg-blue-300 h-16 w-full "></div>
+            </div>
+            
+        </div>
         
         <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6  w-[90%] ">
                 <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
             </div>
+        </div>
+
+        <div class="text-8xl border p-10">
+            <h2>dev-tools</h2>
+            <a href="stamp1.html" class="border-b">stamp1</a>
+            <a href="stamp2.html" class="border-b">stamp2</a>
+            <a href="stamp3.html" class="border-b">stamp3</a>
         </div>
      </main>
 
@@ -140,7 +157,34 @@
                 } 
                 
             });
-            
+
+            const stamp_bar = document.getElementById('stamp-bar');
+            const present = document.getElementById('presentbox');
+
+            function updateStampProgress() {
+                const storageKey = 'Sakutto_Rally';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = 0;
+                const totalStamps = 3;
+
+                for (let i = 1; i <= totalStamps; i++) {
+                    const stamp = currentData.find(item => item.id === 'stamp' + i);
+                    if (stamp && stamp.status) {
+                        currentStamps++;
+                    }
+                }
+                const NowStampBar = (stamp_bar.offsetWidth) * currentStamps / 3;
+
+                stamp_bar.classList.remove('w-full');
+                stamp_bar.classList.add(`w-[${NowStampBar}px]`);
+
+                if (currentStamps === totalStamps) {
+                    present.classList.remove('hidden');
+                }
+            }
+
+            updateStampProgress();
+
             const fotter = document.getElementById('fotter-items');
             let FotterHeight = fotter.offsetHeight;
 
@@ -164,30 +208,12 @@
             const closePopup = () => {
                 popBar.classList.add('translate-y-full');
                 body.classList.remove('overflow-hidden');
+                updateStampProgress();
 
                 setTimeout(() => {
                     popup.classList.add('opacity-0',  'pointer-events-none');
                     popBar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
                 }, 300);
-            }
-
-            const present = document.getElementById('presentbox');
-
-            function checkAllStamps() {
-                const storageKey = 'Sakutto_Rally';
-                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-
-                const stamp1 = currentData.find(item => item.id === 'stamp1');
-                const stamp2 = currentData.find(item => item.id === 'stamp2');
-                const stamp3 = currentData.find(item => item.id === 'stamp3');
-
-                return stamp1 && stamp1.status &&
-                       stamp2 && stamp2.status &&
-                       stamp3 && stamp3.status;
-            }
-            
-            if (checkAllStamps()) {
-                present.classList.remove('hidden');
             }
 
             // ok
