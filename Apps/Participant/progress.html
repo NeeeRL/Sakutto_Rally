@@ -180,7 +180,9 @@
             });
 
             checkpoints.forEach(checkpoint => {
-                const isChecked = localStorage.getItem(checkpoint.id) === 'true';
+                const sakuttoRallyData = JSON.parse(localStorage.getItem('Sakutto_Rally')) || [];
+                const checkpointData = sakuttoRallyData.find(item => item.id === checkpoint.id);
+                const isChecked = checkpointData ? checkpointData.status : false;
                 const listContainer = isChecked ? checkedList : uncheckedList;
                 const icon = isChecked 
                 // 色はここで変えれるお

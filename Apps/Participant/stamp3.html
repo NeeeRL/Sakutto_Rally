@@ -26,8 +26,10 @@
                 <h1 class="text-6xl text-center pb-8">スタンプを獲得しました</h1>
             </div>
             <img src="img/seikou_syukufuku_man.png" alt="スタンプ3の画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
-            <div id="clear-button" class="rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 mt-16">
-                <p class="text-5xl text-center font-bold">進捗を確認する</p>
+            <div class="w-full pt-8 pb-8 rounded-full mt-16  bg-yellow-300 text-center">
+                <a href="progress.html" class="rounded-full font-bold text-5xl ">
+                    進捗を確認する
+                </a>
             </div>
         </main>
         <footer class="h-[8vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-around " id="fotter-items">
@@ -69,24 +71,61 @@
     </footer>
 
       <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
                 if (e.matches) {
                     alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                } 
-                
+                }                 
             });
-        localStorage.setItem('stamp3', 'true');
-        if (localStorage.getItem('stamp1') === 'true' && localStorage.getItem('stamp2') === 'true') {
-            window.location.href = 'clear.html';
-        }
 
-        const clear_button = document.getElementById('clear-button');
-        
-        clear_button.addEventListener('click', () => {
-            window.location.href = 'progress.html';
+            function AddlocalStorage(id, newStatus) {
+                const storageKey = 'Sakutto_Rally';
+
+                // 1. LocalStorageから現在のデータを読み込む (なければ空の配列 '[]' として初期化)
+                let currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                // 2. 更新対象のIDが配列内に存在するか探す
+                const targetItem = currentData.find(item => item.id === id);
+
+                if (targetItem) {
+                    // 3a. IDが存在した場合：ステータスを更新
+                    targetItem.status = newStatus;
+                    console.log(`ID: "${id}" のステータスを ${newStatus} に更新しました。`);
+                } else {
+                    // 3b. IDが存在しなかった場合：新しいオブジェクトとして配列に追加
+                    currentData.push({ id: id, status: newStatus });
+                    console.log(`ID: "${id}" をステータス ${newStatus} で新規追加しました。`);
+                }
+
+                // 4. 変更後の配列をLocalStorageに保存
+                localStorage.setItem(storageKey, JSON.stringify(currentData));
+            } 
+            
+             function checkAllStamps() {
+                const storageKey = 'Sakutto_Rally';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                const stamp1 = currentData.find(item => item.id === 'stamp1');
+                const stamp2 = currentData.find(item => item.id === 'stamp2');
+                const stamp3 = currentData.find(item => item.id === 'stamp3');
+
+                return stamp1 && stamp1.status &&
+                       stamp2 && stamp2.status &&
+                       stamp3 && stamp3.status;
+            }
+            
+            AddlocalStorage('stamp3',true);
+
+            if (checkAllStamps()) {
+                window.location.href = 'clear.html';
+            }
+
         });
-    });
+
+       
+        
+
+         
     </script> 
     </body>
 </html>
