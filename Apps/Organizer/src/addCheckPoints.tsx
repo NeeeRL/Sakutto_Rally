@@ -111,7 +111,7 @@ function addCheckPoints () {
                                 className="flex items-start py-1.5 px-2.5 justify-between w-full"
                             >
                                 {/* デバッグ用に赤い文字でIDを出力している */}
-                                <span className="text-sm">{checkPoint.name}<span className='text-red-600'>{checkPoint.id}</span></span>
+                                <span className="text-sm">{checkPoint.name}{/*<span className='text-red-600'>{checkPoint.id}</span>*/}</span>
                                 <div className="flex items-center space-x-2">
                                     <button                                 
                                         className="flex h-full items-center my-auto"
