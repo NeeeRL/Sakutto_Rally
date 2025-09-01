@@ -39,3 +39,9 @@ npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 
+# GitStory
+myenv/
+venv/
+git-story_media/
+GitStory.mp4
+
