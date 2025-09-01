@@ -26,20 +26,43 @@
 
     <main class="mr-16 mb-16 ml-16 mt-20" id="mains">
         <div>
-            <h1 class="text-7xl mb-16">チェック済み</h1>
-            <div id="checked-list">
+            <div class="flex items-center mb-10 pointer-events-none" id="check">
+                <div id="ico">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                    </svg>
+
+                </div>
+                <h1 class="text-7xl ml-8">チェック済み</h1>
+
+            </div>
+            <div id="checked-list" class="duration-200 ease-in">
                 
             </div>
         </div>
-        <div class="mt-20">
-            <h1 class="text-7xl mb-16">未チェック</h1>
-            <div id="unchecked-list">
+        <div class="mt-16">
+            <div class="flex items-center mb-10 pointer-events-none" id="uncheck">
+                <div id="unico">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                </svg>
+
+                </div>
+ 
+                <h1 class="text-7xl ml-8">未チェック</h1>
+            </div>
+            <div id="unchecked-list" class="duration-200 ease-in">
                 
+            </div>
+        </div>
+        <div class="flex items-center justify-center hidden" id="clear-btn-box">
+            <div id="sent-clear-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer py-8  w-full ">
+                <p  class="text-5xl text-center font-bold py-4">クリア画面を表示する</p>
             </div>
         </div>
     </main>
-    <footer class="h-[8vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-around " id="fotter-items">
-        <a href="map.html" class="w-[27vw] flex flex-col items-center justify-center pt-3 pb-3 mr-[1vw] ml-[2vw]">
+<footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
@@ -50,29 +73,39 @@
                 <p class="text-4xl">地図</p>
             </div>
             
+            
         </a>
-        <a href="index.html" class="w-[27vw] flex flex-col items-center justify-center pt-3 pb-3 mr-[1vw] ml-[1vw]">
+        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg> 
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+</svg>
+
                 </div>
                 <p class="text-4xl">ホーム</p>
-
             </div>
-
+            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
         </a>
-        <a href="index.html" class="relative w-[27vw] h-[73%] pt-3 pb-3 mr-[2vw] ml-[1vw] flex items-center justify-center">
+        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+            
             <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
+                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2 relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                    <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
-                </svg>
+  <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
+</svg>
+
+                        <div class="absolute top-0 right-0 hidden "  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
                 </div>
                 <p class="text-4xl">進捗</p>
             </div>
-
+            
+            
         </a>
     </footer>
 
@@ -86,6 +119,12 @@
             const amari = (window.innerHeight * 7) / 100;
             mainElement.style.marginBottom = `${FotterHeight + amari }px`;
 
+            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+                if (e.matches) {
+                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
+                } 
+                
+            });
 
             const checkpoints = [
                 { id: 'stamp1', name: 'チェックポイント１' },
@@ -96,16 +135,86 @@
             const checkedList = document.getElementById('checked-list');
             const uncheckedList = document.getElementById('unchecked-list');
 
+            const check = document.getElementById('check');
+            const uncheck = document.getElementById('uncheck');
+
+            let isCheckHide = false;
+            const ico = document.getElementById('ico');
+            const unico = document.getElementById('unico');
+
+            check.addEventListener('click', () => {
+                if(isCheckHide) {
+                    const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+                    
+
+                    checkedList.classList.remove('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        ico.innerHTML = ` ${checkIcon} `;
+                        checkedList.classList.toggle('hidden');
+                        isCheckHide = false;
+                    }, 210);
+
+                }else {
+                    const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" /></svg>';
+
+                    checkedList.classList.add('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        ico.innerHTML = ` ${checkIcon} `; 
+                        checkedList.classList.add('hidden');
+                        isCheckHide = true;
+                    }, 210);
+                }
+                
+            });
+
+            let isUnCheckHide = false;
+
+            uncheck.addEventListener('click', () => {
+                if(isUnCheckHide) {
+                    const uncheckIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+
+                    uncheckedList.classList.remove('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        unico.innerHTML = ` ${uncheckIcon} `;
+
+                        uncheckedList.classList.remove('hidden');
+                        isUnCheckHide = false;
+                    }, 210);
+                }else {
+                    const uncheckIcon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" /></svg>';
+
+                    uncheckedList.classList.add('opacity-0',  'pointer-events-none');
+                    setTimeout(() => {
+                        unico.innerHTML = ` ${uncheckIcon} `;
+
+                        uncheckedList.classList.add('hidden');
+                        isUnCheckHide = true;
+                    }, 210);
+                }
+                
+            });
+
             checkpoints.forEach(checkpoint => {
-                const isChecked = localStorage.getItem(checkpoint.id) === 'true';
+                const sakuttoRallyData = JSON.parse(localStorage.getItem('Sakutto_Rally')) || [];
+                const checkpointData = sakuttoRallyData.find(item => item.id === checkpoint.id);
+                const isChecked = checkpointData ? checkpointData.status : false;
                 const listContainer = isChecked ? checkedList : uncheckedList;
                 const icon = isChecked 
                 // 色はここで変えれるお
                     ? `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16 text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`
                     : `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>`;
 
+                if(isChecked) {
+                    checkedList.classList.add('py-12');
+                    ico.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+                    check.classList.remove('pointer-events-none');
+                }else {
+                    uncheckedList.classList.add('py-12');
+                    unico.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>';
+                    uncheck.classList.remove('pointer-events-none');
+                }
                 const element = document.createElement('div');
-                element.className = 'flex justify-between items-center border pt-8 pb-8 mb-8 rounded-full bg-white shadow';
+                element.className = 'flex items-center pt-8 pb-8 mb-8 rounded-full ring-4 ring-black';
                 element.innerHTML = `
                     <div class="ml-8 flex items-center pt-1 pb-1">
                         ${icon}
@@ -117,6 +226,47 @@
                 `;
                 listContainer.appendChild(element);
             });
+
+            const SentClear = document.getElementById('sent-clear-button');
+            const ClearBox = document.getElementById('clear-btn-box');
+
+            function checkAllStamps() {
+                const storageKey = 'Sakutto_Rally';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                const stamp1 = currentData.find(item => item.id === 'stamp1');
+                const stamp2 = currentData.find(item => item.id === 'stamp2');
+                const stamp3 = currentData.find(item => item.id === 'stamp3');
+
+                return stamp1 && stamp1.status &&
+                       stamp2 && stamp2.status &&
+                       stamp3 && stamp3.status;
+            }
+            if(checkAllStamps()) {
+                ClearBox.classList.remove('hidden');
+            }
+
+            SentClear.addEventListener('click', () => {
+                window.location.href = 'clear.html';
+            });
+
+            const exclamation = document.getElementById('exclamation');
+
+            function checkAllStamps() {
+                const storageKey = 'Sakutto_Rally';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                const stamp1 = currentData.find(item => item.id === 'stamp1');
+                const stamp2 = currentData.find(item => item.id === 'stamp2');
+                const stamp3 = currentData.find(item => item.id === 'stamp3');
+
+                return stamp1 && stamp1.status &&
+                       stamp2 && stamp2.status &&
+                       stamp3 && stamp3.status;
+            }
+            if(checkAllStamps()) {
+                exclamation.classList.remove('hidden');
+            }
         });
     </script>
 </body>
