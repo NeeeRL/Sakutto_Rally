@@ -41,16 +41,16 @@
         </div>
         <p class="text-5xl w-[90%] m-auto">スタンプラリーの参加、ありがとうございます。早速QRコードをスキャンして、スタンプラリーをクリアしましょう!!</p>
 
-        <div>
-            <h1>進捗</h1>
-            <div>
-                <div>現在0/3のスタンプを獲得</div>
-                <div></div>
+        <div class="mb-16 mt-20 w-[92%] m-auto">
+            <h2 class="text-6xl mb-8 text-center">現在の進捗</h1>
+            <div class="flex justify-between items-center my-4">
+                <div class="text-5xl" id="pro-text">0/3個のスタンプを獲得中</div>
+                <p id="pro-percent" class="text-5xl"></p>
             </div>
-            <div class="flex items-center w-full rounded-full overflow-hidden bg-gray-200 h-16">
-                <div id="stamp-bar" class="bg-blue-300 h-16 w-full "></div>
+            <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden" id="max-progress-bar">
+                <div id="progress-bar" class="bg-blue-300 w-0 h-full transition-all duration-1000 ease-in-out "></div>
             </div>
-            
+
         </div>
         
         <div class="flex items-center justify-center">
@@ -158,10 +158,12 @@
                 
             });
 
-            const stamp_bar = document.getElementById('stamp-bar');
-            const present = document.getElementById('presentbox');
+            
+            
 
             function updateStampProgress() {
+                const present = document.getElementById('presentbox');
+                const progress_bar = document.getElementById('progress-bar');
                 const storageKey = 'Sakutto_Rally';
                 const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
                 let currentStamps = 0;
@@ -173,11 +175,19 @@
                         currentStamps++;
                     }
                 }
-                const NowStampBar = (stamp_bar.offsetWidth) * currentStamps / 3;
+                const percent = document.getElementById('pro-percent');
+                const protext = document.getElementById('pro-text');
 
-                stamp_bar.classList.remove('w-full');
-                stamp_bar.classList.add(`w-[${NowStampBar}px]`);
+                console.log(`${currentStamps}`);
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
 
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    protext.textContent = `${currentStamps}/3個のスタンプを獲得中`;
+                    percent.textContent = `${bar_per}%`;
+                    progress_bar.style.width = `${bar_per}%`;
+                }
+                
                 if (currentStamps === totalStamps) {
                     present.classList.remove('hidden');
                 }
