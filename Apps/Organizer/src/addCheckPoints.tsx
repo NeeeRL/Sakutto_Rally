@@ -63,6 +63,7 @@ function addCheckPoints () {
     const saveInput = () => {
         const newData: eventData = {
             eventName: getInitialValue("eventName"),
+            rootURL: getInitialValue("rootURL"),
             startDate: getInitialValue("startDate"),
             endDate: getInitialValue("endDate"),
             description: getInitialValue("description"),

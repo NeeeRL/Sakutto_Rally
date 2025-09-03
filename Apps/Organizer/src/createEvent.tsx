@@ -21,6 +21,7 @@ const getInitialValue = (key: string) => {
 const createEvent = () => {
 
     const [ eventName, setEventName ] = useState<string>(getInitialValue("eventName"))
+    const [ rootURL, setRootURL ] = useState<string>(getInitialValue("rootURL"))
     const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")))
     const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate"))
     // mapは画像
@@ -30,30 +31,22 @@ const createEvent = () => {
     // const [ thumbnail, setThumbnail ] = useState<string>("")
 
     const saveInput = () => {
-        //ここは後で空の場合の判別で使う？使わないかも
-        // const stored = localStorage.getItem("eventData")
         //これはデバッグ用
         // console.log(stored)
         // const data: eventData = stored ? JSON.parse(stored) : {} as eventData
 
         const newData: preEventData = {
-            // ...data,
             eventName: eventName,
+            rootURL: rootURL,
             startDate: startDate,
             endDate: endDate,
             description: description,
-            //今はnullを入れるために形をnull許容にしている。
-            checkPoints: null
+            checkPoints: getInitialValue("checkPoints")
         }
 
         localStorage.setItem("eventData", JSON.stringify(newData))
         // console.log("上書き後", newData)
     }
-
-
-    // const debug = () => {
-    //     console.log(eventName, date, description)
-    // }
     
     return(
         <>
@@ -68,7 +61,17 @@ const createEvent = () => {
                         value={eventName}
                         onChange={ (event) => setEventName(event.target.value) }
                         type="text" 
-                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" placeholder="イベントの名称を入力"
+                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
+                        placeholder="イベントの名称を入力"
+                    />
+                    <label htmlFor="rootURL" className="mt-4 mb-2 block">ルートURL</label>
+                    <input 
+                        id="rootURL" 
+                        value={rootURL}
+                        onChange={ (event) => setRootURL(event.target.value) }
+                        type="text" 
+                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
+                        placeholder="index.htmlの設置場所を入力"
                     />
                     <label htmlFor="startDate" className="mt-6 my-2 block">イベントの開始日</label>
                     <input 

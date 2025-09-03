@@ -4,19 +4,6 @@ import './App.css'
 // import type { eventData } from './types/event'
 
 function App() {
-  // null許容しないことにしたので一旦却下
-  // const generateNullJson: eventData = () => {    
-  //   const nullJson = {
-  //     eventName: null,
-  //     endDate: null,
-  //     description: null,
-  //     checkPoints: [ null ]
-  //   }
-    
-  //   localStorage.setItem("eventData", JSON.stringify(nullJson))
-  //   console.log("nullJson is saved", nullJson)
-  // }
-
 
   return (
     <>
