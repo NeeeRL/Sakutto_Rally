@@ -1,5 +1,52 @@
 import Header from './header.tsx'
+import { useRef } from 'react'
+// import type { eventData, checkPoint} from './types/event.ts'
+
+
+
+// console.log(settings)
+// if (!settings) {
+//     return null
+// }
+// try {
+//     const parsedData = JSON.parse(settings)
+//     return parsedData ? parsedData : null
+// }
+// catch (event) {
+//     console.error("JSON is not formatted", event)
+// }
+
+//
+//
+
 function downloadFiles () {
+
+    //const htmlFiles = 
+    //const imageFiles =
+    const settings = localStorage.getItem("eventData")
+    
+    const downloadJson = useRef<HTMLAnchorElement>(null)
+
+    const downloadJsonFile = () => {
+
+        if (settings && downloadJson.current) {
+            const jsonBlob = new Blob([settings], {type: "application/json"})
+            const url = URL.createObjectURL(jsonBlob)
+            downloadJson.current.href = url
+            downloadJson.current.download = "settings.json"
+            downloadJson.current.click()
+
+        URL.revokeObjectURL(url)
+        }
+        else {
+            console.log("not data")
+        }
+
+        // setDownloadURL(url)
+
+ 
+    }
+
     return(
         <>
             
@@ -38,7 +85,19 @@ function downloadFiles () {
                         <p>設定ファイル</p>
                         <p className="text-xs text-gray-600">バックアップ用</p>
                     </div>
-                    <button className="bg-gray-200 rounded-xl h-8 px-4">ダウンロード</button>
+                    <button 
+                        onClick={downloadJsonFile}
+                        className="bg-gray-200 rounded-xl h-8 px-4"
+                    >
+                        ダウンロード
+                    </button>
+                    <a
+                        ref={downloadJson}
+                        className="hidden" 
+                    >
+
+                    </a>
+
                 </div>
 
                 <button className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4">すべてを一括ダウンロード</button>
