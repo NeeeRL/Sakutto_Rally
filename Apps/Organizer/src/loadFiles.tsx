@@ -1,12 +1,13 @@
 import type React from 'react'
 import Header from './header.tsx'
-import { Link, useNavigate } from 'react-router-dom'
+import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import type { eventData } from './types/event.ts'
 
 function loadFiles () {
 
     const navigate = useNavigate()
-
+    const fileInput = useRef<HTMLInputElement>(null)
 
     // フォームの入力要素が変更されたときのイベントの型
     const checkJsonFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,18 +15,60 @@ function loadFiles () {
         if (file) {
             const reader = new FileReader()
             reader.onload = (event) => {
-                
-                
-                //値が正しいかチェックを後で実装
-
-                
                 const fileContent = event.target?.result as string
-                // console.log(JSON.parse(fileContent))
-                localStorage.setItem("eventData", fileContent)
-                navigate("/create")
+                try{
+                    const jsonFile = JSON.parse(fileContent)
+                    if (checkJsonKeys(jsonFile)) {         
+                        localStorage.setItem("eventData", fileContent)
+                        navigate("/create")        
+                    }
+                    else {
+                        alert("ファイル形式が正しくありません")
+                        if(fileInput.current){
+                            fileInput.current.value = ""
+                        }
+                    }
+                }
+                catch{
+                    console.error("JSON cannot parsed")
+                    alert("無効なファイル形式です")
+                    if(fileInput.current){
+                        fileInput.current.value = ""
+                    }
+                }
             }
             reader.readAsText(file)
         }
+    }
+
+    const checkJsonKeys = (data: any): boolean => {
+        // JSON形式であることの確認
+        if (typeof data !== "object" || data === null) {
+            return false;
+        }
+        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "checkPoints"]
+        for (const key of keys) {
+            if (!(key in data)){
+                return false
+            }
+        }
+        //checkPointsが配列であることの確認
+        if (!Array.isArray(data.checkPoints)){
+            return false
+        }
+        const cpKeys = ["id", "name", "description"]
+        for (const cp of data.checkPoints) {
+            // checkPointの中身が正しいことの確認
+            if (typeof cp !== "object" || cp === null) {
+                return false;
+            }
+            for (const key of cpKeys) {
+                if (!(key in cp)) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     return(
@@ -41,6 +84,7 @@ function loadFiles () {
                         type="file"
                         accept="application/json"
                         onChange={checkJsonFile}
+                        ref={fileInput}
                         className="bg-gray-100 text-gray-900 rounded-lg mb-24 p-2.5 w-full h-32 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
 

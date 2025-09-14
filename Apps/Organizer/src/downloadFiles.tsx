@@ -35,8 +35,7 @@ function downloadFiles () {
             downloadJson.current.href = url
             downloadJson.current.download = "settings.json"
             downloadJson.current.click()
-
-        URL.revokeObjectURL(url)
+            URL.revokeObjectURL(url)
         }
         else {
             console.log("not data")
@@ -44,14 +43,13 @@ function downloadFiles () {
 
         // setDownloadURL(url)
 
- 
     }
 
     return(
         <>
             
             <Header text="ファイルをダウンロード"/>
-            <div className="w-full flex justify-center items-center flex-col">
+            <div className="w-full flex justify-center items-center flex-col mb-30">
                 <h2 className="font-bold text-lg text-center">ダウンロード可能なファイル</h2>
                 {/* HTMLファイルのダウンロード */}
                 <div className="flex items-center justify-center">
@@ -91,12 +89,8 @@ function downloadFiles () {
                     >
                         ダウンロード
                     </button>
-                    <a
-                        ref={downloadJson}
-                        className="hidden" 
-                    >
-
-                    </a>
+                    {/* ここは表示されない */}
+                    <a ref={downloadJson} className="hidden"></a>
 
                 </div>
 

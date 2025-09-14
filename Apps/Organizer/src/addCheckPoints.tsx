@@ -77,7 +77,7 @@ function addCheckPoints () {
         <>
             <Header text="チェックポイントの設定"/>
         
-            <div className="w-full flex items-center flex-col">
+            <div className="w-full flex items-center flex-col mb-30">
                 <div className="w-9/10">
                 <div className="flex flex-col">
                     <form onSubmit={changeCheckPoint} action="addCheckPoint">
