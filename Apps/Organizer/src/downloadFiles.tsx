@@ -1,34 +1,16 @@
 import Header from './header.tsx'
-import { useRef } from 'react'
-// import type { eventData, checkPoint} from './types/event.ts'
-
-
-
-// console.log(settings)
-// if (!settings) {
-//     return null
-// }
-// try {
-//     const parsedData = JSON.parse(settings)
-//     return parsedData ? parsedData : null
-// }
-// catch (event) {
-//     console.error("JSON is not formatted", event)
-// }
-
-//
-//
+import { useRef, useEffect, useState } from 'react'
+import type { eventData } from './types/event.ts'
+import QRCode from 'react-qr-code'
+import JSZip from 'jszip'
 
 function downloadFiles () {
 
-    //const htmlFiles = 
-    //const imageFiles =
     const settings = localStorage.getItem("eventData")
     
     const downloadJson = useRef<HTMLAnchorElement>(null)
 
     const downloadJsonFile = () => {
-
         if (settings && downloadJson.current) {
             const jsonBlob = new Blob([settings], {type: "application/json"})
             const url = URL.createObjectURL(jsonBlob)
@@ -40,17 +22,86 @@ function downloadFiles () {
         else {
             console.log("not data")
         }
-
-        // setDownloadURL(url)
-
     }
 
-    return(
-        <>
+    const downloadFiles = (content: any) => {
+        const url = URL.createObjectURL(content)
+        const link = document.createElement("a")
+        link.href = url
+        link.download = "QRCodes.zip"
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+    }
+
+    const [ QRList, setQRList ] = useState<{value: string, fileName: string}[]>([]) 
+
+    useEffect (() => {
+        if(settings){
+            const data = JSON.parse(settings) as eventData
+            const lootURL = data.rootURL
+            setQRList(Object.values(data.checkPoints).map(checkPoint => ({
+                // ここでURLを決める。パラメータで判断するときもここを変更。
+                value: lootURL + checkPoint.id + ".html",
+                fileName: checkPoint.name
+            })))
+        }
+    },[settings])
+
+    const downloadQRCode = async () => {
+
+        const zip = new JSZip()
+        const svgs = document.querySelectorAll(".qr-to-zip svg")
+
+        for (let i = 0; i < QRList.length; i++){
+
+            const serializer = new XMLSerializer()
+            const svg = svgs[i]
+            const SVGString = serializer.serializeToString(svg)
+
+            const img = new Image()
+            img.src =
+                "data:image/svg+xml;base64," +
+                btoa(unescape(encodeURIComponent(SVGString)))
             
+            await new Promise<void>((resolve) => {
+                img.onload = () => {
+                    const canvas = document.createElement("canvas")
+                    canvas.width = img.width
+                    canvas.height = img.height
+                    const ctx = canvas.getContext("2d")
+                    if (!ctx) return
+
+                    ctx.drawImage(img, 0, 0);
+                    const pngUrl = canvas.toDataURL("image/png")
+
+                    const base64Data = pngUrl.split(",")[1]
+                    zip.file(QRList[i].fileName + ".png", base64Data, { base64: true })
+                    // console.log(QRList)
+                    resolve()
+                }
+            })
+
+            const QRBlob = await zip.generateAsync({type: "blob"})
+            downloadFiles(QRBlob)        
+        }
+    }
+    return(
+        <>            
             <Header text="ファイルをダウンロード"/>
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 <h2 className="font-bold text-lg text-center">ダウンロード可能なファイル</h2>
+                {/* ユーザーには見せないけどQRコードをを描画 */}
+                <div className="qr-to-zip hidden">
+                    {QRList.map((item, i) => (
+                        <QRCode 
+                            key = {i}
+                            value = {item.value}
+                        />
+                    ))}
+                </div>
+
                 {/* HTMLファイルのダウンロード */}
                 <div className="flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-11 bg-gray-200 rounded-lg p-1.5">
@@ -71,7 +122,12 @@ function downloadFiles () {
                         <p>QRコード</p>
                         <p className="text-xs text-gray-600">QRコードの画像ファイル</p>
                     </div>
-                    <button className="bg-gray-200 rounded-xl h-8 px-4">ダウンロード</button>
+                    <button 
+                        onClick={downloadQRCode}
+                        className="bg-gray-200 rounded-xl h-8 px-4"
+                    >
+                        ダウンロード
+                    </button>
                 </div>
                 <div className="flex items-center justify-center">
                     {/* アイコン */}
@@ -94,7 +150,12 @@ function downloadFiles () {
 
                 </div>
 
-                <button className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4">すべてを一括ダウンロード</button>
+                <button
+                    className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                    // onClick={}
+                >
+                    すべてを一括ダウンロード
+                </button>
             </div>
         </>
     )

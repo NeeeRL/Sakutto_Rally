@@ -89,7 +89,7 @@ const createEvent = () => {
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
-                    <label htmlFor="map" className="mt-6 my-2 block">地図のアップロード</label>
+                    <label htmlFor="map" className="mt-6 my-2 block">地図画像のアップロード</label>
                     <input 
                         id="map" 
                         type="file" 
