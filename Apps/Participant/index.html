@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="スタンプラリーのホームページです。" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="./jsQR.js"></script>
 </head>
 <body>
     <header>
@@ -153,6 +154,30 @@
     </div>
 </div>
 
+
+
+<div id="qrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
+    <div id="qr-bar" class="w-full h-[98vh] bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
+        <div class="flex items-center justify-between w-[88%]">
+            <svg id="qr-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+            <p class="text-[4.2rem]">スキャン</p>
+            <div class="size-20"></div>
+        </div>
+        <div class="flex justify-center items-center w-full h-full">
+            <div id="wrapper" class="relative">
+                <video id="video" autoplay muted playsinline></video>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80"></canvas>
+                <canvas id="rect-canvas" class="absolute top-0 left-0"></canvas>
+            </div>
+        </div>
+        <div id="QRstatus" class="text-5xl mt-4">
+            検出できていません
+        </div>
+    </div>
+</div>
+
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -210,7 +235,7 @@
             let FotterHeight = fotter.offsetHeight;
 
             const mainElement = document.getElementById('mains');
-            // 7vh
+            // 12vh
             const amari = (window.innerHeight * 12) / 100;
             mainElement.style.marginBottom = `${FotterHeight + amari }px`;
 
@@ -232,11 +257,6 @@
                 exclamation.classList.remove('hidden');
             }
 
-            prebox.addEventListener('click', () => {
-                if(checkAllStamps() == false) {
-                    console.log('aaa');
-                } 
-            });
 
 
             const popup = document.getElementById('pop-up');
@@ -335,6 +355,185 @@
 
                 isSwip = false
             });
+
+            const qrpop = document.getElementById('qrCodeReader');
+            const qrpopbar = document.getElementById('qr-bar');
+
+
+            let qrstart = 0;
+            let qrisSwip = false;
+
+            const qrclosePopup = () => {
+                qrpopbar.classList.add('translate-y-full');
+                body.classList.remove('overflow-hidden');
+                updateStampProgress();
+
+                setTimeout(() => {
+                    qrpop.classList.add('opacity-0',  'pointer-events-none');
+                    qrpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
+                }, 300);
+            }
+            // hiraku
+            prebox.addEventListener('click', () => {
+                if(checkAllStamps() == false) {
+                    qrpop.classList.remove('opacity-0',  'pointer-events-none');
+                body.classList.add('overflow-hidden');
+                
+                // 遅延
+                setTimeout(() => {
+                    qrpopbar.classList.remove('translate-y-full');
+                    qrpopbar.classList.add('translate-y-0', 'transition-transform', 'duration-250', 'ease-in');
+                }, 10);
+                } 
+            });
+            // haikei
+            qrpop.addEventListener('click', (e) => {
+                if (e.target === qrpop) {
+                    qrclosePopup();
+                }
+            });
+
+            const qrCloseButton = document.getElementById('qr-close-button');
+            if (qrCloseButton) {
+                qrCloseButton.addEventListener('click', () => {
+                    qrclosePopup();
+                });
+            }
+            
+
+            
+            qrpopbar.addEventListener('touchstart', (e) => {
+                qrisSwip = true;
+                qrstart = e.touches[0].clientY;
+                qrpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in');
+            });
+
+            qrpopbar.addEventListener('touchmove', (e) => {
+                if(qrisSwip == false) {
+                    return;
+                }
+                const current_y = e.touches[0].clientY;
+                const kyori = current_y - qrstart;
+
+                if(kyori > 0) {
+                    qrpopbar.style.transform = `translateY(${kyori}px)`;
+                }
+
+            });
+
+            qrpopbar.addEventListener('touchend', (e) => {
+                if(qrisSwip == false) {
+                    return;
+                }
+
+                const end = e.changedTouches[0].clientY;
+                const kyori = end - qrstart;
+                // 10vh
+                const lengthLine = (window.innerHeight * 10) / 100;
+                qrpopbar.style.transform = '';
+                qrpopbar.classList.add('transition-transform', 'duration-250', 'ease-in');
+                
+                // shita ni sagaru
+                if(kyori > lengthLine) {
+                    qrclosePopup();
+                } else {
+                    qrpopbar.classList.add('translate-y-0');
+                    qrpopbar.addEventListener('transitionend', () => {
+                        qrpopbar.classList.remove('transition-transform', 'ease-in');
+                    }, { once: true });
+                }
+
+                qrisSwip = false
+            });
+
+                   // カメラ映像のキャンバス表示
+const cvs = document.getElementById('camera-canvas');
+const ctx = cvs.getContext('2d');
+const rectCvs = document.getElementById('rect-canvas');
+const rectCtx =  rectCvs.getContext('2d');
+let qrCodeData = '';
+
+const canvasUpdate = () => {
+   cvs.width = contentWidth;
+   cvs.height = contentHeight;
+   ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
+   requestAnimationFrame(canvasUpdate);
+}
+
+// QRコードの検出
+const checkImage = () => {
+   // imageDataを作る
+   const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
+   // jsQRに渡す
+   const code = jsQR(imageData.data, contentWidth, contentHeight);
+
+   // 検出結果に合わせて処理を実施
+   if (code && code.data) {
+      console.log("QRcodeが見つかりました", code);
+      drawRect(code.location);
+      qrCodeData = code.data;
+      const qrMsg = document.getElementById('QRstatus');
+      if(qrMsg) {
+        qrMsg.textContent = `二次元コード：${qrCodeData}`;
+      }
+
+   } else {
+      console.log("QRcodeが見つかりません…", code);
+      rectCtx.clearRect(0, 0, contentWidth, contentHeight);
+      qrCodeData = '';
+      const qrMsg = document.getElementById('QRstatus');
+      if(qrMsg) {
+        qrMsg.textContent = `二次元コード: 見つかりません`;
+      }
+   }
+   setTimeout(()=>{ checkImage() }, 500);
+}
+
+// 四辺形の描画
+const drawRect = (location) => {
+   rectCvs.width = contentWidth;
+   rectCvs.height = contentHeight;
+   drawLine(location.topLeftCorner, location.topRightCorner);
+   drawLine(location.topRightCorner, location.bottomRightCorner);
+   drawLine(location.bottomRightCorner, location.bottomLeftCorner);
+   drawLine(location.bottomLeftCorner, location.topLeftCorner)
+}
+
+// 線の描画
+const drawLine = (begin, end) => {
+   rectCtx.lineWidth = 4;
+   rectCtx.strokeStyle = "#F00";
+   rectCtx.beginPath();
+   rectCtx.moveTo(begin.x, begin.y);
+   rectCtx.lineTo(end.x, end.y);
+   rectCtx.stroke();
+}
+
+// Webカメラの起動
+const video = document.getElementById('video');
+let contentWidth;
+let contentHeight;
+
+// 定義する長さ
+const yoko = (window.innerWidth * 82) / 100;
+const tate = (window.innerHeight * 78) / 100;
+
+const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate} })
+   .then((stream) => {
+      video.srcObject = stream;
+      video.onloadeddata = () => {
+         video.play();
+         contentWidth = video.clientWidth;
+         contentHeight = video.clientHeight;
+         canvasUpdate();
+         checkImage();
+      }
+   }).catch((e) => {
+      console.log(e);
+   });
+
+
+
         });
 
             
