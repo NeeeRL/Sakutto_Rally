@@ -81,11 +81,10 @@ function downloadFiles () {
                     // console.log(QRList)
                     resolve()
                 }
-            })
-
-            const QRBlob = await zip.generateAsync({type: "blob"})
-            downloadFiles(QRBlob)        
+            })    
         }
+            const QRBlob = await zip.generateAsync({type: "blob"})
+            downloadFiles(QRBlob)    
     }
     return(
         <>            
@@ -152,7 +151,7 @@ function downloadFiles () {
 
                 <button
                     className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
-                    // onClick={}
+                    onClick={() => {downloadJsonFile(); downloadQRCode();}}
                 >
                     すべてを一括ダウンロード
                 </button>
