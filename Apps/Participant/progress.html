@@ -56,7 +56,7 @@
                 
             </div>
         </div>
-        <div class="flex items-center justify-center " id="clear-btn-box">
+        <div class="flex items-center justify-center hidden" id="clear-btn-box">
             <div id="sent-clear-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer py-8  w-full ">
                 <p  class="text-5xl text-center font-bold py-4">クリア画面を表示する</p>
             </div>
@@ -280,35 +280,22 @@
                 const stamp2 = currentData.find(item => item.id === 'stamp2');
                 const stamp3 = currentData.find(item => item.id === 'stamp3');
 
-                return stamp1 && stamp1.status &&
-                       stamp2 && stamp2.status &&
-                       stamp3 && stamp3.status;
+                return !!(  stamp1 && stamp1.status &&
+                            stamp2 && stamp2.status &&
+                            stamp3 && stamp3.status     );
             }
+            
+            const exclamation = document.getElementById('exclamation');
+
             if(checkAllStamps()) {
                 ClearBox.classList.remove('hidden');
+                exclamation.classList.remove('hidden');
             }
 
             SentClear.addEventListener('click', () => {
                 window.location.href = 'clear.html';
             });
 
-            const exclamation = document.getElementById('exclamation');
-
-            function checkAllStamps() {
-                const storageKey = 'Sakutto_Rally';
-                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-
-                const stamp1 = currentData.find(item => item.id === 'stamp1');
-                const stamp2 = currentData.find(item => item.id === 'stamp2');
-                const stamp3 = currentData.find(item => item.id === 'stamp3');
-
-                return !!(  stamp1 && stamp1.status &&
-                            stamp2 && stamp2.status &&
-                            stamp3 && stamp3.status     );
-            }
-            if(checkAllStamps()) {
-                exclamation.classList.remove('hidden');
-            }
 
             const qrpop = document.getElementById('qrCodeReader');
             const qrpopbar = document.getElementById('qr-bar');
