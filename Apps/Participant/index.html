@@ -167,13 +167,26 @@
         </div>
         <div class="flex justify-center items-center w-full h-full">
             <div id="wrapper" class="relative">
-                <video id="video" autoplay muted playsinline></video>
-                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80"></canvas>
-                <canvas id="rect-canvas" class="absolute top-0 left-0"></canvas>
+                <video id="video" autoplay muted playsinline class="w-full h-full"></video>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full"></canvas>
+                <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+                <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-full h-full flex justify-center items-center flex-col">
+                        <div class="flex justify-center flex-col items-center text-center gap-4">
+                            <div class="flex justify-center items-center flex-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-40">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
+                                </svg>
+                                <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限不足</h1>
+                            </div>
+                            <p class="text-4xl m-auto py-6 mx-20">
+                                再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラからQRコードを読み込んでください。
+                            </p>
+                        </div>                    
+                </div>
             </div>
         </div>
         <div id="QRstatus" class="text-5xl mt-4">
-            検出できていません
+            枠内に収めてください
         </div>
     </div>
 </div>
@@ -446,95 +459,97 @@
                 qrisSwip = false
             });
 
-                   // カメラ映像のキャンバス表示
-const cvs = document.getElementById('camera-canvas');
-const ctx = cvs.getContext('2d');
-const rectCvs = document.getElementById('rect-canvas');
-const rectCtx =  rectCvs.getContext('2d');
-let qrCodeData = '';
+            // カメラ映像のキャンバス表示
+            const cvs = document.getElementById('camera-canvas');
+            const ctx = cvs.getContext('2d');
+            const rectCvs = document.getElementById('rect-canvas');
+            const rectCtx =  rectCvs.getContext('2d');
+            let qrCodeData = '';
 
-const canvasUpdate = () => {
-   cvs.width = contentWidth;
-   cvs.height = contentHeight;
-   ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
-   requestAnimationFrame(canvasUpdate);
-}
+            const canvasUpdate = () => {
+                cvs.width = contentWidth;
+                cvs.height = contentHeight;
+                ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
+                requestAnimationFrame(canvasUpdate);
+            }
 
-// QRコードの検出
-const checkImage = () => {
-   // imageDataを作る
-   const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
-   // jsQRに渡す
-   const code = jsQR(imageData.data, contentWidth, contentHeight);
+            // QRコードの検出
+            const checkImage = () => {
+                const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
+                const code = jsQR(imageData.data, contentWidth, contentHeight);
 
-   // 検出結果に合わせて処理を実施
-   if (code && code.data) {
-      console.log("QRcodeが見つかりました", code);
-      drawRect(code.location);
-      qrCodeData = code.data;
-      const qrMsg = document.getElementById('QRstatus');
-      if(qrMsg) {
-        qrMsg.textContent = `二次元コード：${qrCodeData}`;
-      }
+                if (code && code.data) {
+                    console.log("QRcodeが見つかりました", code);
+                    drawRect(code.location);
+                    qrCodeData = code.data;
+                    const qrMsg = document.getElementById('QRstatus');
+                    if(qrMsg) {
+                        qrMsg.textContent = `二次元コード：${qrCodeData}`;
+                    }
+                } else {
+                    console.log("QRcodeが見つかりません…");
+                    rectCtx.clearRect(0, 0, contentWidth, contentHeight);
+                    qrCodeData = '';
+                    const qrMsg = document.getElementById('QRstatus');
+                    if(qrMsg) {
+                        qrMsg.textContent = `枠内に収めてください`;
+                    }
+                }
+                setTimeout(()=>{ checkImage() }, 500);
+            }
 
-   } else {
-      console.log("QRcodeが見つかりません…", code);
-      rectCtx.clearRect(0, 0, contentWidth, contentHeight);
-      qrCodeData = '';
-      const qrMsg = document.getElementById('QRstatus');
-      if(qrMsg) {
-        qrMsg.textContent = `二次元コード: 見つかりません`;
-      }
-   }
-   setTimeout(()=>{ checkImage() }, 500);
-}
+            // 四辺形の描画
+            const drawRect = (location) => {
+                rectCvs.width = contentWidth;
+                rectCvs.height = contentHeight;
+                drawLine(location.topLeftCorner, location.topRightCorner);
+                drawLine(location.topRightCorner, location.bottomRightCorner);
+                drawLine(location.bottomRightCorner, location.bottomLeftCorner);
+                drawLine(location.bottomLeftCorner, location.topLeftCorner)
+            }
 
-// 四辺形の描画
-const drawRect = (location) => {
-   rectCvs.width = contentWidth;
-   rectCvs.height = contentHeight;
-   drawLine(location.topLeftCorner, location.topRightCorner);
-   drawLine(location.topRightCorner, location.bottomRightCorner);
-   drawLine(location.bottomRightCorner, location.bottomLeftCorner);
-   drawLine(location.bottomLeftCorner, location.topLeftCorner)
-}
+            // 線の描画
+            const drawLine = (begin, end) => {
+                rectCtx.lineWidth = 4;
+                rectCtx.strokeStyle = "#F00";
+                rectCtx.beginPath();
+                rectCtx.moveTo(begin.x, begin.y);
+                rectCtx.lineTo(end.x, end.y);
+                rectCtx.stroke();
+            }
 
-// 線の描画
-const drawLine = (begin, end) => {
-   rectCtx.lineWidth = 4;
-   rectCtx.strokeStyle = "#F00";
-   rectCtx.beginPath();
-   rectCtx.moveTo(begin.x, begin.y);
-   rectCtx.lineTo(end.x, end.y);
-   rectCtx.stroke();
-}
+            // Webカメラの起動
+            const video = document.getElementById('video');
+            const wrapper = document.getElementById('wrapper');
+            let contentWidth;
+            let contentHeight;
 
-// Webカメラの起動
-const video = document.getElementById('video');
-let contentWidth;
-let contentHeight;
+            const yoko = (window.innerWidth * 82) / 100;
+            const tate = (window.innerHeight * 78) / 100;
 
-// 定義する長さ
-const yoko = (window.innerWidth * 82) / 100;
-const tate = (window.innerHeight * 78) / 100;
+            const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate} })
+                .then((stream) => {
+                    video.srcObject = stream;
+                    video.onloadeddata = () => {
+                        video.play();
+                        
+                        contentWidth = video.videoWidth;
+                        contentHeight = video.videoHeight;
+                        
+                        wrapper.style.width = `${contentWidth}px`;
+                        wrapper.style.height = `${contentHeight}px`;
 
-const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate} })
-   .then((stream) => {
-      video.srcObject = stream;
-      video.onloadeddata = () => {
-         video.play();
-         contentWidth = video.clientWidth;
-         contentHeight = video.clientHeight;
-         canvasUpdate();
-         checkImage();
-      }
-   }).catch((e) => {
-      console.log(e);
-   });
+                        canvasUpdate();
+                        checkImage();
+                    }
+                }).catch((e) => {
+                    console.log(e);
+                    wrapper.style.width = `${yoko}px`;
+                    wrapper.style.height = `${tate}px`;
+                });
 
 
-
-        });
+            });
 
             
 
