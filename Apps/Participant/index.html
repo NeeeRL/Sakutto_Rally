@@ -194,6 +194,11 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            let mediaStream = null;
+            let contentWidth;
+            let contentHeight;
+            let isScanning = false;
+
 
             
 
@@ -378,6 +383,7 @@
             let qrisSwip = false;
 
             const qrclosePopup = () => {
+                stopCamera(); // カメラを停止
                 qrpopbar.classList.add('translate-y-full');
                 body.classList.remove('overflow-hidden');
                 updateStampProgress();
@@ -390,6 +396,7 @@
             // hiraku
             prebox.addEventListener('click', () => {
                 if(checkAllStamps() == false) {
+                    startCamera(); // カメラを起動
                     qrpop.classList.remove('opacity-0',  'pointer-events-none');
                 body.classList.add('overflow-hidden');
                 
@@ -460,6 +467,14 @@
                 qrisSwip = false
             });
 
+            const stopCamera = () => {
+                isScanning = false; // スキャンを停止
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                    mediaStream = null;
+                }
+            };
+
             // カメラ映像のキャンバス表示
             const cvs = document.getElementById('camera-canvas');
             const ctx = cvs.getContext('2d');
@@ -476,6 +491,7 @@
 
             // QRコードの検出
             const checkImage = () => {
+                if (!isScanning) return; // スキャンが停止されていたら処理を終了
                 const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
                 const code = jsQR(imageData.data, contentWidth, contentHeight);
 
@@ -520,35 +536,37 @@
                 rectCtx.stroke();
             }
 
-            // Webカメラの起動
-            const video = document.getElementById('video');
-            const wrapper = document.getElementById('wrapper');
-            let contentWidth;
-            let contentHeight;
+            const startCamera = () => {
+                // Webカメラの起動
+                const video = document.getElementById('video');
+                const wrapper = document.getElementById('wrapper');
 
-            const yoko = (window.innerWidth * 82) / 100;
-            const tate = (window.innerHeight * 78) / 100;
+                const yoko = (window.innerWidth * 82) / 100;
+                const tate = (window.innerHeight * 78) / 100;
 
-            const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate, facingMode: "environment"} })
-                .then((stream) => {
-                    video.srcObject = stream;
-                    video.onloadeddata = () => {
-                        video.play();
-                        
-                        contentWidth = video.videoWidth;
-                        contentHeight = video.videoHeight;
-                        
-                        wrapper.style.width = `${contentWidth}px`;
-                        wrapper.style.height = `${contentHeight}px`;
+                navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate, facingMode: "environment"} })
+                    .then((stream) => {
+                        mediaStream = stream; // ストリームを保存
+                        video.srcObject = stream;
+                        video.onloadeddata = () => {
+                            video.play();
+                            
+                            contentWidth = video.videoWidth;
+                            contentHeight = video.videoHeight;
+                            
+                            wrapper.style.width = `${contentWidth}px`;
+                            wrapper.style.height = `${contentHeight}px`;
 
-                        canvasUpdate();
-                        checkImage();
-                    }
-                }).catch((e) => {
-                    console.log(e);
-                    wrapper.style.width = `${yoko}px`;
-                    wrapper.style.height = `${tate}px`;
-                });
+                            isScanning = true; // スキャンを開始
+                            canvasUpdate();
+                            checkImage();
+                        }
+                    }).catch((e) => {
+                        console.log(e);
+                        wrapper.style.width = `${yoko}px`;
+                        wrapper.style.height = `${tate}px`;
+                    });
+            };
 
 
             });
