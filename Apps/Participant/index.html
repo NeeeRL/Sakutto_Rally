@@ -486,6 +486,7 @@
                     if(qrMsg) {
                         qrMsg.textContent = `二次元コード：${qrCodeData}`;
                     }
+                    
                 } else {
                     console.log("QRcodeが見つかりません…");
                     rectCtx.clearRect(0, 0, contentWidth, contentHeight);
@@ -527,7 +528,7 @@
             const yoko = (window.innerWidth * 82) / 100;
             const tate = (window.innerHeight * 78) / 100;
 
-            const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate} })
+            const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width: yoko, height: tate, facingMode: "environment"} })
                 .then((stream) => {
                     video.srcObject = stream;
                     video.onloadeddata = () => {
