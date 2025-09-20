@@ -422,9 +422,13 @@
 
                 qrisSwip = false
             });
+            const permission = document.getElementById('permission-denied');
+
 
             const stopCamera = () => {
                 isScanning = false; // スキャンを停止
+                permission.classList.remove('hidden');
+
                 if (mediaStream) {
                     mediaStream.getTracks().forEach(track => track.stop());
                     mediaStream = null;
@@ -452,7 +456,7 @@
                 const code = jsQR(imageData.data, contentWidth, contentHeight);
 
                 if (code && code.data) {
-                    console.log("QRcodeが見つかりました", code);
+                    console.log("二次元コードが見つかりました", code);
                     drawRect(code.location);
                     qrCodeData = code.data;
                     const qrMsg = document.getElementById('QRstatus');
@@ -461,7 +465,7 @@
                     }
 
                 } else {
-                    console.log("QRcodeが見つかりません…");
+                    console.log("二次元コードが見つかりません…");
                     rectCtx.clearRect(0, 0, contentWidth, contentHeight);
                     qrCodeData = '';
                     const qrMsg = document.getElementById('QRstatus');
@@ -493,6 +497,8 @@
             }
 
             const startCamera = () => {
+                document.getElementById('permission-denied').style.display = 'none';
+
                 // Webカメラの起動
                 const video = document.getElementById('video');
                 const wrapper = document.getElementById('wrapper');
@@ -508,6 +514,7 @@
 
                 navigator.mediaDevices.getUserMedia(constraints)
                     .then((stream) => {
+                        permission.classList.add('hidden');
                         mediaStream = stream; // ストリームを保存
                         video.srcObject = stream;
                         video.onloadeddata = () => {
@@ -524,10 +531,8 @@
                             checkImage();
                         }
                     }).catch((e) => {
-                        console.log(e);
-                        const permission = document.getElementById('permission-denied');
-                        permission.classList.remove('z-70');
-                        permission.classList.add('z-90');
+                        console.error(e);
+                        document.getElementById('permission-denied').style.display = 'flex';
                     });
             };
 

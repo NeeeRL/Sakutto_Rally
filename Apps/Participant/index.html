@@ -385,8 +385,9 @@
                 return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
             }
 
-            if(isIOS) {
+            if(isIOS()) {
                 qrpopbar.classList.add('h-[80vh]');
+                console.log('aaaaaaaaaaaaa');
             }else {
                 qrpopbar.classList.add('h-[90vh]');
             }
@@ -551,6 +552,8 @@
             }
 
             const startCamera = () => {
+                document.getElementById('permission-denied').style.display = 'none';
+
                 // Webカメラの起動
                 const video = document.getElementById('video');
                 const wrapper = document.getElementById('wrapper');
@@ -583,10 +586,8 @@
                             checkImage();
                         }
                     }).catch((e) => {
-                        console.log(e);
-                        const permission = document.getElementById('permission-denied');
-                        permission.classList.remove('z-70');
-                        permission.classList.add('z-90');
+                        console.error(e);
+                        document.getElementById('permission-denied').style.display = 'flex';
                     });
             };
 
