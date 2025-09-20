@@ -156,9 +156,9 @@
                 const stamp2 = currentData.find(item => item.id === 'stamp2');
                 const stamp3 = currentData.find(item => item.id === 'stamp3');
 
-                return stamp1 && stamp1.status &&
-                       stamp2 && stamp2.status &&
-                       stamp3 && stamp3.status;
+                return !!(  stamp1 && stamp1.status &&
+                            stamp2 && stamp2.status &&
+                            stamp3 && stamp3.status     );
             }
             if(checkAllStamps()) {
                 exclamation.classList.remove('hidden');

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="contents!!!!!" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./jsQR.js"></script>
 </head>
 <body>
     <header>
@@ -55,7 +56,7 @@
                 
             </div>
         </div>
-        <div class="flex items-center justify-center hidden" id="clear-btn-box">
+        <div class="flex items-center justify-center " id="clear-btn-box">
             <div id="sent-clear-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer py-8  w-full ">
                 <p  class="text-5xl text-center font-bold py-4">クリア画面を表示する</p>
             </div>
@@ -108,6 +109,42 @@
             
         </a>
     </footer>
+
+    <div id="qrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
+    <div id="qr-bar" class="w-full h-[80vh] bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
+        <div class="flex items-center justify-between w-[88%]">
+            <svg id="qr-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+            <p class="text-[4.2rem]">スキャン</p>
+            <div class="size-20"></div>
+        </div>
+        <div class="flex justify-center items-center w-full h-full">
+            <div id="wrapper" class="relative">
+                <video id="video" autoplay muted playsinline class="w-full h-full"></video>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full"></canvas>
+                <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+                <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-full h-full flex justify-center items-center flex-col">
+                        <div class="flex justify-center flex-col items-center text-center gap-4">
+                            <div class="flex justify-center items-center flex-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-40">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
+                                </svg>
+                                <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限不足</h1>
+                            </div>
+                            <p class="text-4xl m-auto py-6 mx-20">
+                                再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラからQRコードを読み込んでください。
+                            </p>
+                        </div>                    
+                </div>
+            </div>
+        </div>
+        <div id="QRstatus" class="text-5xl mt-4">
+            枠内に収めてください
+        </div>
+    </div>
+</div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -215,6 +252,7 @@
                 }
                 const element = document.createElement('div');
                 element.className = 'flex items-center pt-8 pb-8 mb-8 rounded-full ring-4 ring-black';
+                element.classList.add('prebox-item');
                 element.innerHTML = `
                     <div class="ml-8 flex items-center pt-1 pb-1">
                         ${icon}
@@ -260,14 +298,224 @@
                 const stamp2 = currentData.find(item => item.id === 'stamp2');
                 const stamp3 = currentData.find(item => item.id === 'stamp3');
 
-                return stamp1 && stamp1.status &&
-                       stamp2 && stamp2.status &&
-                       stamp3 && stamp3.status;
+                return !!(  stamp1 && stamp1.status &&
+                            stamp2 && stamp2.status &&
+                            stamp3 && stamp3.status     );
             }
             if(checkAllStamps()) {
                 exclamation.classList.remove('hidden');
             }
-        });
+
+            const qrpop = document.getElementById('qrCodeReader');
+            const qrpopbar = document.getElementById('qr-bar');
+            let mediaStream = null;
+            let contentWidth;
+            let contentHeight;
+            let isScanning = false;
+            const preboxItems = document.querySelectorAll('.prebox-item');
+            const body = document.body;
+
+
+
+            let qrstart = 0;
+            let qrisSwip = false;
+
+            const qrclosePopup = () => {
+                stopCamera(); // カメラを停止
+                qrpopbar.classList.add('translate-y-full');
+                body.classList.remove('overflow-hidden');
+
+                setTimeout(() => {
+                    qrpop.classList.add('opacity-0',  'pointer-events-none');
+                    qrpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
+                }, 300);
+            }
+            // hiraku
+            preboxItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if(checkAllStamps() == false) {
+                        startCamera(); // カメラを起動
+                        qrpop.classList.remove('opacity-0',  'pointer-events-none');
+                        body.classList.add('overflow-hidden');
+                    
+                        // 遅延
+                        setTimeout(() => {
+                            qrpopbar.classList.remove('translate-y-full');
+                            qrpopbar.classList.add('translate-y-0', 'transition-transform', 'duration-250', 'ease-in');
+                        }, 10);
+                    } 
+                });
+            });
+            // haikei
+            qrpop.addEventListener('click', (e) => {
+                if (e.target === qrpop) {
+                    qrclosePopup();
+                }
+            });
+
+            const qrCloseButton = document.getElementById('qr-close-button');
+            if (qrCloseButton) {
+                qrCloseButton.addEventListener('click', () => {
+                    qrclosePopup();
+                });
+            }
+            
+
+            
+            qrpopbar.addEventListener('touchstart', (e) => {
+                qrisSwip = true;
+                qrstart = e.touches[0].clientY;
+                qrpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in');
+            });
+
+            qrpopbar.addEventListener('touchmove', (e) => {
+                if(qrisSwip == false) {
+                    return;
+                }
+                const current_y = e.touches[0].clientY;
+                const kyori = current_y - qrstart;
+
+                if(kyori > 0) {
+                    qrpopbar.style.transform = `translateY(${kyori}px)`;
+                }
+
+            });
+
+            qrpopbar.addEventListener('touchend', (e) => {
+                if(qrisSwip == false) {
+                    return;
+                }
+
+                const end = e.changedTouches[0].clientY;
+                const kyori = end - qrstart;
+                // 10vh
+                const lengthLine = (window.innerHeight * 10) / 100;
+                qrpopbar.style.transform = '';
+                qrpopbar.classList.add('transition-transform', 'duration-250', 'ease-in');
+                
+                // shita ni sagaru
+                if(kyori > lengthLine) {
+                    qrclosePopup();
+                } else {
+                    qrpopbar.classList.add('translate-y-0');
+                    qrpopbar.addEventListener('transitionend', () => {
+                        qrpopbar.classList.remove('transition-transform', 'ease-in');
+                    }, { once: true });
+                }
+
+                qrisSwip = false
+            });
+
+            const stopCamera = () => {
+                isScanning = false; // スキャンを停止
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                    mediaStream = null;
+                }
+            };
+
+            // カメラ映像のキャンバス表示
+            const cvs = document.getElementById('camera-canvas');
+            const ctx = cvs.getContext('2d');
+            const rectCvs = document.getElementById('rect-canvas');
+            const rectCtx =  rectCvs.getContext('2d');
+            let qrCodeData = '';
+
+            const canvasUpdate = () => {
+                cvs.width = contentWidth;
+                cvs.height = contentHeight;
+                ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
+                requestAnimationFrame(canvasUpdate);
+            }
+
+            // QRコードの検出
+            const checkImage = () => {
+                if (!isScanning) return; // スキャンが停止されていたら処理を終了
+                const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
+                const code = jsQR(imageData.data, contentWidth, contentHeight);
+
+                if (code && code.data) {
+                    console.log("QRcodeが見つかりました", code);
+                    drawRect(code.location);
+                    qrCodeData = code.data;
+                    const qrMsg = document.getElementById('QRstatus');
+                    if(qrMsg) {
+                        qrMsg.textContent = `二次元コード：${qrCodeData}`;
+                    }
+
+                } else {
+                    console.log("QRcodeが見つかりません…");
+                    rectCtx.clearRect(0, 0, contentWidth, contentHeight);
+                    qrCodeData = '';
+                    const qrMsg = document.getElementById('QRstatus');
+                    if(qrMsg) {
+                        qrMsg.textContent = `枠内に収めてください`;
+                    }
+                }
+                setTimeout(()=>{ checkImage() }, 500);
+            }
+
+            // 四辺形の描画
+            const drawRect = (location) => {
+                rectCvs.width = contentWidth;
+                rectCvs.height = contentHeight;
+                drawLine(location.topLeftCorner, location.topRightCorner);
+                drawLine(location.topRightCorner, location.bottomRightCorner);
+                drawLine(location.bottomRightCorner, location.bottomLeftCorner);
+                drawLine(location.bottomLeftCorner, location.topLeftCorner)
+            }
+
+            // 線の描画
+            const drawLine = (begin, end) => {
+                rectCtx.lineWidth = 4;
+                rectCtx.strokeStyle = "#F00";
+                rectCtx.beginPath();
+                rectCtx.moveTo(begin.x, begin.y);
+                rectCtx.lineTo(end.x, end.y);
+                rectCtx.stroke();
+            }
+
+            const startCamera = () => {
+                // Webカメラの起動
+                const video = document.getElementById('video');
+                const wrapper = document.getElementById('wrapper');
+
+                const constraints = {
+                    audio: false,
+                    video: {
+                        facingMode: "environment",
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                };
+
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then((stream) => {
+                        mediaStream = stream; // ストリームを保存
+                        video.srcObject = stream;
+                        video.onloadeddata = () => {
+                            video.play();
+                            
+                            contentWidth = video.videoWidth;
+                            contentHeight = video.videoHeight;
+                            
+                            wrapper.style.width = `${contentWidth}px`;
+                            wrapper.style.height = `${contentHeight}px`;
+
+                            isScanning = true; // スキャンを開始
+                            canvasUpdate();
+                            checkImage();
+                        }
+                    }).catch((e) => {
+                        console.log(e);
+                        wrapper.style.width = `${yoko}px`;
+                        wrapper.style.height = `${tate}px`;
+                    });
+            };
+
+
+            });
+
     </script>
 </body>
 </html>
