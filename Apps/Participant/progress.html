@@ -109,10 +109,10 @@
         </a>
     </footer>
 
-<div id="qrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
-    <div id="qr-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
+<div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
+    <div id="Ur-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
         <div class="flex items-center justify-between w-[88%] mb-8">
-            <svg id="qr-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
+            <svg id="Ur-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
             <p class="text-[4.2rem]">スキャン</p>
@@ -133,7 +133,7 @@
                                     <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限がありません</h1>
                                 </div>
                                 <p class="text-4xl m-auto py-6 mx-20">
-                                    再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラからQRコードを読み込んでください。
+                                    再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
                                 </p>
                             </div>  
                         </div>
@@ -142,7 +142,7 @@
                 </div>
             </div>
         </div>
-        <div id="QRstatus" class="text-5xl mt-12">
+        <div id="URstatus" class="text-5xl mt-12">
             枠内に収めてください
         </div>
     </div>
@@ -296,8 +296,8 @@
             });
 
 
-            const qrpop = document.getElementById('qrCodeReader');
-            const qrpopbar = document.getElementById('qr-bar');
+            const Urpop = document.getElementById('UrCodeReader');
+            const Urpopbar = document.getElementById('Ur-bar');
             let mediaStream = null;
             let contentWidth;
             let contentHeight;
@@ -313,24 +313,24 @@
             }
 
             if(isIOS()) {
-                qrpopbar.classList.add('h-[80vh]');
+                Urpopbar.classList.add('h-[80vh]');
             }else {
-                qrpopbar.classList.add('h-[90vh]');
+                Urpopbar.classList.add('h-[90vh]');
             }
 
 
 
-            let qrstart = 0;
-            let qrisSwip = false;
+            let Urstart = 0;
+            let UrisSwip = false;
 
-            const qrclosePopup = () => {
+            const UrclosePopup = () => {
                 stopCamera(); // カメラを停止
-                qrpopbar.classList.add('translate-y-full');
+                Urpopbar.classList.add('translate-y-full');
                 body.classList.remove('overflow-hidden');
 
                 setTimeout(() => {
-                    qrpop.classList.add('opacity-0',  'pointer-events-none');
-                    qrpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
+                    Urpop.classList.add('opacity-0',  'pointer-events-none');
+                    Urpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
                 }, 300);
             }
             // hiraku
@@ -338,75 +338,75 @@
                 item.addEventListener('click', () => {
                     if(checkAllStamps() == false) {
                         startCamera(); // カメラを起動
-                        qrpop.classList.remove('opacity-0',  'pointer-events-none');
+                        Urpop.classList.remove('opacity-0',  'pointer-events-none');
                         body.classList.add('overflow-hidden');
                     
                         // 遅延
                         setTimeout(() => {
-                            qrpopbar.classList.remove('translate-y-full');
-                            qrpopbar.classList.add('translate-y-0', 'transition-transform', 'duration-250', 'ease-in');
+                            Urpopbar.classList.remove('translate-y-full');
+                            Urpopbar.classList.add('translate-y-0', 'transition-transfoUm', 'duration-250', 'ease-in');
                         }, 10);
                     } 
                 });
             });
             // haikei
-            qrpop.addEventListener('click', (e) => {
-                if (e.target === qrpop) {
-                    qrclosePopup();
+            Urpop.addEventListener('click', (e) => {
+                if (e.target === Urpop) {
+                    UrclosePopup();
                 }
             });
 
-            const qrCloseButton = document.getElementById('qr-close-button');
-            if (qrCloseButton) {
-                qrCloseButton.addEventListener('click', () => {
-                    qrclosePopup();
+            const UrCloseButton = document.getElementById('Ur-close-button');
+            if (UrCloseButton) {
+                UrCloseButton.addEventListener('click', () => {
+                    UrclosePopup();
                 });
             }
             
 
             
-            qrpopbar.addEventListener('touchstart', (e) => {
-                qrisSwip = true;
-                qrstart = e.touches[0].clientY;
-                qrpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in');
+            Urpopbar.addEventListener('touchstart', (e) => {
+                UrisSwip = true;
+                Urstart = e.touches[0].clientY;
+                Urpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in');
             });
 
-            qrpopbar.addEventListener('touchmove', (e) => {
-                if(qrisSwip == false) {
+            Urpopbar.addEventListener('touchmove', (e) => {
+                if(UrisSwip == false) {
                     return;
                 }
                 const current_y = e.touches[0].clientY;
-                const kyori = current_y - qrstart;
+                const kyori = current_y - Urstart;
 
                 if(kyori > 0) {
-                    qrpopbar.style.transform = `translateY(${kyori}px)`;
+                    Urpopbar.style.transform = `translateY(${kyori}px)`;
                 }
 
             });
 
-            qrpopbar.addEventListener('touchend', (e) => {
-                if(qrisSwip == false) {
+            Urpopbar.addEventListener('touchend', (e) => {
+                if(UrisSwip == false) {
                     return;
                 }
 
                 const end = e.changedTouches[0].clientY;
-                const kyori = end - qrstart;
+                const kyori = end - Urstart;
                 // 10vh
                 const lengthLine = (window.innerHeight * 10) / 100;
-                qrpopbar.style.transform = '';
-                qrpopbar.classList.add('transition-transform', 'duration-250', 'ease-in');
+                Urpopbar.style.transform = '';
+                Urpopbar.classList.add('transition-transform', 'duration-250', 'ease-in');
                 
                 // shita ni sagaru
                 if(kyori > lengthLine) {
-                    qrclosePopup();
+                    UrclosePopup();
                 } else {
-                    qrpopbar.classList.add('translate-y-0');
-                    qrpopbar.addEventListener('transitionend', () => {
-                        qrpopbar.classList.remove('transition-transform', 'ease-in');
+                    Urpopbar.classList.add('translate-y-0');
+                    Urpopbar.addEventListener('transitionend', () => {
+                        Urpopbar.classList.remove('transition-transform', 'ease-in');
                     }, { once: true });
                 }
 
-                qrisSwip = false
+                UrisSwip = false
             });
             const permission = document.getElementById('permission-denied');
 
@@ -426,7 +426,7 @@
             const ctx = cvs.getContext('2d');
             const rectCvs = document.getElementById('rect-canvas');
             const rectCtx =  rectCvs.getContext('2d');
-            let qrCodeData = '';
+            let UrCodeData = '';
 
             const canvasUpdate = () => {
                 cvs.width = contentWidth;
@@ -435,7 +435,7 @@
                 requestAnimationFrame(canvasUpdate);
             }
 
-            // QRコードの検出
+            // 二次元コードの検出
             const checkImage = () => {
                 if (!isScanning) return; // スキャンが停止されていたら処理を終了
                 const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
@@ -444,19 +444,29 @@
                 if (code && code.data) {
                     console.log("二次元コードが見つかりました", code);
                     drawRect(code.location);
-                    qrCodeData = code.data;
-                    const qrMsg = document.getElementById('QRstatus');
-                    if(qrMsg) {
-                        qrMsg.textContent = `二次元コード：${qrCodeData}`;
+                    UrCodeData = code.data;
+                    const UrMsg = document.getElementById('URstatus');
+                    if(UrMsg) {
+                        UrMsg.textContent = `二次元コード：${UrCodeData}`;
                     }
-
+                    // root_URL
+                    const RootURL = 'https://neeerl.github.io/Sakutto_Rally/Apps/Participant/';
+                    for( let i = 0; i <= 3; i++) {
+                        let TargetStamp = 'stamp' + i + '.html';
+                        let TargetURL = RootURL + TargetStamp;
+                        if(code.data == TargetURL) {
+                            window.location.href = `${TargetStamp}`;
+                        }else {
+                            UrMsg.textContent = '正しいコードではありません';
+                        }
+                    }
                 } else {
                     console.log("二次元コードが見つかりません…");
                     rectCtx.clearRect(0, 0, contentWidth, contentHeight);
-                    qrCodeData = '';
-                    const qrMsg = document.getElementById('QRstatus');
-                    if(qrMsg) {
-                        qrMsg.textContent = `枠内に収めてください`;
+                    UrCodeData = '';
+                    const UrMsg = document.getElementById('URstatus');
+                    if(UrMsg) {
+                        UrMsg.textContent = `枠内に収めてください`;
                     }
                 }
                 setTimeout(()=>{ checkImage() }, 500);
