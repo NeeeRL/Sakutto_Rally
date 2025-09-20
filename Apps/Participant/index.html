@@ -43,7 +43,7 @@
         <p class="text-5xl w-[90%] m-auto">スタンプラリーの参加、ありがとうございます。早速QRコードをスキャンして、スタンプラリーをクリアしましょう!!</p>
 
         <div class="mb-20 mt-24 w-[92%] m-auto">
-            <a href="progress.html">
+            <a href="progress.html" id="progress_link">
                     <h2 class="text-6xl mb-8 text-center">現在の進捗</h1>
                     <div class="flex justify-between items-center my-4">
                         <div class="text-5xl" id="pro-text">0/3個のスタンプを獲得中</div>
@@ -238,6 +238,7 @@
                 }
                 
                 if (currentStamps === totalStamps) {
+                    document.getElementById('progress_link').href='clear.html';
                     prebox.innerHTML='<a href="clear.html"><div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-[5rem]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg></div></a>';
                 }
             }
