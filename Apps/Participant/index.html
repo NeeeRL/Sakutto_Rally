@@ -373,6 +373,7 @@
 
             const qrpop = document.getElementById('qrCodeReader');
             const qrpopbar = document.getElementById('qr-bar');
+            const qrMsg = document.getElementById('QRstatus');
             let mediaStream = null;
             let contentWidth;
             let contentHeight;
@@ -387,7 +388,7 @@
 
             if(isIOS()) {
                 qrpopbar.classList.add('h-[80vh]');
-                console.log('aaaaaaaaaaaaa');
+                qrMsg.classList.add('hidden');
             }else {
                 qrpopbar.classList.add('h-[90vh]');
             }
@@ -514,7 +515,6 @@
                     console.log("QRcodeが見つかりました", code);
                     drawRect(code.location);
                     qrCodeData = code.data;
-                    const qrMsg = document.getElementById('QRstatus');
                     if(qrMsg) {
                         qrMsg.textContent = `二次元コード：${qrCodeData}`;
                     }
