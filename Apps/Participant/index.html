@@ -576,7 +576,6 @@
                     }
                 };
 
-                // saikeisan oyayouso kara hokano youso wo sashihiku
                 const urBar1 = document.getElementById('Ur-bar-1');
                 const urBar2 = document.getElementById('Ur-bar-2');
 
@@ -584,17 +583,19 @@
                 const urBar1Style = window.getComputedStyle(urBar1);
                 const urBar3Style = window.getComputedStyle(UrMsg);
 
+                const parentPaddingTop = parseFloat(ParStyle.paddingTop);
+                const parentPaddingBottom = parseFloat(ParStyle.paddingBottom);
                 const parentHeight = parseFloat(ParStyle.height);
+
                 const urBar1Height = parseFloat(urBar1Style.height);
-                const urBar3Height = parseFloat(urBar3Style.height);
+                const urBar1MarginBottom = parseFloat(urBar1Style.marginBottom);
+                const urBar3Height = urBar3Style ? parseFloat(urBar3Style.height) : 0;
+                const urBar3MarginTop = urBar3Style ? parseFloat(urBar3Style.marginTop) : 0;
 
-                // 3. 数値同士で正しく計算する
-                const urBar2Height = parentHeight - urBar1Height - urBar3Height;
+                const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar3Height - urBar3MarginTop;
 
-                // 計算結果を確認
                 console.log(`urBar2の高さは: ${urBar2Height}px`);
 
-                // (任意) 計算した高さをurBar2に適用する
                 if (urBar2Height > 0) {
                     urBar2.style.height = `${urBar2Height}px`;
                 }
