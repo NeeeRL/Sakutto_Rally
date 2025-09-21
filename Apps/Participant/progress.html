@@ -524,8 +524,12 @@
                 const urBar3Height = urBar3Style ? parseFloat(urBar3Style.height) : 0;
                 const urBar3MarginTop = urBar3Style ? parseFloat(urBar3Style.marginTop) : 0;
 
-                const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar3Height - urBar3MarginTop;
-
+                if(isIOS()){
+                    const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar1Height - urBar1MarginBottom;
+                }else {
+                    const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar3Height - urBar3MarginTop;
+                }
+                
                 console.log(`urBar2の高さは: ${urBar2Height}px`);
 
                 if (urBar2Height > 0) {
