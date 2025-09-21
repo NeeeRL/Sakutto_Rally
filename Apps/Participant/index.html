@@ -157,14 +157,14 @@
 
 <div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
     <div id="Ur-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
-        <div class="flex items-center justify-between w-[88%] mb-8">
+        <div class="flex items-center justify-between w-[88%] mb-8" id="Ur-bar-1">
             <svg id="Ur-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
             <p class="text-[4.2rem]">スキャン</p>
             <div class="size-20"></div>
         </div>
-        <div class="flex justify-center items-center flex-col w-full h-full ">
+        <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
             <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
                 <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
                 <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
@@ -575,6 +575,30 @@
                         height: { ideal: 720 }
                     }
                 };
+
+                // saikeisan oyayouso kara hokano youso wo sashihiku
+                const urBar1 = document.getElementById('Ur-bar-1');
+                const urBar2 = document.getElementById('Ur-bar-2');
+
+                const ParStyle = window.getComputedStyle(Urpopbar);
+                const urBar1Style = window.getComputedStyle(urBar1);
+                const urBar3Style = window.getComputedStyle(UrMsg);
+
+                const parentHeight = parseFloat(ParStyle.height);
+                const urBar1Height = parseFloat(urBar1Style.height);
+                const urBar3Height = parseFloat(urBar3Style.height);
+
+                // 3. 数値同士で正しく計算する
+                const urBar2Height = parentHeight - urBar1Height - urBar3Height;
+
+                // 計算結果を確認
+                console.log(`urBar2の高さは: ${urBar2Height}px`);
+
+                // (任意) 計算した高さをurBar2に適用する
+                if (urBar2Height > 0) {
+                    urBar2.style.height = `${urBar2Height}px`;
+                }
+
 
 
                 navigator.mediaDevices.getUserMedia(constraints)
