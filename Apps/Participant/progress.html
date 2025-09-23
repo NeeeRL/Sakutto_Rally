@@ -111,7 +111,7 @@
 
 <div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
     <div id="Ur-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
-        <div class="flex items-center justify-between w-[88%] mb-8"  id="Ur-bar-1">
+        <div class="flex items-center justify-between w-[88%] mb-8" id="Ur-bar-1">
             <svg id="Ur-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -298,6 +298,7 @@
 
             const Urpop = document.getElementById('UrCodeReader');
             const Urpopbar = document.getElementById('Ur-bar');
+            const UrMsg = document.getElementById('URstatus');
             let mediaStream = null;
             let contentWidth;
             let contentHeight;
