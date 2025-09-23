@@ -1,6 +1,6 @@
 import Header from './header.tsx'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { preEventData } from './types/event'
 
 const getInitialValue = (key: string) => {
@@ -18,6 +18,53 @@ const getInitialValue = (key: string) => {
     }
 }
 
+//初期値取得，なければ作成
+const openIDB = () => {
+    return new Promise<IDBDatabase>((resolve, reject) => {
+        const request = indexedDB.open("images", 1)
+
+        request.onupgradeneeded = (event) => {
+            const db = (event.target as IDBOpenDBRequest).result
+            if (!db.objectStoreNames.contains("images")) {
+                db.createObjectStore("images", {keyPath: "key"})
+            }
+        }
+
+        request.onsuccess = () => resolve(request.result)
+        request.onerror = () => reject(request.error)
+    })
+}
+const saveIDB = async (key: string, file: File) => {
+    const db = await openIDB()
+
+    return new Promise<void>((resolve, reject) => {
+        const tx = db.transaction("images", "readwrite")
+        const store = tx.objectStore("images")
+
+        const request = store.put({key, file})
+
+        request.onsuccess = () => resolve()
+        request.onerror = () => reject(request.error)
+    })
+}
+const getIDB = async (key: string): Promise<File | null> => {
+    const db = await openIDB()
+
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction("images", "readonly")
+        const store = tx.objectStore("images")
+
+        const request = store.get(key)
+
+        request.onsuccess = () => {
+            const result = request.result
+            resolve(result ? result.file : null)
+        }
+        request.onerror = () => reject(request.error)
+    })
+}
+
+
 const createEvent = () => {
 
     const [ eventName, setEventName ] = useState<string>(getInitialValue("eventName"))
@@ -25,10 +72,10 @@ const createEvent = () => {
     const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")))
     const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate"))
     // mapは画像
-    // const [ map, setMap ] = useState<string>("")
+    const [ map, setMap ] = useState<string | null>("")
     const [ description, setDescription ] = useState<string>(getInitialValue("description"))
     // thumbnailは画像
-    // const [ thumbnail, setThumbnail ] = useState<string>("")
+    const [ thumbnail, setThumbnail ] = useState<string | null>("")
 
     const saveInput = () => {
         //これはデバッグ用
@@ -47,6 +94,30 @@ const createEvent = () => {
         localStorage.setItem("eventData", JSON.stringify(newData))
         // console.log("上書き後", newData)
     }
+
+    const uploadIDB = (name: string) => {
+        return async (event: React.ChangeEvent<HTMLInputElement>) => {
+            const file = event.target.files?.[0]
+            if (!file) return
+            await saveIDB(name, file)
+
+            //ここで画像の場所を指定
+            if (name === "map"){
+                setMap(URL.createObjectURL(file))
+            } else if (name === "thumbnail") {
+                setThumbnail(URL.createObjectURL(file))
+            }
+        }
+    }
+        
+    useEffect(() => {
+        (async () => {
+            const mapFile = await getIDB("map")
+            const thumbnailFile = await getIDB("thumbnail")
+            if (mapFile) setMap(URL.createObjectURL(mapFile))
+            if (thumbnailFile) setThumbnail(URL.createObjectURL(thumbnailFile))
+        })()
+    }, [])
     
     return(
         <>
@@ -93,9 +164,11 @@ const createEvent = () => {
                     <input 
                         id="map" 
                         type="file" 
-                        accept="image/*" 
+                        accept="image/*"
+                        onChange={uploadIDB("map")}
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
+                    {map && <img src={map} alt="map preview" />}
                     <label htmlFor="description" className="mt-6 my-2 block">概要</label>
                     <textarea 
                         id="description" 
@@ -108,9 +181,11 @@ const createEvent = () => {
                     <input 
                         id="thumbnail" 
                         type="file" 
-                        accept="image/*" 
+                        accept="image/*"
+                        onChange={uploadIDB("thumbnail")}
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
+                    {thumbnail && <img src={thumbnail} alt="thumbnail preview" />}
                 </div>
                 <Link 
                     to="/checkpoints" 

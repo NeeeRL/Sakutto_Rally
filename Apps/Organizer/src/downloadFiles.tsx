@@ -4,6 +4,50 @@ import type { eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
 import JSZip from 'jszip'
 
+//この関数を使うときは必ずawaitを使うこと
+const blobToBase64 = (blob: Blob): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onloadend = () => resolve(reader.result as string)
+    reader.onerror = reject
+    reader.readAsDataURL(blob) // "data:image/png;base64,~" の形式
+  })
+}
+
+//ここはあとで共通化するので消す
+const openIDB = () => {
+    return new Promise<IDBDatabase>((resolve, reject) => {
+        const request = indexedDB.open("images", 1)
+
+        request.onupgradeneeded = (event) => {
+            const db = (event.target as IDBOpenDBRequest).result
+            if (!db.objectStoreNames.contains("images")) {
+                db.createObjectStore("images", {keyPath: "key"})
+            }
+        }
+
+        request.onsuccess = () => resolve(request.result)
+        request.onerror = () => reject(request.error)
+    })
+}
+const getIDB = async (key: string): Promise<File | null> => {
+    const db = await openIDB()
+
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction("images", "readonly")
+        const store = tx.objectStore("images")
+
+        const request = store.get(key)
+
+        request.onsuccess = () => {
+            const result = request.result
+            resolve(result ? result.file : null)
+        }
+        request.onerror = () => reject(request.error)
+    })
+}
+
+
 function downloadFiles () {
 
     const settings = localStorage.getItem("eventData")
@@ -12,6 +56,17 @@ function downloadFiles () {
 
     const downloadJsonFile = () => {
         if (settings && downloadJson.current) {
+            // try {
+            //     const mapFile = await getIDB("map")
+            //     const thumbFile = await getIDB("thumbnail")
+
+            //     if(mapFile){
+            //         data.map = await
+            //     }
+            // }
+
+
+
             const jsonBlob = new Blob([settings], {type: "application/json"})
             const url = URL.createObjectURL(jsonBlob)
             downloadJson.current.href = url
@@ -44,7 +99,7 @@ function downloadFiles () {
             setQRList(Object.values(data.checkPoints).map(checkPoint => ({
                 // ここでURLを決める。パラメータで判断するときもここを変更。
                 value: lootURL + checkPoint.id + ".html",
-                fileName: checkPoint.name
+                fileName: checkPoint.name + "-" + checkPoint.id
             })))
         }
     },[settings])
