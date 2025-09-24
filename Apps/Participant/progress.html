@@ -166,6 +166,7 @@
                 
             });
 
+            // check-pointに関わるコード __NKyotsu
             const checkpoints = [
                 { id: 'stamp1', name: 'チェックポイント１' },
                 { id: 'stamp2', name: 'チェックポイント２' },
@@ -268,6 +269,10 @@
                 listContainer.appendChild(element);
             });
 
+
+
+            
+
             const SentClear = document.getElementById('sent-clear-button');
             const ClearBox = document.getElementById('clear-btn-box');
 
@@ -296,6 +301,7 @@
             });
 
 
+            // qr-code の部分  __NKyotsu
             const Urpop = document.getElementById('UrCodeReader');
             const Urpopbar = document.getElementById('Ur-bar');
             const UrMsg = document.getElementById('URstatus');
@@ -411,7 +417,7 @@
             });
             const permission = document.getElementById('permission-denied');
 
-
+            // jsqrのカメラ部分 __NKyotsu
             const stopCamera = () => {
                 isScanning = false; // スキャンを停止
                 permission.classList.remove('hidden');
@@ -443,7 +449,6 @@
                 const code = jsQR(imageData.data, contentWidth, contentHeight);
 
                 if (code && code.data) {
-                    console.log("二次元コードが見つかりました", code);
                     drawRect(code.location);
                     UrCodeData = code.data;
                     const UrMsg = document.getElementById('URstatus');
@@ -462,7 +467,6 @@
                         }
                     }
                 } else {
-                    console.log("二次元コードが見つかりません…");
                     rectCtx.clearRect(0, 0, contentWidth, contentHeight);
                     UrCodeData = '';
                     const UrMsg = document.getElementById('URstatus');
@@ -527,7 +531,6 @@
 
                 const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar3Height - urBar3MarginTop;
                 
-                console.log(`urBar2の高さは: ${urBar2Height}px`);
 
                 if (urBar2Height > 0) {
                     urBar2.style.height = `${urBar2Height}px`;

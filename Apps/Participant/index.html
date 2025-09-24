@@ -209,6 +209,7 @@
                 
             });
             
+            // __NKyotsu
             const prebox = document.querySelector('.prebox');
 
             function updateStampProgress() {
@@ -227,7 +228,6 @@
                 const percent = document.getElementById('pro-percent');
                 const protext = document.getElementById('pro-text');
 
-                console.log(`${currentStamps}`);
                 const bar_per = Math.round(currentStamps / totalStamps * 100);
 
                 if (progress_bar) {
@@ -272,7 +272,7 @@
             }
 
 
-
+            // スタンプデータを消すボタンに関わるスクリプト　__NKyotsu
             const popup = document.getElementById('pop-up');
             const popBar = document.getElementById('pop-bar');
             const YesPop = document.getElementById('yes-pop');
@@ -370,6 +370,8 @@
                 isSwip = false
             });
 
+
+            // QRコードリーダーの部分　__NKyotsu
             const Urpop = document.getElementById('UrCodeReader');
             const Urpopbar = document.getElementById('Ur-bar');
             const UrMsg = document.getElementById('URstatus');
@@ -378,6 +380,7 @@
             let contentHeight;
             let isScanning = false;
             
+            // iOSのためのQRコードリーダーのコード　__NKyotsu
             function isIOS() {
                 if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
                     return true;
@@ -392,7 +395,7 @@
             }
 
 
-
+            // QRコードの部分の続き　__NKyotsu
             let Urstart = 0;
             let UrisSwip = false;
 
@@ -481,6 +484,7 @@
                 UrisSwip = false
             });
 
+            // JSQRの部分　__NKyotsu
             const stopCamera = () => {
                 isScanning = false; // スキャンを停止
                 if (mediaStream) {
@@ -510,7 +514,6 @@
                 const code = jsQR(imageData.data, contentWidth, contentHeight);
 
                 if (code && code.data) {
-                    console.log("二次元コードが見つかりました", code);
                     drawRect(code.location);
                     UrCodeData = code.data;
                     if(UrMsg) {
@@ -528,7 +531,6 @@
                         }
                     }
                 } else {
-                    console.log("二次元コードが見つかりません…");
                     rectCtx.clearRect(0, 0, contentWidth, contentHeight);
                     UrCodeData = '';
                     const UrMsg = document.getElementById('URstatus');
@@ -593,12 +595,10 @@
 
                 const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar3Height - urBar3MarginTop;
 
-                console.log(`urBar2の高さは: ${urBar2Height}px`);
 
                 if (urBar2Height > 0) {
                     urBar2.style.height = `${urBar2Height}px`;
                 }
-
 
 
                 navigator.mediaDevices.getUserMedia(constraints)

@@ -87,6 +87,7 @@
                 }                 
             });
 
+            // add data __NKyotsu
             function AddlocalStorage(id, newStatus) {
                 const storageKey = 'Sakutto_Rally';
 
@@ -96,10 +97,8 @@
 
                 if (targetItem) {
                     targetItem.status = newStatus;
-                    console.log(`ID: \"${id}\" のステータスを ${newStatus} に更新しました。`);
                 } else {
                     currentData.push({ id: id, status: newStatus });
-                    console.log(`ID: \"${id}\" をステータス ${newStatus} で新規追加しました。`);
                 }
 
                 localStorage.setItem(storageKey, JSON.stringify(currentData));
