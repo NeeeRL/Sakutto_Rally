@@ -1,0 +1,148 @@
+export const footAndJS = `
+
+
+`
+export const templates = {
+head: `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="src/index.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="スタンプラリーページです。" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script></head>
+<body>
+    <header>
+        <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-17 ml-16">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
+                {{pageName}}
+            </h1>
+        </div>
+    </header>
+
+    <noscript class="mr-16 ml-16 mt-10">
+        <p class="text-4xl ">JSが有効でないようです。このサイトを満足に使うにはJavaScriptを有効にしてください。</p>
+    </noscript>
+`,
+foot: `
+    <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+            <div class="flex flex-col items-center justify-center">
+                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+            </svg>
+                </div>
+                <p class="text-4xl">地図</p>
+            </div>
+            
+            
+        </a>
+        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+            <div class="flex flex-col items-center justify-center">
+                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                    </svg>
+                </div>
+                <p class="text-4xl">ホーム</p>
+            </div>
+            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+        </a>
+        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+            
+            <div class="flex flex-col items-center justify-center">
+                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                    </svg>
+                        <div class="absolute top-0 right-0 hidden" id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                </div>
+                <p class="text-4xl">進捗</p>
+            </div>
+            
+            
+        </a>
+    </footer>
+
+
+    <!-- boyake ha koko -->
+<div id="pop-up" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
+    <div id="pop-bar" class=" w-full h-[40vh] bg-white rounded-t-4xl shadow-2xl p-6 flex flex-col justify-between items-center transition-transform translate-y-full">
+        <div class="flex justify-center items-center flex-col">
+            <div class="flex justify-center w-full">
+                <div class="w-[20vw] h-4 bg-gray-300 rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col items-center text-center w-[84%] mt-10">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-18 mt-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+                <h1 class="text-7xl font-bold my-4">確認</h1>
+                <p class="text-5xl mt-4 text-gray-600">本当にスタンプのすべてのデータを削除しても大丈夫でしょうか？</p>
+            </div>
+        </div>
+        
+
+        <div class="w-full flex flex-col items-center h-[auto] mb-12">
+            <button id="yes-pop" class="rounded-full bg-gray-300 py-5 text-6xl w-[85%] my-6 ">はい</button>
+            <button id="no-pop" class="rounded-full bg-gray-300 py-5 text-6xl w-[85%] my-6 ">いいえ</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
+    <div id="Ur-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
+        <div class="flex items-center justify-between w-[88%] mb-8" id="Ur-bar-1">
+            <svg id="Ur-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+            <p class="text-[4.2rem]">スキャン</p>
+            <div class="size-20"></div>
+        </div>
+        <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
+            <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
+                <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
+                <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+                <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
+                        <div class="" style="display: block;">
+                            <div class="flex justify-center flex-col items-center text-center gap-4">
+                                <div class="flex justify-center items-center flex-col">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-40">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
+                                    </svg>
+                                    <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限がありません</h1>
+                                </div>
+                                <p class="text-4xl m-auto py-6 mx-20">
+                                    再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
+                                </p>
+                            </div>  
+                        </div>
+
+                                          
+                </div>
+            </div>
+        </div>
+        <div id="URstatus" class="text-5xl mt-12">
+            枠内に収めてください
+        </div>
+    </div>
+</div>
+</body>
+</html>`
+};

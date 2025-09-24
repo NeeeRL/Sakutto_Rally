@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import type { eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
 import JSZip from 'jszip'
+import { templates } from './templates.tsx'
 
 //この関数を使うときは必ずawaitを使うこと
 const blobToBase64 = (blob: Blob): Promise<string> => {
@@ -45,6 +46,28 @@ const getIDB = async (key: string): Promise<File | null> => {
         }
         request.onerror = () => reject(request.error)
     })
+}
+
+const downloadFile = (blob: Blob, filename: string) => {
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+const renderTemplate = (template: string, data: Record<string, string>) => {
+  return template.replace(/{{(.*?)}}/g, (_, key) => data[key.trim()] ?? "");
+}
+const generateHTML = async () => {
+    const zipHTML = new JSZip()
+
+    const topPage = renderTemplate(templates.head + templates.foot, { title: "これはタイトルだよ"})
+
+    zipHTML.file("test.html", topPage)
+
+    const blob = await zipHTML.generateAsync({ type: "blob"})
+    downloadFile(blob, "pages.zip")
 }
 
 
@@ -172,7 +195,12 @@ function downloadFiles () {
                         <p>HTMLファイル</p>
                         <p className="text-xs text-gray-600">参加者用HTMLファイル</p>
                     </div>
-                    <button className="bg-gray-200 rounded-xl h-8 px-4">ダウンロード</button>
+                    <button
+                        className="bg-gray-200 rounded-xl h-8 px-4"
+                        onClick={generateHTML}
+                    >
+                        ダウンロード
+                        </button>
                 </div>
                 <div className="flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-11 bg-gray-200 rounded-lg p-1.5 ">
