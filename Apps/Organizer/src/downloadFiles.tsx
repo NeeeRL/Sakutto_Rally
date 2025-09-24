@@ -54,25 +54,32 @@ function downloadFiles () {
     
     const downloadJson = useRef<HTMLAnchorElement>(null)
 
-    const downloadJsonFile = () => {
+    const downloadJsonFile = async () => {
         if (settings && downloadJson.current) {
-            // try {
-            //     const mapFile = await getIDB("map")
-            //     const thumbFile = await getIDB("thumbnail")
+            try {
+                const data = JSON.parse(settings)
+                const mapFile = await getIDB("map")
+                const thumbFile = await getIDB("thumbnail")
 
-            //     if(mapFile){
-            //         data.map = await
-            //     }
-            // }
+                if(mapFile){
+                    data.map = await blobToBase64(mapFile)
+                }
+                if (thumbFile) {
+                    data.thumbnail = await blobToBase64(thumbFile)
+                }
 
+                const jsonString = JSON.stringify(data, null, 2)
+                const jsonBlob = new Blob([jsonString], {type: "application/json"})
+                const url = URL.createObjectURL(jsonBlob)
+                downloadJson.current.href = url
+                downloadJson.current.download = "settings.json"
+                downloadJson.current.click()
+                URL.revokeObjectURL(url)
+            }
+            catch(err){
+                console.error(err)
+            }
 
-
-            const jsonBlob = new Blob([settings], {type: "application/json"})
-            const url = URL.createObjectURL(jsonBlob)
-            downloadJson.current.href = url
-            downloadJson.current.download = "settings.json"
-            downloadJson.current.click()
-            URL.revokeObjectURL(url)
         }
         else {
             console.log("not data")

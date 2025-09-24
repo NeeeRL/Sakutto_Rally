@@ -4,6 +4,46 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import type { eventData } from './types/event.ts'
 
+const base64ToBlob = (base64: string) => {
+    const arr = base64.split(",")
+    const mime = arr[0].match(/:(.*?);/)?.[1] || "application/octet-stream"
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+    }
+    return new Blob([u8arr], { type: mime })
+}
+const openIDB = () => {
+    return new Promise<IDBDatabase>((resolve, reject) => {
+        const request = indexedDB.open("images", 1)
+
+        request.onupgradeneeded = (event) => {
+            const db = (event.target as IDBOpenDBRequest).result
+            if (!db.objectStoreNames.contains("images")) {
+                db.createObjectStore("images", {keyPath: "key"})
+            }
+        }
+
+        request.onsuccess = () => resolve(request.result)
+        request.onerror = () => reject(request.error)
+    })
+}
+const saveIDB = async (key: string, file: File) => {
+    const db = await openIDB()
+
+    return new Promise<void>((resolve, reject) => {
+        const tx = db.transaction("images", "readwrite")
+        const store = tx.objectStore("images")
+
+        const request = store.put({key, file})
+
+        request.onsuccess = () => resolve()
+        request.onerror = () => reject(request.error)
+    })
+}
+
 function loadFiles () {
 
     const navigate = useNavigate()
@@ -14,12 +54,25 @@ function loadFiles () {
         const file = e.target.files?.[0]
         if (file) {
             const reader = new FileReader()
-            reader.onload = (event) => {
+            reader.onload = async (event) => {
                 const fileContent = event.target?.result as string
                 try{
                     const jsonFile = JSON.parse(fileContent)
-                    if (checkJsonKeys(jsonFile)) {         
-                        localStorage.setItem("eventData", fileContent)
+                    if (checkJsonKeys(jsonFile)) { 
+                        if(jsonFile.map && jsonFile.map.startsWith("data:")){
+                            const blob = base64ToBlob(jsonFile.map)
+                            const fileObj = new File([blob], "map.png", { type: blob.type })
+                            await saveIDB("map", fileObj)
+                            delete jsonFile.map
+                        }
+                        if (jsonFile.thumbnail && jsonFile.thumbnail.startsWith("data:")) {
+                            const blob = base64ToBlob(jsonFile.thumbnail)
+                            const fileObj = new File([blob], "thumbnail.png", { type: blob.type })
+                            await saveIDB("thumbnail", fileObj)
+                            delete jsonFile.thumbnail
+                        }
+
+                        localStorage.setItem("eventData", JSON.stringify(jsonFile))
                         navigate("/create")        
                     }
                     else {
@@ -29,8 +82,8 @@ function loadFiles () {
                         }
                     }
                 }
-                catch{
-                    console.error("JSON cannot parsed")
+                catch(err){
+                    console.error("JSON cannot parsed", err)
                     alert("無効なファイル形式です")
                     if(fileInput.current){
                         fileInput.current.value = ""
@@ -46,7 +99,7 @@ function loadFiles () {
         if (typeof data !== "object" || data === null) {
             return false;
         }
-        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "checkPoints"]
+        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "checkPoints", "map", "thumbnail"]
         for (const key of keys) {
             if (!(key in data)){
                 return false
