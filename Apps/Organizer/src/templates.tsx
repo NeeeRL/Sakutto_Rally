@@ -1,6 +1,5 @@
 export const footAndJS = `
 
-
 `
 export const templates = {
 head: `<!DOCTYPE html>
@@ -20,7 +19,7 @@ head: `<!DOCTYPE html>
                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
             <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
-                {{pageName}}
+                スタンプラリーホーム
             </h1>
         </div>
     </header>
@@ -144,5 +143,64 @@ foot: `
     </div>
 </div>
 </body>
-</html>`
+</html>`,
+indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
+        <div class="flex items-center flex-col">
+            <h1 class="text-7xl py-2 my-2">スタンプラリー</h1>
+            <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-13 pr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                </svg>
+                <p class="text-5xl">期間: {{start}}から{{end}}まで</p>
+            </div>
+        </div>
+        
+        <div class="flex justify-center mt-16 mb-16">
+            <img src="{{image}}" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
+        </div>
+        <p class="text-5xl w-[90%] m-auto">{{description}}</p>
+
+        <div class="mb-20 mt-24 w-[92%] m-auto">
+            <a href="progress.html" id="progress_link">
+                    <h2 class="text-6xl mb-8 text-center">現在の進捗</h1>
+                    <div class="flex justify-between items-center my-4">
+                        <div class="text-5xl" id="pro-text">0/3個のスタンプを獲得中</div>
+                        <p id="pro-percent" class="text-5xl"></p>
+                    </div>
+                    <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden" id="max-progress-bar">
+                        <div id="progress-bar" class="bg-blue-300 w-0 h-full transition-all duration-1000 ease-in-out "></div>
+                    </div> 
+            </a>
+            
+
+        </div>
+        
+        <div class="flex items-center justify-center">
+            <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6  w-[90%] ">
+                <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
+            </div>
+        </div>
+
+        <div class="text-8xl border p-10">
+            <h2>dev-tools</h2>
+            <a href="stamp1.html" class="border-b">stamp1</a>
+            <a href="stamp2.html" class="border-b">stamp2</a>
+            <a href="stamp3.html" class="border-b">stamp3</a>
+        </div>
+     </main>
+
+    <div class="prebox fixed bottom-60 right-12 w-[9rem] h-[9rem] rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 bg-blue-500">
+            <div class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="White" class="size-[5rem]">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
+</svg>
+
+            </div>            
+        </div>
+`,
+mapPage: `<main class="mt-10 mx-16" id="mains">
+    <img src="{{map}}" alt="スタンプラリーの地図" class="w-full h-auto border">
+</main>
+`
 };

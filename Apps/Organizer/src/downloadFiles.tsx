@@ -1,6 +1,6 @@
 import Header from './header.tsx'
 import { useRef, useEffect, useState } from 'react'
-import type { eventData } from './types/event.ts'
+import type { checkPoint, eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
 import JSZip from 'jszip'
 import { templates } from './templates.tsx'
@@ -59,21 +59,68 @@ const downloadFile = (blob: Blob, filename: string) => {
 const renderTemplate = (template: string, data: Record<string, string>) => {
   return template.replace(/{{(.*?)}}/g, (_, key) => data[key.trim()] ?? "");
 }
-const generateHTML = async () => {
-    const zipHTML = new JSZip()
-
-    const topPage = renderTemplate(templates.head + templates.foot, { title: "これはタイトルだよ"})
-
-    zipHTML.file("test.html", topPage)
-
-    const blob = await zipHTML.generateAsync({ type: "blob"})
-    downloadFile(blob, "pages.zip")
-}
 
 
 function downloadFiles () {
 
     const settings = localStorage.getItem("eventData")
+
+    const generateHTML = async () => {
+    
+        try{
+            if(settings){
+                const data = JSON.parse(settings)
+                const mapFile = await getIDB("map")
+                const thumbFile = await getIDB("thumbnail")
+
+                if(mapFile){
+                    data.map = await blobToBase64(mapFile)
+                }
+                if (thumbFile) {
+                    data.thumbnail = await blobToBase64(thumbFile)
+                }
+
+                const zipHTML = new JSZip()
+
+                const topPage = renderTemplate(
+                    templates.head + templates.indexMain + templates.foot,
+                    { 
+                        title: data.eventName, 
+                        start: data.startDate, 
+                        end: data.endDate,
+                        image: data.thumbnail,
+                        description: data.description
+                    }
+                )
+                const mapPage = renderTemplate(
+                    templates.head + templates.mapPage + templates.foot,
+                    { map: data.map }
+                )
+                const progressPage = renderTemplate(
+                    templates.head + templates.mapPage + templates.foot,
+                    { map: data.map }
+                )
+
+                zipHTML.file("index.html", topPage)
+                zipHTML.file("map.html", mapPage)
+                zipHTML.file("progress.html", progressPage)
+
+                data.checkPoints.forEach((element: checkPoint) => {
+                    const checkPointPage = renderTemplate(
+                        templates.head + templates.foot,
+                        { cpName: element.name }
+                    )
+                    zipHTML.file(element.id + ".html", checkPointPage)
+                })
+
+                const blob = await zipHTML.generateAsync({ type: "blob"})
+                downloadFile(blob, "pages.zip")
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
     
     const downloadJson = useRef<HTMLAnchorElement>(null)
 
