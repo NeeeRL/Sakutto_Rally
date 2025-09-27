@@ -2,7 +2,7 @@ import Header from './header.tsx'
 import { useRef, useEffect, useState } from 'react'
 import type { checkPoint, eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
-import JSZip from 'jszip'
+import JSZip, { forEach } from 'jszip'
 import { templates } from './templates.tsx'
 
 //この関数を使うときは必ずawaitを使うこと
@@ -85,7 +85,8 @@ function downloadFiles () {
                 const topPage = renderTemplate(
                     templates.head + templates.indexMain + templates.foot,
                     { 
-                        title: data.eventName, 
+                        title: data.eventName + "ホーム", 
+                        eventName: data.eventName,
                         start: data.startDate, 
                         end: data.endDate,
                         image: data.thumbnail,
@@ -94,17 +95,34 @@ function downloadFiles () {
                 )
                 const mapPage = renderTemplate(
                     templates.head + templates.mapPage + templates.foot,
-                    { map: data.map }
+                    { 
+                        title: data.eventName,
+                        map: data.map
+                    }
                 )
+
+                const stamps = () => {
+                    let ans = ""
+                    let returnAns = "return ("
+                    data.checkPoints.forEach((element: checkPoint, index: number) => {
+                        ans += `const ${element.id} = currentData.find(item => item.id === '${element.id}');`
+                        returnAns += `${element.id} && ${element.id}.status ${ data.checkPoints.length - 1 > index ? " && ": ""}`
+                    })
+                    return ans + returnAns + ")"
+                }
                 const progressPage = renderTemplate(
                     templates.head + templates.mapPage + templates.foot,
-                    { map: data.map }
+                    { 
+                        map: data.map,
+                        stamps: stamps()
+                    }
                 )
+                console.log(stamps())
 
                 zipHTML.file("index.html", topPage)
                 zipHTML.file("map.html", mapPage)
                 zipHTML.file("progress.html", progressPage)
-
+                //各チェックポイントのHTMLファイルを生成
                 data.checkPoints.forEach((element: checkPoint) => {
                     const checkPointPage = renderTemplate(
                         templates.head + templates.foot,

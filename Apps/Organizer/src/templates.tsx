@@ -146,7 +146,7 @@ foot: `
 </html>`,
 indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
         <div class="flex items-center flex-col">
-            <h1 class="text-7xl py-2 my-2">スタンプラリー</h1>
+            <h1 class="text-7xl py-2 my-2">{{eventName}}</h1>
             <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-13 pr-2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
@@ -154,7 +154,6 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
                 <p class="text-5xl">期間: {{start}}から{{end}}まで</p>
             </div>
         </div>
-        
         <div class="flex justify-center mt-16 mb-16">
             <img src="{{image}}" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
         </div>
@@ -180,13 +179,6 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
                 <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
             </div>
         </div>
-
-        <div class="text-8xl border p-10">
-            <h2>dev-tools</h2>
-            <a href="stamp1.html" class="border-b">stamp1</a>
-            <a href="stamp2.html" class="border-b">stamp2</a>
-            <a href="stamp3.html" class="border-b">stamp3</a>
-        </div>
      </main>
 
     <div class="prebox fixed bottom-60 right-12 w-[9rem] h-[9rem] rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 bg-blue-500">
@@ -201,6 +193,18 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
 `,
 mapPage: `<main class="mt-10 mx-16" id="mains">
     <img src="{{map}}" alt="スタンプラリーの地図" class="w-full h-auto border">
+    {{stamps}}
 </main>
-`
+`,
+commonScript:`<script>function checkAllStamps() {
+const storageKey = '{{eventName}}';
+const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+{{stamps}}
+
+//return !!(  stamp1 && stamp1.status &&
+//            stamp2 && stamp2.status &&
+//            stamp3 && stamp3.status     );
+}
+</script>`
 };
