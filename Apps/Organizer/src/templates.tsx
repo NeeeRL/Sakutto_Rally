@@ -103,7 +103,53 @@ foot: `
 </div>
 
 
+`,
+indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
+    <div class="flex items-center flex-col">
+        <h1 class="text-7xl py-2 my-2">{{eventName}}</h1>
+        <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-13 pr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+            </svg>
+            <p class="text-5xl">期間: {{start}}から{{end}}まで</p>
+        </div>
+    </div>
+    <div class="flex justify-center mt-16 mb-16">
+        <img src="{{image}}" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
+    </div>
+    <p class="text-5xl w-[90%] m-auto">{{description}}</p>
 
+    <div class="mb-20 mt-24 w-[92%] m-auto">
+        <a href="progress.html" id="progress_link">
+                <h2 class="text-6xl mb-8 text-center">現在の進捗</h1>
+                <div class="flex justify-between items-center my-4">
+                    <div class="text-5xl" id="pro-text">/{{stampCount}}個のスタンプを獲得中</div>
+                    <p id="pro-percent" class="text-5xl"></p>
+                </div>
+                <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden" id="max-progress-bar">
+                    <div id="progress-bar" class="bg-blue-300 w-0 h-full transition-all duration-1000 ease-in-out "></div>
+                </div> 
+        </a>
+        
+
+    </div>
+    
+    <div class="flex items-center justify-center">
+        <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6  w-[90%] ">
+            <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
+        </div>
+    </div>
+</main>
+
+<div class="prebox fixed bottom-60 right-12 w-[9rem] h-[9rem] rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 bg-blue-500">
+    <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="White" class="size-[5rem]">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
+        </svg>
+    </div>            
+</div>
+        
 <div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
     <div id="Ur-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
         <div class="flex items-center justify-between w-[88%] mb-8" id="Ur-bar-1">
@@ -119,21 +165,19 @@ foot: `
                 <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
                 <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
                 <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
-                        <div class="" style="display: block;">
-                            <div class="flex justify-center flex-col items-center text-center gap-4">
-                                <div class="flex justify-center items-center flex-col">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-40">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
-                                    </svg>
-                                    <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限がありません</h1>
-                                </div>
-                                <p class="text-4xl m-auto py-6 mx-20">
-                                    再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
-                                </p>
-                            </div>  
-                        </div>
-
-                                          
+                    <div class="" style="display: block;">
+                        <div class="flex justify-center flex-col items-center text-center gap-4">
+                            <div class="flex justify-center items-center flex-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-40">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
+                                </svg>
+                                <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限がありません</h1>
+                            </div>
+                            <p class="text-4xl m-auto py-6 mx-20">
+                                再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
+                            </p>
+                        </div>  
+                    </div>             
                 </div>
             </div>
         </div>
@@ -142,69 +186,414 @@ foot: `
         </div>
     </div>
 </div>
-</body>
-</html>`,
-indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
-        <div class="flex items-center flex-col">
-            <h1 class="text-7xl py-2 my-2">{{eventName}}</h1>
-            <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-13 pr-2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                </svg>
-                <p class="text-5xl">期間: {{start}}から{{end}}まで</p>
-            </div>
-        </div>
-        <div class="flex justify-center mt-16 mb-16">
-            <img src="{{image}}" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
-        </div>
-        <p class="text-5xl w-[90%] m-auto">{{description}}</p>
-
-        <div class="mb-20 mt-24 w-[92%] m-auto">
-            <a href="progress.html" id="progress_link">
-                    <h2 class="text-6xl mb-8 text-center">現在の進捗</h1>
-                    <div class="flex justify-between items-center my-4">
-                        <div class="text-5xl" id="pro-text">0/3個のスタンプを獲得中</div>
-                        <p id="pro-percent" class="text-5xl"></p>
-                    </div>
-                    <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden" id="max-progress-bar">
-                        <div id="progress-bar" class="bg-blue-300 w-0 h-full transition-all duration-1000 ease-in-out "></div>
-                    </div> 
-            </a>
-            
-
-        </div>
-        
-        <div class="flex items-center justify-center">
-            <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6  w-[90%] ">
-                <p  class="text-5xl text-center font-bold py-2">スタンプデータを削除する</p>
-            </div>
-        </div>
-     </main>
-
-    <div class="prebox fixed bottom-60 right-12 w-[9rem] h-[9rem] rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 bg-blue-500">
-            <div class="text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="White" class="size-[5rem]">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
-</svg>
-
-            </div>            
-        </div>
 `,
 mapPage: `<main class="mt-10 mx-16" id="mains">
     <img src="{{map}}" alt="スタンプラリーの地図" class="w-full h-auto border">
     {{stamps}}
 </main>
 `,
-commonScript:`<script>function checkAllStamps() {
+scriptHead: `<script>document.addEventListener('DOMContentLoaded', () => {`,
+scriptFoot: `});</script></body></html>`,
+commonScript:`
+const fotter = document.getElementById('fotter-items');
+let FotterHeight = fotter.offsetHeight;
+
+const mainElement = document.getElementById('mains');
+// 7vh
+const amari = (window.innerHeight * 7) / 100;
+mainElement.style.marginBottom = (FotterHeight + amari) + "px";
+
+window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+    if (e.matches) {
+        alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
+    } 
+});
+
+const exclamation = document.getElementById('exclamation');
+function checkAllStamps() {
 const storageKey = '{{eventName}}';
 const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-
-{{stamps}}
-
-//return !!(  stamp1 && stamp1.status &&
-//            stamp2 && stamp2.status &&
-//            stamp3 && stamp3.status     );
+return currentData.length >= {{stampCount}};
 }
-</script>`
+if(checkAllStamps()) {
+    exclamation.classList.remove('hidden');
+}
+
+{{customScript}}`,
+indexScript: `
+            const prebox = document.querySelector('.prebox');
+
+            function updateStampProgress() {
+                const progress_bar = document.getElementById('progress-bar');
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = currentData.length;
+                const totalStamps = {{stampCount}};
+                
+                const percent = document.getElementById('pro-percent');
+                const protext = document.getElementById('pro-text');
+
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
+
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    protext.textContent = currentStamps + "/{{stampCount}}個のスタンプを獲得中";
+                    percent.textContent = bar_per + "%";
+                    progress_bar.style.width = bar_per + "%";
+                }
+                
+                if (currentStamps === totalStamps) {
+                    document.getElementById('progress_link').href='clear.html';
+                    prebox.innerHTML='<a href="clear.html"><div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-[5rem]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg></div></a>';
+                }
+            }
+
+            updateStampProgress();
+
+            const popup = document.getElementById('pop-up');
+            const popBar = document.getElementById('pop-bar');
+            const YesPop = document.getElementById('yes-pop');
+            const NoPopup = document.getElementById('no-pop');
+            const clearButton = document.getElementById('clear-localstorage-button');
+            const body = document.body;
+
+
+            let start = 0;
+            let isSwip = false;
+
+            const closePopup = () => {
+                popBar.classList.add('translate-y-full');
+                body.classList.remove('overflow-hidden');
+                updateStampProgress();
+
+                setTimeout(() => {
+                    popup.classList.add('opacity-0',  'pointer-events-none');
+                    popBar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
+                }, 300);
+            }
+
+            // ok
+            YesPop.addEventListener('click', () => {
+                localStorage.removeItem('{{eventName}}');
+                closePopup();
+                window.location.href = 'index.html';
+            });
+            // iie
+            NoPopup.addEventListener('click', () => {
+                closePopup();
+            });
+            // hiraku
+            clearButton.addEventListener('click', () => {
+                popup.classList.remove('opacity-0',  'pointer-events-none');
+                body.classList.add('overflow-hidden');
+                
+                // 遅延
+                setTimeout(() => {
+                    popBar.classList.remove('translate-y-full');
+                    popBar.classList.add('translate-y-0', 'transition-transform', 'duration-250', 'ease-in');
+                }, 10);
+                
+            });
+            // haikei
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    closePopup();
+                }
+            });
+            
+
+            
+            popBar.addEventListener('touchstart', (e) => {
+                isSwip = true;
+                start = e.touches[0].clientY;
+                popBar.classList.remove('transition-transform', 'duration-250', 'ease-in');
+            });
+
+            popBar.addEventListener('touchmove', (e) => {
+                if(isSwip == false) {
+                    return;
+                }
+                const current_y = e.touches[0].clientY;
+                const kyori = current_y - start;
+
+                if(kyori > 0) {
+                    popBar.style.transform = "translateY(" + kyori + "px)";
+                }
+
+            });
+
+            popBar.addEventListener('touchend', (e) => {
+                if(isSwip == false) {
+                    return;
+                }
+
+                const end = e.changedTouches[0].clientY;
+                const kyori = end - start;
+                // 10vh
+                const lengthLine = (window.innerHeight * 10) / 100;
+                popBar.style.transform = '';
+                popBar.classList.add('transition-transform', 'duration-250', 'ease-in');
+                
+                // shita ni sagaru
+                if(kyori > lengthLine) {
+                    closePopup();
+                } else {
+                    popBar.classList.add('translate-y-0');
+                    popBar.addEventListener('transitionend', () => {
+                        popBar.classList.remove('transition-transform', 'ease-in');
+                    }, { once: true });
+                }
+
+                isSwip = false
+            });
+
+
+            // QRコードリーダーの部分　__NKyotsu
+            const Urpop = document.getElementById('UrCodeReader');
+            const Urpopbar = document.getElementById('Ur-bar');
+            const UrMsg = document.getElementById('URstatus');
+            let mediaStream = null;
+            let contentWidth;
+            let contentHeight;
+            let isScanning = false;
+            
+            // iOSのためのQRコードリーダーのコード　__NKyotsu
+            function isIOS() {
+                if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    return true;
+                }
+                return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+            }
+
+            if(isIOS()) {
+                Urpopbar.classList.add('h-[80vh]');
+            }else {
+                Urpopbar.classList.add('h-[90vh]');
+            }
+
+
+            // QRコードの部分の続き　__NKyotsu
+            let Urstart = 0;
+            let UrisSwip = false;
+
+            const UrclosePopup = () => {
+                stopCamera(); // カメラを停止
+                Urpopbar.classList.add('translate-y-full');
+                body.classList.remove('overflow-hidden');
+                updateStampProgress();
+
+                setTimeout(() => {
+                    Urpop.classList.add('opacity-0',  'pointer-events-none');
+                    Urpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
+                }, 300);
+            }
+            // hiraku
+            prebox.addEventListener('click', () => {
+                if(checkAllStamps() == false) {
+                    startCamera(); // カメラを起動
+                    Urpop.classList.remove('opacity-0',  'pointer-events-none');
+                body.classList.add('overflow-hidden');
+                
+                // 遅延
+                setTimeout(() => {
+                    Urpopbar.classList.remove('translate-y-full');
+                    Urpopbar.classList.add('translate-y-0', 'transition-transform', 'duration-250', 'ease-in');
+                }, 10);
+                } 
+            });
+            // haikei
+            Urpop.addEventListener('click', (e) => {
+                if (e.target === Urpop) {
+                    UrclosePopup();
+                }
+            });
+
+            const UrCloseButton = document.getElementById('Ur-close-button');
+            if (UrCloseButton) {
+                UrCloseButton.addEventListener('click', () => {
+                    UrclosePopup();
+                });
+            }
+            
+
+            
+            Urpopbar.addEventListener('touchstart', (e) => {
+                UrisSwip = true;
+                Urstart = e.touches[0].clientY;
+                Urpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in');
+            });
+
+            Urpopbar.addEventListener('touchmove', (e) => {
+                if(UrisSwip == false) {
+                    return;
+                }
+                const current_y = e.touches[0].clientY;
+                const kyori = current_y - Urstart;
+
+                if(kyori > 0) {
+                    Urpopbar.style.transform = "translateY(" + kyori + "px)";
+                }
+
+            });
+
+            Urpopbar.addEventListener('touchend', (e) => {
+                if(UrisSwip == false) {
+                    return;
+                }
+
+                const end = e.changedTouches[0].clientY;
+                const kyori = end - Urstart;
+                // 10vh
+                const lengthLine = (window.innerHeight * 10) / 100;
+                Urpopbar.style.transform = '';
+                Urpopbar.classList.add('transition-transform', 'duration-250', 'ease-in');
+                
+                // shita ni sagaru
+                if(kyori > lengthLine) {
+                    UrclosePopup();
+                } else {
+                    Urpopbar.classList.add('translate-y-0');
+                    Urpopbar.addEventListener('transitionend', () => {
+                        Urpopbar.classList.remove('transition-transform', 'ease-in');
+                    }, { once: true });
+                }
+
+                UrisSwip = false
+            });
+
+            // JSQRの部分　__NKyotsu
+            const stopCamera = () => {
+                isScanning = false; // スキャンを停止
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                    mediaStream = null;
+                }
+            };
+
+            // カメラ映像のキャンバス表示
+            const cvs = document.getElementById('camera-canvas');
+            const ctx = cvs.getContext('2d');
+            const rectCvs = document.getElementById('rect-canvas');
+            const rectCtx =  rectCvs.getContext('2d');
+            let UrCodeData = '';
+
+            const canvasUpdate = () => {
+                cvs.width = contentWidth;
+                cvs.height = contentHeight;
+                ctx.drawImage(video, 0, 0, contentWidth, contentHeight);
+                requestAnimationFrame(canvasUpdate);
+            }
+
+            // 二次元コードの検出
+            const checkImage = () => {
+                if (!isScanning) return; // スキャンが停止されていたら処理を終了
+                const imageData = ctx.getImageData(0, 0, contentWidth, contentHeight);
+                const code = jsQR(imageData.data, contentWidth, contentHeight);
+
+                if (code && code.data) {
+                    drawRect(code.location);
+                    UrCodeData = code.data;
+                    if(UrMsg) {
+                        UrMsg.textContent = "二次元コード：" + UrCodeData;
+                    }
+                    // root_URL
+                    const RootURL = '{{rootURL}}';
+                        if(code.data.startsWith(RootURL)) {
+                            window.location.href = code.data;
+                            stopCamera();
+                        }else {
+                            UrMsg.textContent = '正しいコードではありません';
+                        }
+                } else {
+                    rectCtx.clearRect(0, 0, contentWidth, contentHeight);
+                    UrCodeData = '';
+                    const UrMsg = document.getElementById('URstatus');
+                    if(UrMsg) {
+                        UrMsg.textContent = "枠内に収めてください";
+                    }
+                }
+                setTimeout(()=>{ checkImage() }, 500);
+            }
+
+            // 四辺形の描画
+            const drawRect = (location) => {
+                rectCvs.width = contentWidth;
+                rectCvs.height = contentHeight;
+                drawLine(location.topLeftCorner, location.topRightCorner);
+                drawLine(location.topRightCorner, location.bottomRightCorner);
+                drawLine(location.bottomRightCorner, location.bottomLeftCorner);
+                drawLine(location.bottomLeftCorner, location.topLeftCorner)
+            }
+
+            // 線の描画
+            const drawLine = (begin, end) => {
+                rectCtx.lineWidth = 4;
+                rectCtx.strokeStyle = "#F00";
+                rectCtx.beginPath();
+                rectCtx.moveTo(begin.x, begin.y);
+                rectCtx.lineTo(end.x, end.y);
+                rectCtx.stroke();
+            }
+
+            let video = null
+            const startCamera = () => {
+                document.getElementById('permission-denied').style.display = 'none';
+
+                // Webカメラの起動
+                video = document.getElementById('video');
+                const wrapper = document.getElementById('wrapper');
+
+                const constraints = {
+                    audio: false,
+                    video: {
+                        facingMode: "environment",
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                };
+
+                const urBar1 = document.getElementById('Ur-bar-1');
+                const urBar2 = document.getElementById('Ur-bar-2');
+
+                const ParStyle = window.getComputedStyle(Urpopbar);
+                const urBar1Style = window.getComputedStyle(urBar1);
+                const urBar3Style = window.getComputedStyle(UrMsg);
+
+                const parentPaddingTop = parseFloat(ParStyle.paddingTop);
+                const parentPaddingBottom = parseFloat(ParStyle.paddingBottom);
+                const parentHeight = parseFloat(ParStyle.height);
+
+                const urBar1Height = parseFloat(urBar1Style.height);
+                const urBar1MarginBottom = parseFloat(urBar1Style.marginBottom);
+                const urBar3Height = urBar3Style ? parseFloat(urBar3Style.height) : 0;
+                const urBar3MarginTop = urBar3Style ? parseFloat(urBar3Style.marginTop) : 0;
+
+                const urBar2Height = parentHeight - parentPaddingTop - parentPaddingBottom - urBar1Height - urBar1MarginBottom - urBar3Height - urBar3MarginTop;
+
+
+                if (urBar2Height > 0) {
+                    urBar2.style.height = urBar2Height + "px";
+                }
+
+
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then((stream) => {
+                        mediaStream = stream; // ストリームを保存
+                        video.srcObject = stream;
+                        video.onloadeddata = () => {
+                            video.play();
+                            
+                            contentWidth = video.videoWidth;
+                            contentHeight = video.videoHeight;
+                            
+
+                            isScanning = true; // スキャンを開始
+                            canvasUpdate();
+                            checkImage();
+                        }
+                    }).catch((e) => {
+                        console.error(e);
+                        document.getElementById('permission-denied').style.display = 'flex';
+                    });
+            };`
 };

@@ -1,7 +1,7 @@
 import Header from './header.tsx'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { nanoid } from 'nanoid'
+import { customAlphabet, customRandom } from 'nanoid'
 import type { checkPoint, eventData } from './types/event.ts'
 
 const getInitialValue = (key: string) => {
@@ -41,7 +41,9 @@ function addCheckPoints () {
         }
         else {
             //追加の場合は新しくIDを生成
-            setCheckPoints([...checkPoints, { id: nanoid(), name: newCheckPoint, description: checkPointDesctiption}])
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            const generateID = customAlphabet(alphabet, 12)
+            setCheckPoints([...checkPoints, { id: "a" + generateID(), name: newCheckPoint, description: checkPointDesctiption}])
         }
         setNewCheckPoint("")
         setCheckPointDescription("")

@@ -82,15 +82,28 @@ function downloadFiles () {
 
                 const zipHTML = new JSZip()
 
+                const stamps = () => {
+                    let ans = ""
+                    let returnAns = "return ("
+                    data.checkPoints.forEach((element: checkPoint, index: number) => {
+                        ans += `const ${element.id} = currentData.find(item => item.id === '${element.id}');`
+                        returnAns += `${element.id} && ${element.id}.status ${ data.checkPoints.length - 1 > index ? " && ": ""}`
+                    })
+                    return ans + returnAns + ");"
+                }
+
                 const topPage = renderTemplate(
-                    templates.head + templates.indexMain + templates.foot,
+                    templates.head + templates.indexMain + templates.foot + templates.scriptHead + templates.commonScript + templates.indexScript + templates.scriptFoot,
                     { 
                         title: data.eventName + "ホーム", 
                         eventName: data.eventName,
                         start: data.startDate, 
                         end: data.endDate,
                         image: data.thumbnail,
-                        description: data.description
+                        description: data.description,
+                        rootURL: data.rootURL,
+                        stamps: stamps(),
+                        stampCount: data.checkPoints.length
                     }
                 )
                 const mapPage = renderTemplate(
@@ -101,15 +114,8 @@ function downloadFiles () {
                     }
                 )
 
-                const stamps = () => {
-                    let ans = ""
-                    let returnAns = "return ("
-                    data.checkPoints.forEach((element: checkPoint, index: number) => {
-                        ans += `const ${element.id} = currentData.find(item => item.id === '${element.id}');`
-                        returnAns += `${element.id} && ${element.id}.status ${ data.checkPoints.length - 1 > index ? " && ": ""}`
-                    })
-                    return ans + returnAns + ")"
-                }
+
+
                 const progressPage = renderTemplate(
                     templates.head + templates.mapPage + templates.foot,
                     { 
@@ -117,7 +123,6 @@ function downloadFiles () {
                         stamps: stamps()
                     }
                 )
-                console.log(stamps())
 
                 zipHTML.file("index.html", topPage)
                 zipHTML.file("map.html", mapPage)
@@ -228,7 +233,6 @@ function downloadFiles () {
 
                     const base64Data = pngUrl.split(",")[1]
                     zip.file(QRList[i].fileName + ".png", base64Data, { base64: true })
-                    // console.log(QRList)
                     resolve()
                 }
             })    
