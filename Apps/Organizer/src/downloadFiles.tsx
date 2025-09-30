@@ -93,45 +93,81 @@ function downloadFiles () {
                 }
 
                 const topPage = renderTemplate(
-                    templates.head + templates.indexMain + templates.foot + templates.scriptHead + templates.commonScript + templates.indexScript + templates.scriptFoot,
+                    templates.head + templates.indexMain + templates.scriptHead + templates.commonScript + templates.indexScript + templates.scriptFoot,
                     { 
-                        title: data.eventName + "ホーム", 
+                        title: data.eventName + "-ホーム", 
                         eventName: data.eventName,
                         start: data.startDate, 
                         end: data.endDate,
                         image: data.thumbnail,
                         description: data.description,
                         rootURL: data.rootURL,
-                        stamps: stamps(),
                         stampCount: data.checkPoints.length
                     }
                 )
                 const mapPage = renderTemplate(
-                    templates.head + templates.mapPage + templates.foot,
+                    templates.head + templates.mapPage,
                     { 
-                        title: data.eventName,
+                        title: data.eventName + "-マップ",
                         map: data.map
                     }
                 )
 
-
-
+                const checkPointsProgress = () => {
+                    let ans = ""
+                    data.checkPoints.forEach((element: checkPoint, index: number) => {
+                        ans += `{ id: '${element.id}', name: '${element.name}' }${ data.checkPoints.length -1 > index ? ",": ""}`
+                    })
+                    return ans
+                }
                 const progressPage = renderTemplate(
-                    templates.head + templates.mapPage + templates.foot,
+                    templates.head + templates.progressPage + templates.scriptHead + templates.progressScript + templates.scriptFoot,
                     { 
+                        title: data.eventName + "-進捗",
+                        eventName: data.eventName,
                         map: data.map,
-                        stamps: stamps()
+                        stampCount: data.checkPoints.length,
+                        checkPoints: checkPointsProgress()
                     }
+                )
+                const clearPage = renderTemplate(
+                    templates.clearPage,
+                    {
+                        title: data.eventName + "-クリア",
+                        eventName: data.eventName,
+                        stampCount: data.checkPoints.length
+
+                    }
+                )
+                const error404 = renderTemplate(
+                    templates.error404,
+                    {}
+                )
+                const error403 = renderTemplate(
+                    templates.error403,
+                    {}
                 )
 
                 zipHTML.file("index.html", topPage)
                 zipHTML.file("map.html", mapPage)
                 zipHTML.file("progress.html", progressPage)
+                zipHTML.file("clear.html", clearPage)
+                zipHTML.file("404.html", error404)
+                zipHTML.file("403.html", error403)
+
                 //各チェックポイントのHTMLファイルを生成
                 data.checkPoints.forEach((element: checkPoint) => {
                     const checkPointPage = renderTemplate(
-                        templates.head + templates.foot,
-                        { cpName: element.name }
+                        templates.head + templates.checkPointMain,
+                        {
+                            title: data.eventName + "-" + element.name,
+                            eventName: data.eventName,
+                            cpName: element.name,
+                            stampId: element.id,
+                            stampMessage: element.description,
+                            stampCount: data.checkPoints.length,
+                            rootURL: data.rootURL
+                        }
                     )
                     zipHTML.file(element.id + ".html", checkPointPage)
                 })
