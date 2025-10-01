@@ -127,7 +127,8 @@ function downloadFiles () {
                         eventName: data.eventName,
                         map: data.map,
                         stampCount: data.checkPoints.length,
-                        checkPoints: checkPointsProgress()
+                        checkPoints: checkPointsProgress(),
+                        rootURL: data.rootURL
                     }
                 )
                 const clearPage = renderTemplate(

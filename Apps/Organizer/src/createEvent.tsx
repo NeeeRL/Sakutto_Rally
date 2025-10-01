@@ -139,10 +139,11 @@ const createEvent = () => {
                     <input 
                         id="rootURL" 
                         value={rootURL}
-                        onChange={ (event) => setRootURL(event.target.value) }
+                        // 最後が/ならそのまま，ないなら強制的に追加
+                        onChange={ (event) => setRootURL(event.target.value.slice(-1) === "/" ? event.target.value : event.target.value + "/") }
                         type="text" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
-                        placeholder="index.htmlの設置場所を入力"
+                        placeholder="例)https://example.com/"
                     />
                     <label htmlFor="startDate" className="mt-6 my-2 block">イベントの開始日</label>
                     <input 
