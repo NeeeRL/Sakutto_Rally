@@ -98,6 +98,7 @@ function downloadFiles () {
                     templates.head + templates.mapPage,
                     { 
                         title: data.eventName + "-マップ",
+                        eventName: data.eventName,
                         map: data.map
                     }
                 )

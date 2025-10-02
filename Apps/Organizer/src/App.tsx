@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import './App.css'
 // import type { eventData } from './types/event'
+import mainImage from '../img/honbann.svg'
 
 const resetLocalStorage  = () => {
   localStorage.removeItem("eventData")
@@ -14,7 +15,7 @@ function App() {
     <>
       <h1 className='mt-4 mb-2 text-4xl text-center'>Sakutto Rally</h1>
       <p className='text-center mb-4'>～気軽に運用できるスタンプラリーメーカー～​</p>
-      <img src="../img/honbann.svg" alt="" className='w-[90%] h-auto m-auto  ' />
+      <img src={mainImage} alt="" className='w-[90%] h-auto m-auto  ' />
       <p className='text-center w-[84%] m-auto'>スタンプラリーイベントをサクッと気軽に開催できる、ミニマムなスタンプラリーメーカーです。サーバーさえあればファイルの作成も運用にもコストがかかりません。</p>
       <div className="w-full flex justify-center items-center flex-col my-8">
         <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl'>

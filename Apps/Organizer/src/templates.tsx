@@ -11,11 +11,8 @@ head: `<!DOCTYPE html>
 <body>
     <header>
         <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-17 ml-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
             <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
-                スタンプラリーホーム
+                {{eventName}}
             </h1>
         </div>
     </header>
@@ -72,7 +69,6 @@ stampFoot: `
     </footer>`,
 indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     <div class="flex items-center flex-col">
-        <h1 class="text-7xl py-2 my-2">{{eventName}}</h1>
         <div class="flex justify-center items-center pt-6 pb-2 border-b w-[80%]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-13 pr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
@@ -148,7 +144,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
             </div>
         </div>
         <div id="URstatus" class="text-5xl mt-12">
-            枠内に収めてください
+            大きくはっきりと
         </div>
     </div>
 </div>
@@ -577,7 +573,7 @@ indexScript: `
                     UrCodeData = '';
                     const UrMsg = document.getElementById('URstatus');
                     if(UrMsg) {
-                        UrMsg.textContent = "枠内に収めてください";
+                        UrMsg.textContent = "大きくはっきりと";
                     }
                 }
                 setTimeout(()=>{ checkImage() }, 500);
@@ -780,7 +776,7 @@ progressPage : `
             </div>
         </div>
         <div id="URstatus" class="text-5xl mt-12">
-            枠内に収めてください
+            大きくはっきりと
         </div>
     </div>
 </div>`,
@@ -1078,7 +1074,7 @@ progressPage : `
                     UrCodeData = '';
                     const UrMsg = document.getElementById('URstatus');
                     if(UrMsg) {
-                        UrMsg.textContent = "枠内に収めてください";
+                        UrMsg.textContent = "大きくはっきりと";
                     }
                 }
                 setTimeout(()=>{ checkImage() }, 500);
