@@ -83,7 +83,7 @@ const createEvent = () => {
 
         const newData: preEventData = {
             eventName: eventName,
-            rootURL: rootURL.slice(-1) === "/" ? rootURL : rootURL + "/",
+            rootURL: rootURL.slice(-1) === "/" && rootURL === ""  ? rootURL : rootURL + "/",
             startDate: startDate,
             endDate: endDate,
             description: description,
