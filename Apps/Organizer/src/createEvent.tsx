@@ -160,15 +160,23 @@ const createEvent = () => {
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
-                    <label htmlFor="map" className="mt-6 my-2 block">地図画像のアップロード</label>
-                    <input 
-                        id="map" 
-                        type="file" 
-                        accept="image/*"
-                        onChange={uploadIDB("map")}
-                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
-                    />
-                    {map && <img src={map} alt="map preview" />}
+                    <div>
+                        <label htmlFor="map" className="mt-6 my-2 block">地図画像のアップロード</label>
+                        <input 
+                            id="map" 
+                            type="file" 
+                            accept="image/*"
+                            onChange={uploadIDB("map")}
+                            className="hidden"
+                        />
+                        <label
+                            htmlFor="map"
+                            className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none block"
+                        >
+                            {map ? "別の画像を選択" : <span>まだ画像が選択されていません</span> }
+                        </label>
+                        {map ? <img src={map} alt="map preview" className="mt-2 rounded-lg" /> : ""}
+                    </div>
                     <label htmlFor="description" className="mt-6 my-2 block">概要</label>
                     <textarea 
                         id="description" 
@@ -176,16 +184,24 @@ const createEvent = () => {
                         onChange={ (event) => setDescription(event.target.value) }
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full h-30 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" 
                         placeholder="イベントの概要を入力"
-                    />
-                    <label htmlFor="thumbnail" className="mt-6 my-2 block">サムネイルのアップロード</label>
-                    <input 
-                        id="thumbnail" 
-                        type="file" 
-                        accept="image/*"
-                        onChange={uploadIDB("thumbnail")}
-                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
-                    />
-                    {thumbnail && <img src={thumbnail} alt="thumbnail preview" />}
+                    />                    
+                    <div>
+                        <label htmlFor="thumbnail" className="mt-6 my-2 block">サムネイル画像のアップロード</label>
+                        <input 
+                            id="thumbnail" 
+                            type="file" 
+                            accept="image/*"
+                            onChange={uploadIDB("thumbnail")}
+                            className="hidden"
+                        />
+                        <label
+                            htmlFor="thumbnail"
+                            className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none block"
+                        >
+                            {thumbnail ? "別の画像を選択" : <span>まだ画像が選択されていません</span> }
+                        </label>
+                        {thumbnail ? <img src={thumbnail} alt="thumbnail preview" className="mt-2 rounded-lg"/> : ""}
+                    </div>
                 </div>
                 <Link 
                     to="/checkpoints" 
