@@ -66,15 +66,15 @@ const getIDB = async (key: string): Promise<File | null> => {
 
 const createEvent = () => {
 
-    const [ eventName, setEventName ] = useState<string>(getInitialValue("eventName"))
-    const [ rootURL, setRootURL ] = useState<string>(getInitialValue("rootURL"))
-    const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")))
-    const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate"))
+    const [ eventName, setEventName ] = useState<string>(getInitialValue("eventName") ?? "")
+    const [ rootURL, setRootURL ] = useState<string>(getInitialValue("rootURL") ?? "")
+    const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")) ?? "")
+    const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate") ?? "")
     // mapは画像
-    const [ map, setMap ] = useState<string | null>("")
-    const [ description, setDescription ] = useState<string>(getInitialValue("description"))
+    const [ map, setMap ] = useState<string | null>(null)
+    const [ description, setDescription ] = useState<string>(getInitialValue("description") ?? "")
     // thumbnailは画像
-    const [ thumbnail, setThumbnail ] = useState<string | null>("")
+    const [ thumbnail, setThumbnail ] = useState<string | null>(null)
 
     const saveInput = () => {
         //これはデバッグ用
@@ -83,7 +83,7 @@ const createEvent = () => {
 
         const newData: preEventData = {
             eventName: eventName,
-            rootURL: rootURL.slice(-1) === "/" && rootURL === ""  ? rootURL : rootURL + "/",
+            rootURL: rootURL.slice(-1) === "/" || rootURL !== ""  ? rootURL : rootURL + "/",
             startDate: startDate,
             endDate: endDate,
             description: description,
@@ -203,13 +203,17 @@ const createEvent = () => {
                         {thumbnail ? <img src={thumbnail} alt="thumbnail preview" className="mt-2 rounded-lg"/> : ""}
                     </div>
                 </div>
-                <Link 
-                    to="/checkpoints" 
-                    onClick={saveInput}
-                    className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
-                >
-                    イベントを作成
-                </Link>
+                { eventName && rootURL && startDate && endDate && description && map && thumbnail ?
+                    <Link 
+                        to="/checkpoints" 
+                        onClick={saveInput}
+                        className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                    >
+                        イベントを作成
+                    </Link> :
+                    ""
+                }
+
             </div>
         </>
     )

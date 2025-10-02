@@ -1,7 +1,7 @@
 import Header from './header.tsx'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { customAlphabet, customRandom } from 'nanoid'
+import { customAlphabet } from 'nanoid'
 import type { checkPoint, eventData } from './types/event.ts'
 
 const getInitialValue = (key: string) => {
@@ -176,13 +176,16 @@ function addCheckPoints () {
                 </div>
                 </div>
                 {/* 下のボタン */}
-                <Link 
-                    to="/download" 
-                    onClick={saveInput}
-                    className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
-                >
-                    完了する
-                </Link>
+                { checkPoints.length > 0 ? 
+                    <Link 
+                        to="/download" 
+                        onClick={saveInput}
+                        className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                    >
+                        完了する
+                    </Link> :
+                    ""
+                }
             </div>
         </>
     )

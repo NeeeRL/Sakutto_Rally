@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import './App.css'
 // import type { eventData } from './types/event'
 
+const resetLocalStorage  = () => {
+  localStorage.removeItem("eventData")
+  indexedDB.deleteDatabase("images")
+}
+
 function App() {
 
   return (
@@ -24,7 +29,7 @@ function App() {
           <Link 
             to="/create" 
             className="text-white text-center bg-blue-400 font-bold px-12 py-2 rounded-md mb-2 mt-4"
-            // onClick={generateNullJson}
+            onClick={resetLocalStorage}
           >
             新しく作成する
           </Link>
@@ -34,8 +39,8 @@ function App() {
           
           <div className='flex justify-center items-center gap-4'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-</svg>
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+            </svg>
 
             <p className='text-xl my-2'>データを読み込む</p>
           </div>
