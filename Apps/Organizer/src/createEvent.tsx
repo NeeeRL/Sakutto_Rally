@@ -76,6 +76,12 @@ const createEvent = () => {
     // thumbnailは画像
     const [ thumbnail, setThumbnail ] = useState<string | null>(null)
 
+    const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail)
+
+    const sayAllInput = () => {
+        alert("すべて入力してください")
+    }
+
     const saveInput = () => {
         //これはデバッグ用
         // console.log(stored)
@@ -120,7 +126,7 @@ const createEvent = () => {
     
     return(
         <>
-            <Header text="イベントの新規作成"/>
+            <Header text="イベント情報の設定"/>
             
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 
@@ -144,7 +150,7 @@ const createEvent = () => {
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                         placeholder="例)https://example.com/"
                     />
-                    <label htmlFor="startDate" className="mt-6 my-2 block">イベントの開始日</label>
+                    <label htmlFor="startDate" className="mt-6 my-2 block">イベント開始日</label>
                     <input 
                         id="startDate" 
                         value={startDate}
@@ -152,13 +158,38 @@ const createEvent = () => {
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
-                    <label htmlFor="endDate" className="mt-6 my-2 block">イベントの終了日</label>
+                    <label htmlFor="endDate" className="mt-6 my-2 block">イベント最終日</label>
                     <input 
                         id="endDate" 
                         value={endDate}
                         onChange={ (event) => setEndDate(event.target.value) }
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
+                    />                
+                    <div>
+                        <label htmlFor="thumbnail" className="mt-6 my-2 block">トップ画像のアップロード</label>
+                        <input 
+                            id="thumbnail" 
+                            type="file" 
+                            accept="image/*"
+                            onChange={uploadIDB("thumbnail")}
+                            className="hidden"
+                        />
+                        <label
+                            htmlFor="thumbnail"
+                            className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none block"
+                        >
+                            {thumbnail ? "別の画像を選択" : <span>トップページに表示される画像を選択</span> }
+                        </label>
+                        {thumbnail ? <img src={thumbnail} alt="thumbnail preview" className="mt-2 rounded-lg"/> : ""}
+                    </div>
+                    <label htmlFor="description" className="mt-6 my-2 block">概要</label>
+                    <textarea 
+                        id="description" 
+                        value={description}
+                        onChange={ (event) => setDescription(event.target.value) }
+                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full h-30 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" 
+                        placeholder="イベントの概要を入力"
                     />
                     <div>
                         <label htmlFor="map" className="mt-6 my-2 block">地図画像のアップロード</label>
@@ -173,47 +204,26 @@ const createEvent = () => {
                             htmlFor="map"
                             className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none block"
                         >
-                            {map ? "別の画像を選択" : <span>まだ画像が選択されていません</span> }
+                            {map ? "別の画像を選択" : <span>マップページに表示される画像を選択</span> }
                         </label>
                         {map ? <img src={map} alt="map preview" className="mt-2 rounded-lg" /> : ""}
                     </div>
-                    <label htmlFor="description" className="mt-6 my-2 block">概要</label>
-                    <textarea 
-                        id="description" 
-                        value={description}
-                        onChange={ (event) => setDescription(event.target.value) }
-                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full h-30 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" 
-                        placeholder="イベントの概要を入力"
-                    />                    
-                    <div>
-                        <label htmlFor="thumbnail" className="mt-6 my-2 block">サムネイル画像のアップロード</label>
-                        <input 
-                            id="thumbnail" 
-                            type="file" 
-                            accept="image/*"
-                            onChange={uploadIDB("thumbnail")}
-                            className="hidden"
-                        />
-                        <label
-                            htmlFor="thumbnail"
-                            className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none block"
-                        >
-                            {thumbnail ? "別の画像を選択" : <span>まだ画像が選択されていません</span> }
-                        </label>
-                        {thumbnail ? <img src={thumbnail} alt="thumbnail preview" className="mt-2 rounded-lg"/> : ""}
-                    </div>
                 </div>
-                { eventName && rootURL && startDate && endDate && description && map && thumbnail ?
+                { allInput ?
                     <Link 
                         to="/checkpoints" 
                         onClick={saveInput}
-                        className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
                     >
-                        イベントを作成
+                        チェックポイントの設定
                     </Link> :
-                    ""
+                    <button 
+                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
+                        onClick={sayAllInput}
+                    >
+                        チェックポイントの設定
+                    </button>
                 }
-
             </div>
         </>
     )

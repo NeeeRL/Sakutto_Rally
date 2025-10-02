@@ -2,7 +2,7 @@ import Header from './header.tsx'
 import { useRef, useEffect, useState } from 'react'
 import type { checkPoint, eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
-import JSZip, { forEach } from 'jszip'
+import JSZip from 'jszip'
 import { templates } from './templates.tsx'
 
 //この関数を使うときは必ずawaitを使うこと
@@ -60,7 +60,6 @@ const renderTemplate = (template: string, data: Record<string, string>) => {
   return template.replace(/{{(.*?)}}/g, (_, key) => data[key.trim()] ?? "");
 }
 
-
 function downloadFiles () {
 
     const settings = localStorage.getItem("eventData")
@@ -81,16 +80,6 @@ function downloadFiles () {
                 }
 
                 const zipHTML = new JSZip()
-
-                const stamps = () => {
-                    let ans = ""
-                    let returnAns = "return ("
-                    data.checkPoints.forEach((element: checkPoint, index: number) => {
-                        ans += `const ${element.id} = currentData.find(item => item.id === '${element.id}');`
-                        returnAns += `${element.id} && ${element.id}.status ${ data.checkPoints.length - 1 > index ? " && ": ""}`
-                    })
-                    return ans + returnAns + ");"
-                }
 
                 const topPage = renderTemplate(
                     templates.head + templates.indexMain + templates.scriptHead + templates.commonScript + templates.indexScript + templates.scriptFoot,
@@ -282,12 +271,13 @@ function downloadFiles () {
             <Header text="ファイルをダウンロード"/>
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 <h2 className="font-bold text-lg text-center">ダウンロード可能なファイル</h2>
-                {/* ユーザーには見せないけどQRコードをを描画 */}
+                {/* ユーザーには見せないけど二次元コードを描画 */}
                 <div className="qr-to-zip hidden">
                     {QRList.map((item, i) => (
                         <QRCode 
                             key = {i}
                             value = {item.value}
+                            size = {256}
                         />
                     ))}
                 </div>
@@ -298,8 +288,8 @@ function downloadFiles () {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                     </svg>
                     <div className="m-4 w-36">
-                        <p>HTMLファイル</p>
-                        <p className="text-xs text-gray-600">参加者用HTMLファイル</p>
+                        <p>HTMLファイル郡</p>
+                        <p className="text-xs text-gray-600">アップロード用HTMLファイル郡（ZIP形式）</p>
                     </div>
                     <button
                         className="bg-gray-200 rounded-xl h-8 px-4"
@@ -314,8 +304,10 @@ function downloadFiles () {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
                     </svg>
                     <div className="m-4 w-36">
-                        <p>QRコード</p>
-                        <p className="text-xs text-gray-600">QRコードの画像ファイル</p>
+                        <p>二次元コード郡
+    
+                        </p>
+                        <p className="text-xs text-gray-600">二次元コードの画像ファイル郡（ZIP形式）</p>
                     </div>
                     <button 
                         onClick={downloadQRCode}

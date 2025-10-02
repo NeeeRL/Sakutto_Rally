@@ -128,6 +128,7 @@ function addCheckPoints () {
                         </div>
                     </form>
                     <h2 className="font-bold text-lg my-4 block">現在のチェックポイント</h2>
+                    <p>参加者側で表示される順番を調整できます</p>
                     <ul className="w-full flex flex-col justify-start overflow-y-scroll h-[calc(100vh-450px)] min-h-32">
                         {checkPoints.map((checkPoint) => (
                             <li
@@ -180,11 +181,11 @@ function addCheckPoints () {
                     <Link 
                         to="/download" 
                         onClick={saveInput}
-                        className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
                     >
                         完了する
                     </Link> :
-                    ""
+                    <div className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400">完了する</div>
                 }
             </div>
         </>

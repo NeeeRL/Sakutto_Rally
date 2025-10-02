@@ -89,7 +89,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
         <a href="progress.html" id="progress_link">
                 <h2 class="text-6xl mb-8 text-center">現在の進捗</h1>
                 <div class="flex justify-between items-center my-4">
-                    <div class="text-5xl" id="pro-text">/{{stampCount}}個のスタンプを獲得中</div>
+                    <div class="text-5xl" id="pro-text">/{{stampCount}}個のスタンプを獲得済み</div>
                     <p id="pro-percent" class="text-5xl"></p>
                 </div>
                 <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden" id="max-progress-bar">
@@ -308,7 +308,7 @@ indexScript: `
 
                 if (progress_bar) {
                     progress_bar.classList.remove('w-0');
-                    protext.textContent = currentStamps + "/{{stampCount}}個のスタンプを獲得中";
+                    protext.textContent = currentStamps + "/{{stampCount}}個のスタンプを獲得済み";
                     percent.textContent = bar_per + "%";
                     progress_bar.style.width = bar_per + "%";
                 }
