@@ -1587,5 +1587,7 @@ error403:`<!DOCTYPE html>
     </script>
     </body>
 </html>
-`
+`,
+scriptHead: `<script>document.addEventListener('DOMContentLoaded', () => {`,
+scriptFoot: `});</script></body></html>`
 };

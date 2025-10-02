@@ -64,7 +64,6 @@ const getIDB = async (key: string): Promise<File | null> => {
     })
 }
 
-
 const createEvent = () => {
 
     const [ eventName, setEventName ] = useState<string>(getInitialValue("eventName"))
@@ -84,7 +83,7 @@ const createEvent = () => {
 
         const newData: preEventData = {
             eventName: eventName,
-            rootURL: rootURL,
+            rootURL: rootURL.slice(-1) === "/" ? rootURL : rootURL + "/",
             startDate: startDate,
             endDate: endDate,
             description: description,
@@ -140,7 +139,7 @@ const createEvent = () => {
                         id="rootURL" 
                         value={rootURL}
                         // 最後が/ならそのまま，ないなら強制的に追加
-                        onChange={ (event) => setRootURL(event.target.value.slice(-1) === "/" ? event.target.value : event.target.value + "/") }
+                        onChange={ (event) => setRootURL(event.target.value) }
                         type="text" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                         placeholder="例)https://example.com/"
