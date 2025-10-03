@@ -11,7 +11,7 @@ head: `<!DOCTYPE html>
 <body>
     <header>
         <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white">
-            <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
+            <h1 class="text-3xl font-bold py-10 absolute left-1/2 -translate-x-1/2">
                 {{eventName}}
             </h1>
         </div>

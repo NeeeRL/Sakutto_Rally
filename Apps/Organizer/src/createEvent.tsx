@@ -76,7 +76,9 @@ const createEvent = () => {
     // thumbnailは画像
     const [ thumbnail, setThumbnail ] = useState<string | null>(null)
 
-    const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail)
+    const checkPoints = getInitialValue("checkPoints")
+
+    const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail && checkPoints.length)
 
     const sayAllInput = () => {
         alert("すべて入力してください")
@@ -131,6 +133,22 @@ const createEvent = () => {
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 
                 <div className="w-9/10">
+                    <div className="flex">
+                        <Link 
+                            to="/create"
+                            onClick={saveInput}
+                            className="w-[calc(50%-1px)] bottom-0 font-bold text-center py-2 rounded-t-xl mt-4 block border-gray-300 border-1 border-b-0 mx-1"
+                        >
+                            1.イベント情報
+                        </Link>
+                        <Link 
+                            to="/checkpoints"
+                            onClick={saveInput}
+                            className="w-[calc(50%-1px)] bottom-0 font-bold text-gray-500/50 text-center py-2 rounded-t-xl mt-4 block bg-gray-100/50 border-gray-300 border-1 border-b-0 mx-1"
+                        >
+                            2.チェックポイント
+                        </Link>
+                    </div>
                     <label htmlFor="eventName" className="mt-4 mb-2 block">イベントの名前</label>
                     <input 
                         id="eventName" 
@@ -209,7 +227,7 @@ const createEvent = () => {
                         {map ? <img src={map} alt="map preview" className="mt-2 rounded-lg" /> : ""}
                     </div>
                 </div>
-                { allInput ?
+                {/* { allInput ?
                     <Link 
                         to="/checkpoints" 
                         onClick={saveInput}
@@ -222,6 +240,21 @@ const createEvent = () => {
                         onClick={sayAllInput}
                     >
                         チェックポイントの設定
+                    </button>
+                } */}
+                { allInput ? 
+                    <Link 
+                        to="/download" 
+                        onClick={saveInput}
+                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
+                    >
+                        完了する
+                    </Link> :
+                    <button
+                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
+                        onClick={sayAllInput}
+                    >
+                        完了する
                     </button>
                 }
             </div>
