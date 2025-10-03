@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <title>クリア</title>
         <link rel="stylesheet" href="src/index.css" />
@@ -33,7 +33,7 @@
                 <p class="text-3xl text-center ">※スタンプラリーデータは削除されます</p>
 
             </div>
-        </div> 
+        </main> 
        <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
@@ -106,6 +106,23 @@
 </div>
 
         <script>
+            function checkAllStamps() {
+                const storageKey = 'Sakutto_Rally';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                const stamp1 = currentData.find(item => item.id === 'stamp1');
+                const stamp2 = currentData.find(item => item.id === 'stamp2');
+                const stamp3 = currentData.find(item => item.id === 'stamp3');
+
+                return stamp1 && stamp1.status &&
+                       stamp2 && stamp2.status &&
+                       stamp3 && stamp3.status;
+            }
+
+            if(checkAllStamps() == false) {
+                window.location.href = '403.html';
+            }
+
         document.addEventListener('DOMContentLoaded', () => {
             const fotter = document.getElementById('fotter-items');
             let FotterHeight = fotter.offsetHeight;
@@ -139,15 +156,15 @@
                 const stamp2 = currentData.find(item => item.id === 'stamp2');
                 const stamp3 = currentData.find(item => item.id === 'stamp3');
 
-                return stamp1 && stamp1.status &&
-                       stamp2 && stamp2.status &&
-                       stamp3 && stamp3.status;
+                return !!(  stamp1 && stamp1.status &&
+                            stamp2 && stamp2.status &&
+                            stamp3 && stamp3.status     );
             }
             if(checkAllStamps()) {
                 exclamation.classList.remove('hidden');
             }
 
-
+            // __NKyotsu delete data-localstrage
             let start = 0;
             let isSwip = false;
 

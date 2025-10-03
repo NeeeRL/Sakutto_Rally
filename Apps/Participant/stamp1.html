@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <title>スタンプを獲得</title>
         <link rel="stylesheet" href="src/index.css" />
@@ -87,26 +87,20 @@
                 }                 
             });
 
+            // add data __NKyotsu
             function AddlocalStorage(id, newStatus) {
                 const storageKey = 'Sakutto_Rally';
 
-                // 1. LocalStorageから現在のデータを読み込む (なければ空の配列 \'[]\' として初期化)
                 let currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
 
-                // 2. 更新対象のIDが配列内に存在するか探す
                 const targetItem = currentData.find(item => item.id === id);
 
                 if (targetItem) {
-                    // 3a. IDが存在した場合：ステータスを更新
                     targetItem.status = newStatus;
-                    console.log(`ID: \"${id}\" のステータスを ${newStatus} に更新しました。`);
                 } else {
-                    // 3b. IDが存在しなかった場合：新しいオブジェクトとして配列に追加
                     currentData.push({ id: id, status: newStatus });
-                    console.log(`ID: \"${id}\" をステータス ${newStatus} で新規追加しました。`);
                 }
 
-                // 4. 変更後の配列をLocalStorageに保存
                 localStorage.setItem(storageKey, JSON.stringify(currentData));
             }
 
@@ -118,18 +112,16 @@
                 const stamp2 = currentData.find(item => item.id === 'stamp2');
                 const stamp3 = currentData.find(item => item.id === 'stamp3');
 
-                return stamp1 && stamp1.status &&
-                       stamp2 && stamp2.status &&
-                       stamp3 && stamp3.status;
+                return !!(  stamp1 && stamp1.status &&
+                            stamp2 && stamp2.status &&
+                            stamp3 && stamp3.status     );
             }
             
             AddlocalStorage('stamp1',true);
-            // ここから下の、exclamationのところだけ処理いらないかもしれない…→スタンプあったらリダイレクトさせるから
-            const exclamation = document.getElementById('exclamation');
+
 
             if (checkAllStamps()) {
                 window.location.href = 'clear.html';
-                exclamation.classList.remove('hidden');
             }
         });
     </script> 

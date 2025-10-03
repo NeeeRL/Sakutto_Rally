@@ -6,6 +6,7 @@ export interface checkPoint {
 
 export interface preEventData {
     eventName: string
+    rootURL: string
     startDate: string
     endDate: string
     description: string
@@ -14,6 +15,7 @@ export interface preEventData {
 
 export interface eventData {
     eventName: string
+    rootURL: string
     startDate: string
     endDate: string
     description: string

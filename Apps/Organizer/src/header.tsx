@@ -1,8 +1,12 @@
-// import { useState } from 'react'
+import { useEffect } from 'react'
 // import './App.css'
 
 function header(props: {text: string}) {
 
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, []);
+  
   // const [count, setCount] = useState(0)
   const color = "black"
   const isReturnButton = window.history.length < 1

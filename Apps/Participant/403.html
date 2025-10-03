@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>403</title>
+        <link rel="stylesheet" href="src/index.css" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="contents!!!!!">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+    </style>
+    </head>
+    <body class="overflow-hidden">
+        
+        
+        <noscript class="mr-16 ml-16 mt-10">
+        <p class="text-4xl ">JSが有効でないようです。このサイトを満足に使うにはJavaScriptを有効にしてください。</p>
+    </noscript>
+
+        <main class="h-lvh y-overflow-hidden w-full flex justify-center flex-col items-center">
+            <div class="flex justify-center flex-col items-center text-center">
+                <p class="text-9xl py-12">403</p>
+                    
+
+                <h1 class="text-5xl font-bold text-slate-800 tracking-tight py-4">アクセスが禁止されています</h1>
+                <p class="text-4xl m-auto py-6 mx-20">
+                    お探しのページへの、アクセスは許可されていません。以下のボタンを押して、ホームへお戻りください。
+                </p>
+            </div>
+            
+        </main>
+        <footer class="h-[8.5vh] fixed bottom-10 left-8 right-8 flex justify-center items-center">
+                <div id="send-home-button" class=" rounded-full bg-blue-300 cursor-pointer py-8  w-[90%] ">
+                    <p  class="text-5xl text-center font-bold ">ホームへ戻る</p>
+                </div>
+        </footer>
+
+        
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // __NKyotsu home-button
+            document.getElementById('send-home-button').addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+            
+            
+        });
+    </script>
+    </body>
+</html>
