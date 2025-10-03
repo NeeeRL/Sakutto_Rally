@@ -349,8 +349,9 @@ function downloadFiles () {
                     </svg>
                     すべてを一括ダウンロード
                 </button>
-                <p>設定ファイルをダウンロードすることで，設定を復元することができます。
-                </p>
+                <div className="w-full flex justify-center items-center flex-col">
+                    <p className='block w-9/10'>設定ファイルをダウンロードすることで，設定を復元することができます。</p>
+                </div>
                 <Link
                     to="/"
                     className="bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"

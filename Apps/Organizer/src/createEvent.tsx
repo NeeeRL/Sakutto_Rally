@@ -11,7 +11,7 @@ const getInitialValue = (key: string) => {
 
     try {
         const parsedData = JSON.parse(stored)
-        return parsedData[key] ? parsedData[key] : null
+        return parsedData[key] ? parsedData[key] : ""
     }
     catch (event) {
         console.error("JSON is not formatted", event)
@@ -71,12 +71,12 @@ const createEvent = () => {
     const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")) ?? "")
     const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate") ?? "")
     // mapは画像
-    const [ map, setMap ] = useState<string | null>(null)
+    const [ map, setMap ] = useState<string>("")
     const [ description, setDescription ] = useState<string>(getInitialValue("description") ?? "")
     // thumbnailは画像
-    const [ thumbnail, setThumbnail ] = useState<string | null>(null)
+    const [ thumbnail, setThumbnail ] = useState<string>("")
 
-    const checkPoints = getInitialValue("checkPoints")
+    const checkPoints = (getInitialValue("checkPoints") ?? "")
 
     const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail && checkPoints.length)
 
