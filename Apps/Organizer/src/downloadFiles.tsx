@@ -1,5 +1,6 @@
 import Header from './header.tsx'
 import { useRef, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import type { checkPoint, eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
 import JSZip from 'jszip'
@@ -293,7 +294,7 @@ function downloadFiles () {
                         <p className="text-xs text-gray-600">アップロード用HTMLファイル郡（ZIP形式）</p>
                     </div>
                     <button
-                        className="bg-gray-200 rounded-xl h-8 px-4"
+                        className="bg-blue-400 text-white rounded-xl h-8 px-4"
                         onClick={generateHTML}
                     >
                         ダウンロード
@@ -312,7 +313,7 @@ function downloadFiles () {
                     </div>
                     <button 
                         onClick={downloadQRCode}
-                        className="bg-gray-200 rounded-xl h-8 px-4"
+                        className="bg-blue-400 text-white rounded-xl h-8 px-4"
                     >
                         ダウンロード
                     </button>
@@ -329,8 +330,9 @@ function downloadFiles () {
                     </div>
                     <button 
                         onClick={downloadJsonFile}
-                        className="bg-gray-200 rounded-xl h-8 px-4"
+                        className="bg-blue-400 text-white rounded-xl h-8 px-4"
                     >
+
                         ダウンロード
                     </button>
                     {/* ここは表示されない */}
@@ -339,11 +341,22 @@ function downloadFiles () {
                 </div>
 
                 <button
-                    className="fixed w-9/10 bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                    className="bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
                     onClick={() => {downloadJsonFile(); downloadQRCode();}}
                 >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 inline">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
                     すべてを一括ダウンロード
                 </button>
+                <p>設定ファイルをダウンロードすることで，設定を復元することができます。
+                </p>
+                <Link
+                    to="/"
+                    className="bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
+                >
+                    トップページに戻る
+                </Link>
             </div>
         </>
     )

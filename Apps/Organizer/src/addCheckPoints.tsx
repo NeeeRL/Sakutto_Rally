@@ -162,7 +162,7 @@ function addCheckPoints () {
                             <Link 
                                 to="/create"
                                 onClick={saveInput}
-                                className="w-[calc(50%-1px)] bottom-0 font-bold text-gray-500/50 text-center py-2 rounded-t-xl mt-4 block bg-gray-100/50 border-gray-300 border-1 border-b-0 mx-1"
+                                className="w-[calc(50%-1px)] bottom-0 font-bold text-gray-500/50 text-center py-2 rounded-t-xl mt-4 block bg-gray-100 border-gray-300 border-1 border-b-0 mx-1"
                             >
                                 1.イベント情報
                             </Link>
