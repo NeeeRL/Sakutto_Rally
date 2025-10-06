@@ -126,7 +126,7 @@ function loadFiles () {
 
     return(
         <>
-            <Header text="設定ファイルを読み込む"/>
+            <Header text="設定ファイルを読み込む" to="/"/>
             <div className="w-full flex justify-center items-center flex-col mb-30">                
                 <div className="w-9/10">
                     <h2 className="font-bold text-lg text-center">設定ファイルをアップロードしてください</h2>

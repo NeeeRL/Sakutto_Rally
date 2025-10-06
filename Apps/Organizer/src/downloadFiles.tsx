@@ -270,7 +270,7 @@ function downloadFiles () {
     }
     return(
         <>            
-            <Header text="ファイルをダウンロード"/>
+            <Header text="ファイルをダウンロード" to="/create"/>
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 <h2 className="font-bold text-lg text-center">ダウンロード可能なファイル</h2>
                 {/* ユーザーには見せないけど二次元コードを描画 */}

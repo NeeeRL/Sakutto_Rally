@@ -153,7 +153,7 @@ function addCheckPoints () {
 
     return(
         <>
-            <Header text="チェックポイントの設定"/>
+            <Header text="チェックポイントの設定" to="/"/>
         
             <div className="w-full flex items-center flex-col mb-30">
                 <div className="w-9/10">

@@ -128,7 +128,7 @@ const createEvent = () => {
     
     return(
         <>
-            <Header text="イベント情報の設定"/>
+            <Header text="イベント情報の設定" to="/"/>
             
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 

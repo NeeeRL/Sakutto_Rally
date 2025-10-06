@@ -10,8 +10,8 @@ head: `<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script></head>
 <body>
     <header>
-        <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white">
-            <h1 class="text-3xl font-bold py-10 absolute left-1/2 -translate-x-1/2">
+        <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mx-6 flex items-center bg-white">
+            <h1 class="text-5xl py-10 absolute left-1/2 -translate-x-1/2 w-9/10">
                 {{eventName}}
             </h1>
         </div>
@@ -1278,12 +1278,11 @@ clearPage: `<!DOCTYPE html>
     
         <main class="mr-16 mb-16 ml-16 mt-20 " id="mains">
             <div class="mt-6 mp-5">
-                <h1 class="text-6xl text-center pb-8">🎉 報酬を獲得!! 🎉</h1>
-                <p class="text-3xl text-center ">この画面を係員に見せて景品と交換してね!!</p>
+                <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
             </div>
              <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-full ">
-                <p  class="text-5xl text-center font-bold pt-3">景品と交換する</p>
+                <p  class="text-5xl text-center font-bold pt-3">終了する</p>
                 <p class="text-3xl text-center ">※スタンプラリーデータは削除されます</p>
             </div>
         </main> 
