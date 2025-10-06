@@ -1,7 +1,5 @@
-// import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './App.css'
-// import type { eventData } from './types/event'
 import mainImage from '../img/honbann.svg'
 
 const resetLocalStorage  = () => {
@@ -10,6 +8,13 @@ const resetLocalStorage  = () => {
 }
 
 function App() {
+
+  let isSaved = false
+
+  const storage = localStorage.getItem("eventData")
+  if (storage !== null){
+    isSaved = true
+  }
 
   return (
     <>
@@ -35,6 +40,28 @@ function App() {
             新しく作成する
           </Link>
         </div>
+
+        {
+            isSaved ? 
+          <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl'>
+            <div className='flex justify-center items-center gap-4'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+              <p className='text-xl my-2'>以前のデータを利用</p>
+            </div>
+            <p className='w-[80%] m-auto text-center'>以前作成したデータが残っています。このデータをもとに作業を再開できます。</p>
+            <Link 
+              to="/create" 
+              className="text-white text-center bg-blue-400 font-bold px-12 py-2 rounded-md mb-2 mt-4"
+            >
+              再開する
+            </Link>
+          </div>
+            :
+             ""
+        }
+
 
         <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl'>
           
