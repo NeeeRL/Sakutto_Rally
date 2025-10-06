@@ -85,13 +85,10 @@ const createEvent = () => {
     }
 
     const saveInput = () => {
-        //これはデバッグ用
-        // console.log(stored)
-        // const data: eventData = stored ? JSON.parse(stored) : {} as eventData
 
         const newData: preEventData = {
             eventName: eventName,
-            rootURL: rootURL.slice(-1) === "/" || rootURL !== ""  ? rootURL : rootURL + "/",
+            rootURL: rootURL.slice(-1) === "/" ? rootURL : ( rootURL.length === 0 ? "" : rootURL + "/" ),
             startDate: startDate,
             endDate: endDate,
             description: description,
