@@ -56,13 +56,16 @@ function addCheckPoints () {
     
     const [ map, setMap ] = useState<string | null>(null)
     const [ thumbnail, setThumbnail ] = useState<string | null>(null)
+    const [ clearImage, setClearImage ] = useState<string | null>("")
 
     useEffect(() => {
         (async () => {
             const mapFile = await getIDB("map")
             const thumbnailFile = await getIDB("thumbnail")
+            const clearImageFile = await getIDB("clearImage")
             if (mapFile) setMap(URL.createObjectURL(mapFile))
             if (thumbnailFile) setThumbnail(URL.createObjectURL(thumbnailFile))
+            if (clearImageFile) setClearImage(URL.createObjectURL(clearImageFile))
         })()
     }, [])
 
@@ -77,8 +80,9 @@ function addCheckPoints () {
     const startDate = getInitialValue("startDate") ?? ""
     const endDate = getInitialValue("endDate") ?? ""
     const description = getInitialValue("description") ?? ""
+    const clearMessage = getInitialValue("clearMessage") ?? ""
 
-    const allInput = !!(eventName && rootURL && startDate && endDate && description && checkPoints.length && map && thumbnail)
+    const allInput = !!(eventName && rootURL && startDate && endDate && description && clearMessage && checkPoints.length && map && thumbnail && clearImage)
     const sayAllInput = () => {
         alert("すべて入力してください")
     }
@@ -145,6 +149,7 @@ function addCheckPoints () {
             startDate: getInitialValue("startDate"),
             endDate: getInitialValue("endDate"),
             description: getInitialValue("description"),
+            clearMessage: getInitialValue("clearMessage"),
             checkPoints: checkPoints
         }
 
