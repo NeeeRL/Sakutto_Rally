@@ -11,7 +11,7 @@ head: `<!DOCTYPE html>
 <body>
     <header>
         <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mx-6 flex items-center bg-white">
-            <h1 class="text-5xl py-10 absolute left-1/2 -translate-x-1/2 w-9/10">
+            <h1 class="text-5xl py-10 absolute left-1/2 -translate-x-1/2 w-9/10 text-center">
                 {{eventName}}
             </h1>
         </div>
@@ -1279,11 +1279,14 @@ clearPage: `<!DOCTYPE html>
         <main class="mr-16 mb-16 ml-16 mt-20 " id="mains">
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
+                <p class="text-3xl text-center ">{{clearMessage}}</p>
             </div>
-             <div class="flex items-center justify-center">
+            <img src="img/present_happy_girl.png" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
+            <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-full ">
                 <p  class="text-5xl text-center font-bold pt-3">終了する</p>
                 <p class="text-3xl text-center ">※スタンプラリーデータは削除されます</p>
+            </div>
             </div>
         </main> 
        <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">

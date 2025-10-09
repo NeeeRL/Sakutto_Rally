@@ -132,7 +132,9 @@ function downloadFiles () {
                     {
                         title: data.eventName + "-クリア",
                         eventName: data.eventName,
-                        stampCount: data.checkPoints.length
+                        stampCount: data.checkPoints.length,
+                        clearMessage: data.clearMessage,
+                        clearImage: data.clearImages
 
                     }
                 )
@@ -186,12 +188,16 @@ function downloadFiles () {
                 const data = JSON.parse(settings)
                 const mapFile = await getIDB("map")
                 const thumbFile = await getIDB("thumbnail")
+                const clearImageFile = await getIDB("clearImage")
 
                 if(mapFile){
                     data.map = await blobToBase64(mapFile)
                 }
                 if (thumbFile) {
                     data.thumbnail = await blobToBase64(thumbFile)
+                }
+                if (clearImageFile) {
+                    data.clearImage = await blobToBase64(clearImageFile)
                 }
 
                 const jsonString = JSON.stringify(data, null, 2)
