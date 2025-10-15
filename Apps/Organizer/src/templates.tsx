@@ -9,9 +9,9 @@ head: `<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script></head>
 <body>
-    <header>
-        <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mx-6 flex items-center bg-white">
-            <h1 class="text-5xl py-10 absolute left-1/2 -translate-x-1/2 w-9/10 text-center">
+    <header class="mt-12">
+        <div class="relative rounded-full py-16 mt-10 h-fit shadow-xl mx-6 flex items-center bg-white">
+            <h1 class="text-5xl text-center absolute left-1/2 -translate-x-1/2 w-9/10">
                 {{eventName}}
             </h1>
         </div>
@@ -22,7 +22,7 @@ head: `<!DOCTYPE html>
     </noscript>
 `,
 stampFoot: `
-        <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
@@ -149,7 +149,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     </div>
 </div>
 
-    <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
@@ -222,7 +222,7 @@ mapPage: `<main class="mt-10 mx-16" id="mains">
     <img src="{{map}}" alt="スタンプラリーの地図" class="w-full h-auto border">
     {{stamps}}
 </main>
-    <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
@@ -263,18 +263,34 @@ mapPage: `<main class="mt-10 mx-16" id="mains">
     </footer>`,
 commonScript:`
 const fotter = document.getElementById('fotter-items');
+const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
+function handleOrientation(mediaQueryResult) {
+
+    if (!isPC && mediaQueryResult.matches) {
+        // 横向きの場合
+        fotter.classList.remove('fixed');
+        fotter.classList.add('border', 'w-[96%]');
+        
+    } else {
+        // 縦向き
+        fotter.classList.add('fixed');
+        fotter.classList.remove('border','w-[96%]');
+    }
+}
+
+const mediaQuery = window.matchMedia("(orientation: landscape)");
+
+handleOrientation(mediaQuery);
+
+mediaQuery.addEventListener("change", handleOrientation);
+
 let FotterHeight = fotter.offsetHeight;
 
 const mainElement = document.getElementById('mains');
-// 7vh
-const amari = (window.innerHeight * 7) / 100;
+// 12vh
+const amari = (window.innerHeight * 12) / 100;
 mainElement.style.marginBottom = (FotterHeight + amari) + "px";
 
-window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-    if (e.matches) {
-        alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-    } 
-});
 
 const exclamation = document.getElementById('exclamation');
 function checkAllStamps() {
@@ -691,14 +707,14 @@ progressPage : `
                 
             </div>
         </div>
-        <div class="flex items-center justify-center hidden" id="clear-btn-box">
+        <div class="m-auto hidden" id="clear-btn-box">
             <div id="sent-clear-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer py-8  w-full ">
                 <p  class="text-5xl text-center font-bold py-4">クリア画面を表示する</p>
             </div>
         </div>
     </main>
     
-<footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
@@ -756,7 +772,7 @@ progressPage : `
         <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
             <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
                 <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
-                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 w-full h-full z-80 object-contain"></canvas>
                 <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
                 <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
                     <div class="" style="display: block;">
@@ -787,11 +803,6 @@ progressPage : `
             const amari = (window.innerHeight * 7) / 100;
             mainElement.style.marginBottom = FotterHeight + amari + "px";
 
-            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
-                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                }
-            });
 
             // check-pointに関わるコード __NKyotsu
             const checkpoints = [
@@ -1174,7 +1185,7 @@ checkPointMain: `
                 </a>
             </div>
         </main>
-        <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
@@ -1217,11 +1228,6 @@ checkPointMain: `
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
-                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                }                 
-            });
 
             // add data __NKyotsu
             function AddlocalStorage(id, newStatus) {
@@ -1264,9 +1270,9 @@ clearPage: `<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
     <body>
-        <header>
-            <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white" >
-                <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
+        <header class="mt-12">
+            <div class="relative rounded-full mt-10 h-fit py-16 shadow-xl mx-6 flex items-center bg-white" >
+                <h1 class="text-6xl text-center absolute left-1/2">
                    クリア!!
                 </h1>    
             </div>
@@ -1289,7 +1295,7 @@ clearPage: `<!DOCTYPE html>
             </div>
             </div>
         </main> 
-       <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
+    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
         <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
@@ -1368,7 +1374,7 @@ clearPage: `<!DOCTYPE html>
             let FotterHeight = fotter.offsetHeight;
 
             const mainElement = document.getElementById('mains');
-            // 10vhを示している。10をxとして、変更していいお　追記：　７vh　なう
+            // 7vhを示している。
             const amari = (window.innerHeight * 7) / 100;
             mainElement.style.marginBottom = FotterHeight + amari + "px";
 
@@ -1379,12 +1385,6 @@ clearPage: `<!DOCTYPE html>
             const clearButton = document.getElementById('clear-localstorage-button');
             const body = document.body;
 
-            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
-                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                } 
-                
-            });
 
             const exclamation = document.getElementById('exclamation');
 
@@ -1497,7 +1497,6 @@ error404: `<!DOCTYPE html>
 <html lang="ja">
     <head>
         <title>404</title>
-        <link rel="stylesheet" href="src/index.css" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="contents!!!!!">
@@ -1546,7 +1545,6 @@ error403:`<!DOCTYPE html>
 <html lang="ja">
     <head>
         <title>403</title>
-        <link rel="stylesheet" href="src/index.css" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="contents!!!!!">
