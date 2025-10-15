@@ -1285,11 +1285,14 @@ clearPage: `<!DOCTYPE html>
         <main class="mr-16 mb-16 ml-16 mt-20 " id="mains">
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
+                <p class="text-3xl text-center ">{{clearMessage}}</p>
             </div>
-             <div class="flex items-center justify-center">
+            <img src="img/present_happy_girl.png" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
+            <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-full ">
                 <p  class="text-5xl text-center font-bold pt-3">終了する</p>
                 <p class="text-3xl text-center ">※スタンプラリーデータは削除されます</p>
+            </div>
             </div>
         </main> 
     <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">

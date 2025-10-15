@@ -75,14 +75,19 @@ const createEvent = () => {
     const [ description, setDescription ] = useState<string>(getInitialValue("description") ?? "")
     // thumbnailは画像
     const [ thumbnail, setThumbnail ] = useState<string>("")
+    // clearImageは画像
+    const [ clearImage, setClearImage ] = useState<string>("")
+    const [ clearMessage, setClearMessage ] = useState<string>(getInitialValue("clearMessage") ?? "")
 
     const checkPoints = (getInitialValue("checkPoints") ?? "")
 
-    const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail && checkPoints.length)
+    const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail && clearImage && clearMessage && checkPoints.length)
 
     const sayAllInput = () => {
         alert("すべて入力してください")
     }
+
+    const [ saveIcon, setSaveIcon ] = useState("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
 
     const saveInput = () => {
 
@@ -92,6 +97,7 @@ const createEvent = () => {
             startDate: startDate,
             endDate: endDate,
             description: description,
+            clearMessage: clearMessage,
             checkPoints: getInitialValue("checkPoints")
         }
 
@@ -110,16 +116,35 @@ const createEvent = () => {
                 setMap(URL.createObjectURL(file))
             } else if (name === "thumbnail") {
                 setThumbnail(URL.createObjectURL(file))
+            } else if (name === "clearImage"){
+                setClearImage(URL.createObjectURL(file))
             }
         }
     }
+
+    const saveChangeIcon = () => {
+        setSaveIcon("m4.5 12.75 6 6 9-13.5")
+        saveInput
+        setTimeout(() => {
+            setSaveIcon("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
+        }, 3000)
+    }
         
     useEffect(() => {
+
+        // const saveWithClick = () => {
+        //     setSaveIcon("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")     
+        // }
+        // document.addEventListener("click", saveWithClick);
+
+
         (async () => {
             const mapFile = await getIDB("map")
             const thumbnailFile = await getIDB("thumbnail")
+            const clearImageFile = await getIDB("clearImage")
             if (mapFile) setMap(URL.createObjectURL(mapFile))
             if (thumbnailFile) setThumbnail(URL.createObjectURL(thumbnailFile))
+            if (clearImageFile) setClearImage(URL.createObjectURL(clearImageFile))
         })()
     }, [])
     
@@ -223,38 +248,59 @@ const createEvent = () => {
                         </label>
                         {map ? <img src={map} alt="map preview" className="mt-2 rounded-lg" /> : ""}
                     </div>
+                    <div>
+                        <label htmlFor="clearImage" className="mt-6 my-2 block">クリア時に表示される画像のアップロード</label>
+                        <input 
+                            id="clearImage" 
+                            type="file" 
+                            accept="image/*"
+                            onChange={uploadIDB("clearImage")}
+                            className="hidden"
+                        />
+                        <label
+                            htmlFor="clearImage"
+                            className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none block"
+                        >
+                            {clearImage ? "別の画像を選択" : <span>マップページに表示される画像を選択</span> }
+                        </label>
+                        {clearImage ? <img src={clearImage} alt="clearImage preview" className="mt-2 rounded-lg" /> : ""}
+                    </div>
+                    
+                    <label htmlFor="clearMessage" className="mt-6 my-2 block">クリア時のメッセージ</label>
+                    <textarea 
+                        id="clearMessage" 
+                        value={clearMessage}
+                        onChange={ (event) => setClearMessage(event.target.value) }
+                        className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full h-30 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" 
+                        placeholder="イベントの概要を入力"
+                    />
                 </div>
-                {/* { allInput ?
-                    <Link 
-                        to="/checkpoints" 
-                        onClick={saveInput}
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
-                    >
-                        チェックポイントの設定
-                    </Link> :
-                    <button 
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
-                        onClick={sayAllInput}
-                    >
-                        チェックポイントの設定
-                    </button>
-                } */}
-                { allInput ? 
-                    <Link 
-                        to="/download" 
-                        onClick={saveInput}
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
-                    >
-                        完了する
-                    </Link>
-                    :
+                <div className="flex w-9/10 fixed bottom-0">
+                    { allInput ? 
+                        <Link 
+                            to="/download" 
+                            onClick={saveInput}
+                            className="w-full text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
+                        >
+                            完了する
+                        </Link>
+                        :
+                        <button
+                            className="w-full text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
+                            onClick={sayAllInput}
+                        >
+                            完了する
+                        </button>
+                    }
                     <button
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
-                        onClick={sayAllInput}
+                        className="w-auto text-white text-center font-bold px-2 py-2 rounded-md my-4 bg-blue-500 ml-8"
+                        onClick={() => {saveInput(); saveChangeIcon();}}
                     >
-                        完了する
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d={saveIcon} />
+                        </svg>
                     </button>
-                }
+                </div>
             </div>
         </>
     )

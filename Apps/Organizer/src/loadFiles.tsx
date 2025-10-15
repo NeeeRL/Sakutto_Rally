@@ -71,6 +71,12 @@ function loadFiles () {
                             await saveIDB("thumbnail", fileObj)
                             delete jsonFile.thumbnail
                         }
+                        if (jsonFile.clearImage && jsonFile.clearImage.startsWith("data:")) {
+                            const blob = base64ToBlob(jsonFile.clearImage)
+                            const fileObj = new File([blob], "clearImage.png", { type: blob.type })
+                            await saveIDB("clearImage", fileObj)
+                            delete jsonFile.clearImage
+                        }
 
                         localStorage.setItem("eventData", JSON.stringify(jsonFile))
                         navigate("/create")        
@@ -99,7 +105,7 @@ function loadFiles () {
         if (typeof data !== "object" || data === null) {
             return false;
         }
-        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "checkPoints", "map", "thumbnail"]
+        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "clearMessage", "checkPoints", "map", "thumbnail", "clearImage"]
         for (const key of keys) {
             if (!(key in data)){
                 return false
