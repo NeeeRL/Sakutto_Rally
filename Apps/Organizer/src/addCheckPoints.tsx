@@ -87,6 +87,9 @@ function addCheckPoints () {
         alert("すべて入力してください")
     }
 
+    const [ saveIcon, setSaveIcon ] = useState("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
+
+
     const moveCheckPoint = (id: string, direction: "up" | "down") => {
         setCheckPoints(prev => {
             const index = prev.findIndex(cp => cp.id === id)
@@ -140,7 +143,7 @@ function addCheckPoints () {
 
     const removeCheckPoint = (removeId: string) => {
         setCheckPoints(checkPoints.filter(checkPoint => checkPoint.id !== removeId))
-    } 
+    }
 
     const saveInput = () => {
         const newData: eventData = {
@@ -154,6 +157,14 @@ function addCheckPoints () {
         }
 
         localStorage.setItem("eventData", JSON.stringify(newData))
+    }
+
+        const saveChangeIcon = () => {
+        setSaveIcon("m4.5 12.75 6 6 9-13.5")
+        saveInput
+        setTimeout(() => {
+            setSaveIcon("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
+        }, 3000)
     }
 
     return(
@@ -204,7 +215,7 @@ function addCheckPoints () {
                             </div>
                         </form>
                         <h2 className="font-bold text-lg mt-4 mb-1 block">現在のチェックポイント</h2>
-                        <p className="text-sm">参加者側で表示される順番を調整できます</p>
+                        <p className="text-xs">参加者側で表示される順番を調整できます</p>
                         <ul className="w-full flex flex-col justify-start overflow-y-scroll h-[calc(100vh-450px)] min-h-32">
                             {checkPoints.map((checkPoint) => (
                                 <li
@@ -251,23 +262,33 @@ function addCheckPoints () {
                             ))}
                         </ul>
                     </div>
-                </div>
-                {/* 下のボタン */}
-                { allInput ? 
-                    <Link 
-                        to="/download" 
-                        onClick={saveInput}
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
-                    >
-                        完了する
-                    </Link> :
+                </div>                
+                <div className="flex w-9/10 fixed bottom-0">
+                    { allInput ? 
+                        <Link 
+                            to="/download" 
+                            onClick={saveInput}
+                            className="w-full text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
+                        >
+                            完了する
+                        </Link>
+                        :
+                        <button
+                            className="w-full text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
+                            onClick={sayAllInput}
+                        >
+                            完了する
+                        </button>
+                    }
                     <button
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
-                        onClick={sayAllInput}
+                        className="w-auto text-white text-center font-bold px-2 py-2 rounded-md my-4 bg-blue-500 ml-8"
+                        onClick={() => {saveInput(); saveChangeIcon();}}
                     >
-                        完了する
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d={saveIcon} />
+                        </svg>
                     </button>
-                }
+                </div>
             </div>
         </>
     )
