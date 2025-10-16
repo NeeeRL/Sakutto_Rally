@@ -101,7 +101,7 @@ function downloadFiles () {
                     }
                 )
                 const mapPage = renderTemplate(
-                    templates.head + templates.mapPage,
+                    templates.head + templates.mapPage + templates.scriptHead + templates.commonScript + templates.scriptFoot,
                     { 
                         title: data.eventName + "-マップ",
                         eventName: data.eventName,
@@ -117,7 +117,7 @@ function downloadFiles () {
                     return ans
                 }
                 const progressPage = renderTemplate(
-                    templates.head + templates.progressPage + templates.scriptHead + templates.progressScript + templates.scriptFoot,
+                    templates.head + templates.progressPage + templates.scriptHead + templates.commonScript + templates.progressScript + templates.scriptFoot,
                     { 
                         title: data.eventName + "-進捗",
                         eventName: data.eventName,

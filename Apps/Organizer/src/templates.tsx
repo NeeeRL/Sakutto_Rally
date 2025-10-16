@@ -5,7 +5,6 @@ head: `<!DOCTYPE html>
     <title>{{title}}</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="スタンプラリーページです。" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script></head>
 <body>
@@ -124,7 +123,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
         <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
             <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
                 <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
-                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 w-full h-full z-80 object-contain"></canvas>
                 <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
                 <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
                     <div class="" style="display: block;">
@@ -1266,7 +1265,6 @@ clearPage: `<!DOCTYPE html>
         <title>クリア</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="contents!!!!!">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
     <body>
@@ -1359,23 +1357,46 @@ clearPage: `<!DOCTYPE html>
     </div>
 </div>
         <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
             function checkAllStamps() {
-            const storageKey = '{{eventName}}';
-            const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-            return currentData.length >= {{stampCount}};
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                return currentData.length >= {{stampCount}};
             }
 
             if(checkAllStamps() == false) {
                 window.location.href = '403.html';
             }
-
-        document.addEventListener('DOMContentLoaded', () => {
             const fotter = document.getElementById('fotter-items');
+            const fotter = document.getElementById('fotter-items');
+
+            const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
+            function handleOrientation(mediaQueryResult) {
+
+                if (!isPC && mediaQueryResult.matches) {
+                    // 横向きの場合
+                    fotter.classList.remove('fixed');
+                    fotter.classList.add('border', 'w-[96%]');
+                    
+                } else {
+                    // 縦向き
+                    fotter.classList.add('fixed');
+                    fotter.classList.remove('border','w-[96%]');
+                }
+            }
+
+            const mediaQuery = window.matchMedia("(orientation: landscape)");
+
+            handleOrientation(mediaQuery);
+
+            mediaQuery.addEventListener("change", handleOrientation);
+
             let FotterHeight = fotter.offsetHeight;
 
             const mainElement = document.getElementById('mains');
-            // 7vhを示している。
-            const amari = (window.innerHeight * 7) / 100;
+            // 12vhを示している。
+            const amari = (window.innerHeight * 12) / 100;
             mainElement.style.marginBottom = FotterHeight + amari + "px";
 
             const popup = document.getElementById('pop-up');
@@ -1499,7 +1520,6 @@ error404: `<!DOCTYPE html>
         <title>404</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="contents!!!!!">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style type="text/tailwindcss">
     </style>
@@ -1547,7 +1567,6 @@ error403:`<!DOCTYPE html>
         <title>403</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="contents!!!!!">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <style type="text/tailwindcss"></style>
     </head>
