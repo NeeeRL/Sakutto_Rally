@@ -1,0 +1,96 @@
+From dc3fc22f480b7d8f4b93553f0c62790aeb2e49a4 Mon Sep 17 00:00:00 2001
+From: NeeeRL <kenken.s5049@gmail.com>
+Date: Thu, 16 Oct 2025 12:07:35 +0900
+Subject: [PATCH] =?UTF-8?q?=E3=82=B3=E3=83=A2=E3=83=B3=E3=82=B9=E3=82=AF?=
+ =?UTF-8?q?=E3=83=AA=E3=83=97=E3=83=88=E3=82=92=E4=BD=BF=E3=81=86=E3=82=88?=
+ =?UTF-8?q?=E3=81=86=E3=81=AB?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ Apps/Organizer/src/downloadFiles.tsx |  4 ++--
+ Apps/Organizer/src/templates.tsx     | 35 ++++++++++++++++++++++------
+ 2 files changed, 30 insertions(+), 9 deletions(-)
+
+diff --git a/Apps/Organizer/src/downloadFiles.tsx b/Apps/Organizer/src/downloadFiles.tsx
+index f44133e..67457af 100644
+--- a/Apps/Organizer/src/downloadFiles.tsx
++++ b/Apps/Organizer/src/downloadFiles.tsx
+@@ -96,7 +96,7 @@ function downloadFiles () {
+                     }
+                 )
+                 const mapPage = renderTemplate(
+-                    templates.head + templates.mapPage,
++                    templates.head + templates.mapPage + templates.scriptHead + templates.commonScript + templates.scriptFoot,
+                     { 
+                         title: data.eventName + "-マップ",
+                         eventName: data.eventName,
+@@ -112,7 +112,7 @@ function downloadFiles () {
+                     return ans
+                 }
+                 const progressPage = renderTemplate(
+-                    templates.head + templates.progressPage + templates.scriptHead + templates.progressScript + templates.scriptFoot,
++                    templates.head + templates.progressPage + templates.scriptHead + templates.commonScript + templates.progressScript + templates.scriptFoot,
+                     { 
+                         title: data.eventName + "-進捗",
+                         eventName: data.eventName,
+diff --git a/Apps/Organizer/src/templates.tsx b/Apps/Organizer/src/templates.tsx
+index 950baec..05ecd2a 100644
+--- a/Apps/Organizer/src/templates.tsx
++++ b/Apps/Organizer/src/templates.tsx
+@@ -1356,23 +1356,44 @@ clearPage: `<!DOCTYPE html>
+     </div>
+ </div>
+         <script>
++        document.addEventListener('DOMContentLoaded', () => {
+             function checkAllStamps() {
+-            const storageKey = '{{eventName}}';
+-            const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+-            return currentData.length >= {{stampCount}};
++                const storageKey = '{{eventName}}';
++                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
++                return currentData.length >= {{stampCount}};
+             }
+ 
+             if(checkAllStamps() == false) {
+                 window.location.href = '403.html';
+             }
+-
+-        document.addEventListener('DOMContentLoaded', () => {
++            
+             const fotter = document.getElementById('fotter-items');
++            const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
++            function handleOrientation(mediaQueryResult) {
++
++                if (!isPC && mediaQueryResult.matches) {
++                    // 横向きの場合
++                    fotter.classList.remove('fixed');
++                    fotter.classList.add('border', 'w-[96%]');
++                    
++                } else {
++                    // 縦向き
++                    fotter.classList.add('fixed');
++                    fotter.classList.remove('border','w-[96%]');
++                }
++            }
++
++            const mediaQuery = window.matchMedia("(orientation: landscape)");
++
++            handleOrientation(mediaQuery);
++
++            mediaQuery.addEventListener("change", handleOrientation);
++            
+             let FotterHeight = fotter.offsetHeight;
+ 
+             const mainElement = document.getElementById('mains');
+-            // 7vhを示している。
+-            const amari = (window.innerHeight * 7) / 100;
++            // 12vhを示している。
++            const amari = (window.innerHeight * 12) / 100;
+             mainElement.style.marginBottom = FotterHeight + amari + "px";
+ 
+             const popup = document.getElementById('pop-up');
+-- 
+2.51.0
+
