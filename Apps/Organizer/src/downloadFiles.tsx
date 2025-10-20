@@ -100,13 +100,21 @@ function downloadFiles () {
 
     useEffect(() => {
         //入力が不完全であれば/createにリダイレクト
-        // 不完全
        if(settings){
             try{
                 const JSONData = JSON.parse(settings)
                 if(!checkJsonKeys(JSONData)){
                     navigate("/create")
                 }
+                const checkIDB = async () => {
+                    const mapFile = await getIDB("map")
+                    const thumbnailFile = await getIDB("thumbnail")
+                    const clearImageFile = await getIDB("clearImage")
+                    if(!mapFile || !thumbnailFile || !clearImageFile){
+                        navigate("/create")
+                    }
+                }
+                checkIDB()
             }
             catch{
                 navigate("/create")

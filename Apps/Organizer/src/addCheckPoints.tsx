@@ -54,9 +54,9 @@ const getIDB = async (key: string): Promise<File | null> => {
 
 function addCheckPoints () {
     
-    const [ map, setMap ] = useState<string | null>(null)
-    const [ thumbnail, setThumbnail ] = useState<string | null>(null)
-    const [ clearImage, setClearImage ] = useState<string | null>("")
+    const [ map, setMap ] = useState<string>("")
+    const [ thumbnail, setThumbnail ] = useState<string>("")
+    const [ clearImage, setClearImage ] = useState<string>("")
 
     useEffect(() => {
         (async () => {
