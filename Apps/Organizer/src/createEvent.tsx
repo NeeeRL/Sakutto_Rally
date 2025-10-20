@@ -129,6 +129,28 @@ const createEvent = () => {
             setSaveIcon("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
         }, 3000)
     }
+
+    //チェックできるようにだけしておく
+    const checkStartDate = (date: string) => {
+        setStartDate(date)
+    }
+
+    const today = new Date()
+
+    //ここは絶対チェック
+    const checkEndDate = (date: string) => {
+        if(startDate){
+            const start = new Date(startDate)
+            const end = new Date(date)
+            if(start.getDate() > end.getDate() || today.getDate() > end.getDate()){
+                alert("日付が無効です")
+            }
+            else{
+                setEndDate(date)
+            }
+        }
+
+    }
         
     useEffect(() => {
 
@@ -194,7 +216,7 @@ const createEvent = () => {
                     <input 
                         id="startDate" 
                         value={startDate}
-                        onChange={ (event) => setStartDate(event.target.value) }
+                        onChange={ (event) => checkStartDate(event.target.value) }
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
@@ -202,7 +224,7 @@ const createEvent = () => {
                     <input 
                         id="endDate" 
                         value={endDate}
-                        onChange={ (event) => setEndDate(event.target.value) }
+                        onChange={ (event) => checkEndDate(event.target.value) }
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />                
