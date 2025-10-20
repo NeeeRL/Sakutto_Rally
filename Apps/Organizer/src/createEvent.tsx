@@ -81,7 +81,7 @@ const createEvent = () => {
 
     const checkPoints = (getInitialValue("checkPoints") ?? "")
 
-    const allInput = !!(eventName && rootURL && startDate && endDate && description && map && thumbnail && clearImage && clearMessage && checkPoints.length)
+    const allInput = !!(eventName.length && rootURL.length >= 2 && startDate && endDate && description.length && map && thumbnail && clearImage && clearMessage.length && checkPoints.length && map && thumbnail && clearImage)
 
     const sayAllInput = () => {
         alert("すべて入力してください")
@@ -100,7 +100,6 @@ const createEvent = () => {
             clearMessage: clearMessage,
             checkPoints: getInitialValue("checkPoints")
         }
-
         localStorage.setItem("eventData", JSON.stringify(newData))
         // console.log("上書き後", newData)
     }
@@ -124,7 +123,7 @@ const createEvent = () => {
 
     const saveChangeIcon = () => {
         setSaveIcon("m4.5 12.75 6 6 9-13.5")
-        saveInput
+        saveInput()
         setTimeout(() => {
             setSaveIcon("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
         }, 3000)
@@ -291,7 +290,8 @@ const createEvent = () => {
                     />
                 </div>
                 <div className="flex w-9/10 fixed bottom-0">
-                    { allInput ? 
+                    { allInput ?
+                        
                         <Link 
                             to="/download" 
                             onClick={saveInput}
@@ -311,7 +311,7 @@ const createEvent = () => {
                         className="w-auto text-white text-center font-bold px-2 py-2 rounded-md my-4 bg-blue-500 ml-8"
                         onClick={() => {saveInput(); saveChangeIcon();}}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 rotate-270">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d={saveIcon} />
                         </svg>
                     </button>

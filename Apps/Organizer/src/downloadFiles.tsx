@@ -1,5 +1,6 @@
 import Header from './header.tsx'
 import { useRef, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import type { checkPoint, eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
@@ -61,9 +62,57 @@ const renderTemplate = (template: string, data: Record<string, string>) => {
   return template.replace(/{{(.*?)}}/g, (_, key) => data[key.trim()] ?? "");
 }
 
+const checkJsonKeys = (data: any): boolean => {
+    // JSON形式であることの確認
+    if (typeof data !== "object" || data === null) {
+        return false;
+    }
+    const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "clearMessage", "checkPoints"]
+    for (const key of keys) {
+        if (!(key in data)){
+            return false
+        }
+    }
+    //checkPointsが配列であることの確認
+    if (!Array.isArray(data.checkPoints)){
+        return false
+    }
+    const cpKeys = ["id", "name", "description"]
+    for (const cp of data.checkPoints) {
+        // checkPointの中身が正しいことの確認
+        if (typeof cp !== "object" || cp === null) {
+            return false;
+        }
+        for (const key of cpKeys) {
+            if (!(key in cp)) {
+                return false
+            }
+        }
+    }
+    return true
+}
+
 function downloadFiles () {
 
     const settings = localStorage.getItem("eventData")
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        //入力が不完全であれば/createにリダイレクト
+        // 不完全
+       if(settings){
+            try{
+                const JSONData = JSON.parse(settings)
+                if(!checkJsonKeys(JSONData)){
+                    navigate("/create")
+                }
+            }
+            catch{
+                navigate("/create")
+            }
+        }
+    }, [])
 
     const generateHTML = async () => {
     

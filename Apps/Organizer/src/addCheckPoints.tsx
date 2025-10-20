@@ -82,7 +82,7 @@ function addCheckPoints () {
     const description = getInitialValue("description") ?? ""
     const clearMessage = getInitialValue("clearMessage") ?? ""
 
-    const allInput = !!(eventName && rootURL && startDate && endDate && description && clearMessage && checkPoints.length && map && thumbnail && clearImage)
+    const allInput = !!(eventName.length && rootURL.length >= 2 && startDate && endDate && description.length && map && thumbnail && clearImage && clearMessage.length && checkPoints.length && map && thumbnail && clearImage)
     const sayAllInput = () => {
         alert("すべて入力してください")
     }
@@ -284,7 +284,7 @@ function addCheckPoints () {
                         className="w-auto text-white text-center font-bold px-2 py-2 rounded-md my-4 bg-blue-500 ml-8"
                         onClick={() => {saveInput(); saveChangeIcon();}}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 rotate-270">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d={saveIcon} />
                         </svg>
                     </button>
