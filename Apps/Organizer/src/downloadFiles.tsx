@@ -192,7 +192,6 @@ function downloadFiles () {
                         stampCount: data.checkPoints.length,
                         clearMessage: data.clearMessage,
                         clearImage: data.clearImages
-
                     }
                 )
                 const error404 = renderTemplate(
@@ -204,6 +203,23 @@ function downloadFiles () {
                     {}
                 )
 
+                const getstampmsc = fetch("../msc/get-coin-351945.mp3")
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(`error status: ${response.status}`);
+                    }
+                    return response.blob();
+                });
+                const clearmsc = fetch("../msc/get-coin-351945.mp3")
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(`error status: ${response.status}`);
+                    }
+                    return response.blob();
+                });
+
+                zipHTML.file("getQR.mp3", getstampmsc);
+                zipHTML.file("clear.mp3", clearmsc);
                 zipHTML.file("index.html", topPage)
                 zipHTML.file("map.html", mapPage)
                 zipHTML.file("progress.html", progressPage)

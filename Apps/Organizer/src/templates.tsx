@@ -6,7 +6,9 @@ head: `<!DOCTYPE html>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script></head>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
 <body>
     <header class="mt-12">
         <div class="relative rounded-full py-16 mt-10 h-fit shadow-xl mx-6 flex items-center bg-white">
@@ -786,7 +788,7 @@ progressPage : `
                                 再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
                             </p>
                         </div>  
-                    </div>          
+                    </div>             
                 </div>
             </div>
         </div>
@@ -795,14 +797,7 @@ progressPage : `
         </div>
     </div>
 </div>`,
-    progressScript: `const fotter = document.getElementById('fotter-items');
-            let FotterHeight = fotter.offsetHeight;
-
-            const mainElement = document.getElementById('mains');
-            const amari = (window.innerHeight * 7) / 100;
-            mainElement.style.marginBottom = FotterHeight + amari + "px";
-
-
+    progressScript: `
             // check-pointに関わるコード __NKyotsu
             const checkpoints = [
                 {{checkPoints}}
@@ -909,8 +904,6 @@ progressPage : `
             const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
             return currentData.length >= {{stampCount}};
             }
-            
-            const exclamation = document.getElementById('exclamation');
 
             if(checkAllStamps()) {
                 ClearBox.classList.remove('hidden');
@@ -1171,7 +1164,7 @@ progressPage : `
                     });
             };`,
 checkPointMain: `
-
+        <audio src="getQR.mp3" id="music"></audio>
         <main class="mr-16 mb-16 ml-16 mt-20 ">
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">スタンプを獲得しました</h1>
@@ -1225,9 +1218,99 @@ checkPointMain: `
         </div>
         </a>
     </footer>
+    <div id="outer" class="w-full h-full z-100 backdrop-blur-md bg-black/50 m-auto fixed inset-0 flex justify-center items-center">
+        <div class="h-[90%] w-[86%] rounded-4xl bg-[#FDFDFD] flex justify-center items-center shadow-xl overflow-auto">
+            <div class=" flex justify-between items-center flex-col w-[90%] h-[84%]">
+                <div class="w-[95%] py-12 ring-4 rounded-4xl ring-gray-300">
+                    <p class="text-6xl text-center ">
+                        {{PointName}}
+                    </p>
+                </div>
+                <div class="py-8">
+                    <div>
+                        <p class="text-black text-center text-6xl py-6">ボタンをタップしてスタンプをゲットしよう!!</p>
+                        <p class="text-center text-4xl py-2">※音が出ます。ご注意ください。</p>
+                    </div>
+                    <div class="py-20 flex justify-center items-center">
+                            <div class="bg-blue-300 w-[50vw] h-[50vw] rounded-full flex flex-col justify-center items-center" id="isok">
+                            <svg width="200" height="200" viewBox="0 0 100 100" class="size-64">
+                                <!-- <g transform="rotate(340 50 50) translate(5 -6)">
+                                    <path 
+                                        d="M50 80 Q70 80 70 60 Q70 48 50 50 L50 32 A4 5 0 0 0 38 32 L38 60 L32 56 A4 4 0 0 0 24 64 L30 70 Q40 80 50 80 Z" 
+                                        fill="none" stroke="white" stroke-width="4" 
+                                    />
+                                    <path 
+                                        d="M32 42 A18 18 0 1 1 56 42" 
+                                        fill="none" 
+                                        stroke="white" 
+                                        stroke-width="6"
+                                    />
+                                </g> -->
+                                <g transform="translate(0 -4)">
+                                    <path d="M24 68 L76 68 L76 62 A8 8 0 0 0 70 52 L30 52 A8 8 0 0 0 24 62 Z " fill="none" stroke="white" stroke-width="4"> 
+                                    </path>
+                                    <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8 M49 8 L51 8" 
+                                        fill="none" stroke="white" stroke-width="4">
+                                    </path>
+                                    <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8" 
+                                        fill="none" stroke="white" stroke-width="4"
+                                        transform="translate(100, 0) scale(-1, 1)">
+                                    </path>
+                                    <path d="M70 74 L30 74 L30 76 L70 76 Z" fill="white" stroke="white" stroke-width="1">
+                                    </path>
+                                </g>
+                                
+                                <text x="50" y="100" fill="white" text-anchor="middle" font-size="20" class="select-none">タップ</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-fit rounded-2xl ring-4 p-6 ring-gray-300">
+                    <div class="my-4">
+                        <p class="text-5xl text-center">現在のスタンプ保持数: <span id="current_stamp">0</span>/3個</p>
+                    </div>
+                    <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden relative" id="max-progress-bar">
+                        <div id="progress-bar" class="absolute z-10 l-0 t-0 bg-blue-300 w-0 h-full transition-all duration-1000 linear"></div>
+                    </div> 
+                    <p class="text-5xl text-center mt-12">コンプリートまであと<span id="CompletationCount"></span>個</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+        function checkAllStamps() {
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                return currentData.length >= {{stampCount}};
+            }
+                if (checkAllStamps()) {
+                    window.location.href = 'clear.html?isSound=true';
+                }
+            const isokElement = document.getElementById('isok');
+            isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
+            function updateStampProgress() {
+                const progress_bar = document.getElementById('progress-bar');
+                const storageKey = 'a';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = currentData.length;
+                const totalStamps = 3;
+                
+                const percent = document.getElementById('pro-percent');
 
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
+
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    const nowstamp = document.getElementById('current_stamp');
+                    nowstamp.textContent = currentStamps;
+                    const countstamp = document.getElementById('CompletationCount');
+                    countstamp.textContent = totalStamps - currentStamps;
+                    progress_bar.style.width = bar_per + "%";
+                }
+            }
+            updateStampProgress();
             // add data __NKyotsu
             function AddlocalStorage(id, newStatus) {
                 const storageKey = '{{eventName}}';
@@ -1244,17 +1327,32 @@ checkPointMain: `
 
                 localStorage.setItem(storageKey, JSON.stringify(currentData));
             }
-            function checkAllStamps() {
-            const storageKey = '{{eventName}}';
-                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-                return currentData.length >= {{stampCount}};
-            }
+            
             
             AddlocalStorage('{{stampId}}',true);
 
-            if (checkAllStamps()) {
-                window.location.href = 'clear.html';
-            }
+            const body = document.body;
+            const isokget =  document.getElementById('isok');
+            body.classList.add('overflow-hidden');
+
+            isokget.addEventListener('click', () => {
+                body.classList.remove('overflow-hidden');
+                outer.classList.add('hidden');
+
+                confetti({
+                    angle: 90,
+                    spread: 400,
+                    startVelocity: 60,
+                    scalar: 3,
+                    gravity: 1,
+                    particleCount: 250,
+                    origin: {
+                        x : 0.5,
+                        y : 0.4
+                    },
+                });
+                document.getElementById('music').play();
+            });
         });
     </script> 
     </body>
@@ -1265,7 +1363,9 @@ clearPage: `<!DOCTYPE html>
         <title>クリア</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     </head>
     <body>
         <header class="mt-12">
@@ -1281,6 +1381,8 @@ clearPage: `<!DOCTYPE html>
     </noscript>
     
         <main class="mr-16 mb-16 ml-16 mt-20 " id="mains">
+                        <audio src="clear.mp3" id="music"></audio>
+
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
                 <p class="text-3xl text-center ">{{clearMessage}}</p>
@@ -1356,6 +1458,64 @@ clearPage: `<!DOCTYPE html>
         </div>
     </div>
 </div>
+<div id="outer" class="w-full h-full z-100 backdrop-blur-md bg-black/50 m-auto fixed inset-0 flex justify-center items-center">
+    <div class="h-[90%] w-[86%] rounded-4xl bg-[#FDFDFD] flex justify-center items-center shadow-xl overflow-auto">
+        <div class=" flex justify-between items-center flex-col w-[90%] h-[84%]">
+            <div class="w-[95%] py-12 ring-4 rounded-4xl ring-gray-300">
+                <p class="text-6xl text-center ">あああ公園前</p>
+            </div>
+            <div class="py-8">
+                <div>
+                    <p class="text-black text-center text-6xl py-6">ボタンをタップしてスタンプをゲットしよう!!</p>
+                    <p class="text-center text-4xl py-2">※音が出ます。ご注意ください。</p>
+                </div>
+                <div class="py-20 flex justify-center items-center">
+                        <div class="bg-blue-300 w-[50vw] h-[50vw] rounded-full flex flex-col justify-center items-center" id="isok">
+                        <svg width="200" height="200" viewBox="0 0 100 100" class="size-64">
+                            <!-- <g transform="rotate(340 50 50) translate(5 -6)">
+                                <path 
+                                    d="M50 80 Q70 80 70 60 Q70 48 50 50 L50 32 A4 5 0 0 0 38 32 L38 60 L32 56 A4 4 0 0 0 24 64 L30 70 Q40 80 50 80 Z" 
+                                    fill="none" stroke="white" stroke-width="4" 
+                                />
+                                <path 
+                                    d="M32 42 A18 18 0 1 1 56 42" 
+                                    fill="none" 
+                                    stroke="white" 
+                                    stroke-width="6"
+                                />
+                            </g> -->
+                            <g transform="translate(0 -4)">
+                                <path d="M24 68 L76 68 L76 62 A8 8 0 0 0 70 52 L30 52 A8 8 0 0 0 24 62 Z " fill="none" stroke="white" stroke-width="4"> 
+                                </path>
+                                <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8 M49 8 L51 8" 
+                                    fill="none" stroke="white" stroke-width="4">
+                                </path>
+                                <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8" 
+                                    fill="none" stroke="white" stroke-width="4"
+                                    transform="translate(100, 0) scale(-1, 1)">
+                                </path>
+                                <path d="M70 74 L30 74 L30 76 L70 76 Z" fill="white" stroke="white" stroke-width="1">
+                                </path>
+                            </g>
+                            
+                            <text x="50" y="100" fill="white" text-anchor="middle" font-size="20" class="select-none">タップ</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full h-fit rounded-2xl ring-4 p-6 ring-gray-300">
+                <div class="my-4">
+                    <p class="text-5xl text-center">現在のスタンプ保持数: <span id="current_stamp">0</span>/3個</p>
+                </div>
+                <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden relative" id="max-progress-bar">
+                    <div id="progress-bar" class="absolute z-10 l-0 t-0 bg-blue-300 w-0 h-full transition-all duration-1000 linear"></div>
+                </div> 
+                <p class="text-5xl text-center mt-12">コンプリートまであと<span id="CompletationCount"></span>個</p>
+            </div>
+        </div>
+    </div>
+</div>
         <script>
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1368,7 +1528,6 @@ clearPage: `<!DOCTYPE html>
             if(checkAllStamps() == false) {
                 window.location.href = '403.html';
             }
-            const fotter = document.getElementById('fotter-items');
             const fotter = document.getElementById('fotter-items');
 
             const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
@@ -1385,6 +1544,65 @@ clearPage: `<!DOCTYPE html>
                     fotter.classList.remove('border','w-[96%]');
                 }
             }
+            const body = document.body;
+
+            const isok = new URLSearchParams(window.location.search);
+            const isokget =  document.getElementById('isok');
+
+            if(isok.get('isSound') == 'true') {
+                // 音声などスタンプの演出を挟む時
+                console.log('aaaa');
+                body.classList.add('overflow-hidden');
+            }else {
+                // 挟まない時
+                document.getElementById('outer').classList.add('hidden');
+
+            }   
+            
+            isokget.addEventListener('click', () => {
+                console.log('aa');
+                    body.classList.remove('overflow-hidden');
+                    document.getElementById('outer').classList.add('hidden');
+                    confetti({
+                        angle: 90,
+                        spread: 400,
+                        startVelocity: 60,
+                        scalar: 3,
+                        gravity: 1,
+                        particleCount: 250,
+                        origin: {
+                            x : 0.5,
+                            y : 0.4
+                        },
+                    });
+                    document.getElementById('music').play();
+            });
+
+            const isokElement = document.getElementById('isok');
+            isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
+
+           function updateStampProgress() {
+                const progress_bar = document.getElementById('progress-bar');
+                const storageKey = 'a';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = currentData.length;
+                const totalStamps = 3;
+                
+                const percent = document.getElementById('pro-percent');
+
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
+
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    const nowstamp = document.getElementById('current_stamp');
+                    nowstamp.textContent = currentStamps;
+                    const countstamp = document.getElementById('CompletationCount');
+                    countstamp.textContent = totalStamps - currentStamps;
+                    progress_bar.style.width = bar_per + "%";
+                }
+            }
+            updateStampProgress();
+
 
             const mediaQuery = window.matchMedia("(orientation: landscape)");
 
@@ -1404,7 +1622,6 @@ clearPage: `<!DOCTYPE html>
             const YesPop = document.getElementById('yes-pop');
             const NoPopup = document.getElementById('no-pop');
             const clearButton = document.getElementById('clear-localstorage-button');
-            const body = document.body;
 
 
             const exclamation = document.getElementById('exclamation');
