@@ -11,7 +11,13 @@ const getInitialValue = (key: string) => {
 
     try {
         const parsedData = JSON.parse(stored)
-        return parsedData[key] ? parsedData[key] : ""
+        const value = parsedData[key]
+
+        if(value === "true" || value === true) return true
+        if(value === "false" || value === false) return false        
+        if (typeof value === "object") return ""
+
+        return value ? value : ""
     }
     catch (event) {
         console.error("JSON is not formatted", event)
@@ -70,6 +76,8 @@ const createEvent = () => {
     const [ rootURL, setRootURL ] = useState<string>(getInitialValue("rootURL") ?? "")
     const [ startDate, setStartDate ] = useState<string>((getInitialValue("startDate")) ?? "")
     const [ endDate, setEndDate ] = useState<string>(getInitialValue("endDate") ?? "")
+    //ここはboolなのでチェックしない
+    const [ isClearSound, setIsClearSound ] = useState<boolean>(getInitialValue("isClearSound") ?? false)
     // mapは画像
     const [ map, setMap ] = useState<string>("")
     const [ description, setDescription ] = useState<string>(getInitialValue("description") ?? "")
@@ -97,8 +105,9 @@ const createEvent = () => {
             startDate: startDate,
             endDate: endDate,
             description: description,
+            isClearSound: isClearSound,
             clearMessage: clearMessage,
-            checkPoints: getInitialValue("checkPoints")
+            checkPoints: checkPoints
         }
         localStorage.setItem("eventData", JSON.stringify(newData))
         // console.log("上書き後", newData)
@@ -167,7 +176,6 @@ const createEvent = () => {
             <Header text="イベント情報の設定" to="/"/>
             
             <div className="w-full flex justify-center items-center flex-col mb-30">
-                
                 <div className="w-9/10">
                     <div className="flex">
                         <Link 
@@ -279,7 +287,16 @@ const createEvent = () => {
                         </label>
                         {clearImage ? <img src={clearImage} alt="clearImage preview" className="mt-2 rounded-lg" /> : ""}
                     </div>
-                    
+                    <div className="flex mt-6 my-2 items-center">
+                        <input 
+                            id="isClearSound" 
+                            checked={isClearSound}
+                            onChange={ (event) => setIsClearSound(event.target.checked) }
+                            type="checkbox"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500"
+                        />
+                        <label htmlFor="isClearSound" className="block">&nbsp;クリア時に効果音を再生する</label>
+                    </div>
                     <label htmlFor="clearMessage" className="mt-6 my-2 block">クリア時のメッセージ</label>
                     <textarea 
                         id="clearMessage" 

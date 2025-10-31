@@ -152,6 +152,7 @@ function addCheckPoints () {
             startDate: getInitialValue("startDate"),
             endDate: getInitialValue("endDate"),
             description: getInitialValue("description"),
+            isClearSound: getInitialValue("isClearSound"),
             clearMessage: getInitialValue("clearMessage"),
             checkPoints: checkPoints
         }
