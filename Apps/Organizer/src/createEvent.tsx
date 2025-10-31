@@ -15,7 +15,7 @@ const getInitialValue = (key: string) => {
 
         if(value === "true" || value === true) return true
         if(value === "false" || value === false) return false        
-        if (typeof value === "object") return ""
+        if (typeof value === "object" && value.length === 0) return ""
 
         return value ? value : ""
     }
@@ -107,7 +107,7 @@ const createEvent = () => {
             description: description,
             isClearSound: isClearSound,
             clearMessage: clearMessage,
-            checkPoints: checkPoints
+            checkPoints: getInitialValue("checkPoints")
         }
         localStorage.setItem("eventData", JSON.stringify(newData))
         // console.log("上書き後", newData)
@@ -143,14 +143,19 @@ const createEvent = () => {
         setStartDate(date)
     }
 
-    const today = new Date()
-
     //ここは絶対チェック
     const checkEndDate = (date: string) => {
         if(startDate){
             const start = new Date(startDate)
-            const end = new Date(date)
-            if(start.getDate() > end.getDate() || today.getDate() > end.getDate()){
+            const end = new Date(date)    
+            const today = new Date()
+
+            const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate())
+            const s = normalize(start)
+            const e = normalize(end)
+            const t = normalize(today)
+
+            if(e < s || e < t){
                 alert("日付が無効です")
             }
             else{

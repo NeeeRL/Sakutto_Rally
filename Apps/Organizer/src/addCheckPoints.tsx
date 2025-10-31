@@ -7,16 +7,21 @@ import type { checkPoint, eventData } from './types/event.ts'
 const getInitialValue = (key: string) => {
     const stored = localStorage.getItem("eventData")
     if (!stored) {
-        return []
+        return null
     }
 
     try {
         const parsedData = JSON.parse(stored)
-        return parsedData[key] ? parsedData[key] : []
+        const value = parsedData[key]
+
+        if(value === "true" || value === true) return true
+        if(value === "false" || value === false) return false        
+        if (typeof value === "object" && value.length === 0) return ""
+
+        return value ? value : ""
     }
     catch (event) {
         console.error("JSON is not formatted", event)
-        return []
     }
 }
 //初期値取得，なければ作成
@@ -71,7 +76,7 @@ function addCheckPoints () {
 
     const [ newCheckPoint, setNewCheckPoint] = useState<string>("")
     const [ checkPointDesctiption, setCheckPointDescription ] = useState<string>("")
-    const [ checkPoints, setCheckPoints] = useState<checkPoint[]>(getInitialValue("checkPoints"))
+    const [ checkPoints, setCheckPoints] = useState<checkPoint[]>(Array.isArray(getInitialValue("checkPoints")) ? getInitialValue("checkPoints") : [])
 
     const [ editingId, setEditingId ] = useState<string | null>(null)
 

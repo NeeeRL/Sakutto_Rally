@@ -105,7 +105,7 @@ function loadFiles () {
         if (typeof data !== "object" || data === null) {
             return false;
         }
-        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "clearMessage", "checkPoints", "map", "thumbnail", "clearImage"]
+        const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "isClearSound", "clearMessage", "checkPoints", "map", "thumbnail", "clearImage"]
         for (const key of keys) {
             if (!(key in data)){
                 return false
