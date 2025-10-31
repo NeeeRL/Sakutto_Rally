@@ -23,50 +23,52 @@ head: `<!DOCTYPE html>
     </noscript>
 `,
 stampFoot: `
-    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                    </div>
+                    <p class="text-4xl">地図</p>
                 </div>
-                <p class="text-4xl">地図</p>
-            </div>
 
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
 
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                            </svg>
-                        </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                            <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                            </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-            
-            
-        </a>
+                
+                
+            </a>
+        </div>
     </footer>`,
 indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     <div class="flex items-center flex-col">
@@ -150,49 +152,51 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     </div>
 </div>
 
-    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                    </div>
+                    <p class="text-4xl">地図</p>
                 </div>
-                <p class="text-4xl">地図</p>
-            </div>
-            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
-                    </svg>
+                
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                            <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                            <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                        </svg>
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                        <div class="absolute top-0 right-0 hidden" id="exclamation">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                            </svg>
-                        </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                            <div class="absolute top-0 right-0 hidden" id="exclamation">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                            </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-            
-        </a>
+                
+            </a>
+        </div>
     </footer>
 
 
@@ -223,44 +227,46 @@ mapPage: `<main class="mt-10 mx-16" id="mains">
     <img src="{{map}}" alt="スタンプラリーの地図" class="w-full h-auto border">
     {{stamps}}
 </main>
-    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                        <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">        
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                    <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">        
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                            <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
+                </div>            
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-        </a>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">        
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
+                </div>
+            </a>
+        </div>
     </footer>`,
 commonScript:`
 const fotter = document.getElementById('fotter-items');
@@ -270,12 +276,12 @@ function handleOrientation(mediaQueryResult) {
     if (!isPC && mediaQueryResult.matches) {
         // 横向きの場合
         fotter.classList.remove('fixed');
-        fotter.classList.add('border', 'w-[96%]');
+        fotter.classList.add( 'w-[96%]');
         
     } else {
         // 縦向き
         fotter.classList.add('fixed');
-        fotter.classList.remove('border','w-[96%]');
+        fotter.classList.remove('w-[96%]');
     }
 }
 
@@ -715,50 +721,52 @@ progressPage : `
         </div>
     </main>
     
-    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>            
-            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                        <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
-                    </svg>
-
-                    <div class="absolute top-0 right-0 hidden "  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
+                </div>            
+                
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-            
-        </a>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                            <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
+                        </svg>
+
+                        <div class="absolute top-0 right-0 hidden "  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
+                </div>
+                
+            </a>
+        </div>
     </footer>
     
 <div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
@@ -1172,52 +1180,54 @@ checkPointMain: `
             </div>
             <!-- <img src="img/seikou_syukufuku_man.png" alt="スタンプ1の画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg"> -->
             <p class="text-4xl">{{stampMessage}}</p>
-            <div class="w-full pt-8 pb-8 rounded-full mt-16  bg-yellow-300 text-center">
-                <a href="progress.html" class="rounded-full font-bold text-5xl ">
+            <a href="progress.html" class="w-full pt-8 pb-8 rounded-full mt-16 inline-block bg-yellow-300 text-center" id="linkToProOrClear">
+                <p class="rounded-full font-bold text-5xl " >
                     進捗を確認する
-                </a>
-            </div>
+                </p>
+            </a>
         </main>
-    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">     
-        <div class="flex flex-col items-center justify-center">
-            <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                </svg>
-                    <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0 w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
+                </div>            
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+
+                    </div>
+                    <p class="text-4xl">ホーム</p>
+                </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">     
+            <div class="flex flex-col items-center justify-center">
+                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                    </svg>
+                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                </div>
+                <p class="text-4xl">進捗</p>
             </div>
-            <p class="text-4xl">進捗</p>
+            </a>
         </div>
-        </a>
     </footer>
     <div id="outer" class="w-full h-full z-100 backdrop-blur-md bg-black/50 m-auto fixed inset-0 flex justify-center items-center">
         <div class="h-[90%] w-[86%] rounded-4xl bg-[#FDFDFD] flex justify-center items-center shadow-xl overflow-auto">
@@ -1281,35 +1291,6 @@ checkPointMain: `
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            function AddlocalStorage(id, newStatus) {
-                const storageKey = '{{eventName}}';
-
-                let currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-
-                const targetItem = currentData.find(item => item.id === id);
-
-                if (targetItem) {
-                    targetItem.status = newStatus;
-                } else {
-                    currentData.push({ id: id, status: newStatus });
-                }
-
-                localStorage.setItem(storageKey, JSON.stringify(currentData));
-            }
-            
-            AddlocalStorage('{{stampId}}',true);
-            const exclamation = document.getElementById('exclamation');
-            if(checkAllStamps()) {
-                exclamation.classList.remove('hidden');
-            }
-            function checkAllStamps() {
-                const storageKey = '{{eventName}}';
-                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-                return currentData.length >= {{stampCount}};
-            }
-            // if (checkAllStamps()) {
-            //     window.location.href = 'clear.html?isSound=true';
-            // }
             const isokElement = document.getElementById('isok');
             isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
             function updateStampProgress() {
@@ -1333,6 +1314,39 @@ checkPointMain: `
                 }
             }
             updateStampProgress();
+            function AddlocalStorage(id, newStatus) {
+                const storageKey = '{{eventName}}';
+
+                let currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+                const targetItem = currentData.find(item => item.id === id);
+
+                if (targetItem) {
+                    targetItem.status = newStatus;
+                } else {
+                    currentData.push({ id: id, status: newStatus });
+                }
+
+                localStorage.setItem(storageKey, JSON.stringify(currentData));
+            }
+            
+            AddlocalStorage('{{stampId}}',true);
+            const exclamation = document.getElementById('exclamation');
+            function checkAllStamps() {
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                return currentData.length >= {{stampCount}};
+            }
+            if(checkAllStamps()) {
+                exclamation.classList.remove('hidden');
+                const ProClear = document.getElementById('linkToProOrClear');
+                ProClear.href="clear.html";
+                ProClear.innerHTML='<p class="rounded-full font-bold text-5xl " >クリア画面へ移動する</p>';
+            }
+            
+            // if (checkAllStamps()) {
+            //     window.location.href = 'clear.html?isSound=true';
+            // }
             // add data __NKyotsu
 
             const body = document.body;
@@ -1399,46 +1413,48 @@ clearPage: `<!DOCTYPE html>
             </div>
             </div>
         </main> 
-    <footer class="h-fit shadow-xl bg-white rounded-lg bottom-10 left-6 right-6 flex items-center fixed pt-3 pb-3 justify-center m-auto" id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>
-            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                    <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0 w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl py-2 bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-        </a>
+                
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </div>
+                    <p class="text-4xl">ホーム</p>
+                </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
+                </div>
+            </a>
+        </div>
     </footer> 
         <!-- boyake ha koko -->
         <div id="pop-up" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
@@ -1540,12 +1556,12 @@ clearPage: `<!DOCTYPE html>
                 if (!isPC && mediaQueryResult.matches) {
                     // 横向きの場合
                     fotter.classList.remove('fixed');
-                    fotter.classList.add('border', 'w-[96%]');
+                    fotter.classList.add( 'w-[96%]');
                     
                 } else {
                     // 縦向き
                     fotter.classList.add('fixed');
-                    fotter.classList.remove('border','w-[96%]');
+                    fotter.classList.remove('w-[96%]');
                 }
             }
             const body = document.body;

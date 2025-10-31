@@ -192,7 +192,7 @@ function downloadFiles () {
                         eventName: data.eventName,
                         stampCount: data.checkPoints.length,
                         clearMessage: data.clearMessage,
-                        clearImage: data.clearImages
+                        clearImage: data.clearImage
                     }
                 )
                 const error404 = renderTemplate(
