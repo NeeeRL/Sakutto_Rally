@@ -952,22 +952,6 @@ progressPage : `
                     Urpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
                 }, 300);
             }
-            // hiraku
-            preboxItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    if(checkAllStamps() == false) {
-                        startCamera(); // カメラを起動
-                        Urpop.classList.remove('opacity-0',  'pointer-events-none');
-                        body.classList.add('overflow-hidden');
-                    
-                        // 遅延
-                        setTimeout(() => {
-                            Urpopbar.classList.remove('translate-y-full');
-                            Urpopbar.classList.add('translate-y-0', 'transition-transfoUm', 'duration-250', 'ease-in');
-                        }, 10);
-                    } 
-                });
-            });
             // haikei
             Urpop.addEventListener('click', (e) => {
                 if (e.target === Urpop) {
@@ -1162,7 +1146,24 @@ progressPage : `
                         console.error(e);
                         document.getElementById('permission-denied').style.display = 'flex';
                     });
-            };`,
+            };
+            // hiraku
+            preboxItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if(checkAllStamps() == false) {
+                        startCamera(); // カメラを起動
+                        Urpop.classList.remove('opacity-0',  'pointer-events-none');
+                        body.classList.add('overflow-hidden');
+                    
+                        // 遅延
+                        setTimeout(() => {
+                            Urpopbar.classList.remove('translate-y-full');
+                            Urpopbar.classList.add('translate-y-0', 'transition-transfoUm', 'duration-250', 'ease-in');
+                        }, 10);
+                    } 
+                });
+            });
+            `,
 checkPointMain: `
         <audio src="getQR.mp3" id="music"></audio>
         <main class="mr-16 mb-16 ml-16 mt-20 ">
@@ -1223,7 +1224,7 @@ checkPointMain: `
             <div class=" flex justify-between items-center flex-col w-[90%] h-[84%]">
                 <div class="w-[95%] py-12 ring-4 rounded-4xl ring-gray-300">
                     <p class="text-6xl text-center ">
-                        {{PointName}}
+                        {{cpName}}
                     </p>
                 </div>
                 <div class="py-8">
@@ -1268,7 +1269,7 @@ checkPointMain: `
                 
                 <div class="w-full h-fit rounded-2xl ring-4 p-6 ring-gray-300">
                     <div class="my-4">
-                        <p class="text-5xl text-center">現在のスタンプ保持数: <span id="current_stamp">0</span>/3個</p>
+                        <p class="text-5xl text-center">現在のスタンプ保持数: <span id="current_stamp">0</span>/{{stampCount}}個</p>
                     </div>
                     <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden relative" id="max-progress-bar">
                         <div id="progress-bar" class="absolute z-10 l-0 t-0 bg-blue-300 w-0 h-full transition-all duration-1000 linear"></div>
@@ -1280,38 +1281,6 @@ checkPointMain: `
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        function checkAllStamps() {
-                const storageKey = '{{eventName}}';
-                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-                return currentData.length >= {{stampCount}};
-            }
-                if (checkAllStamps()) {
-                    window.location.href = 'clear.html?isSound=true';
-                }
-            const isokElement = document.getElementById('isok');
-            isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
-            function updateStampProgress() {
-                const progress_bar = document.getElementById('progress-bar');
-                const storageKey = 'a';
-                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-                let currentStamps = currentData.length;
-                const totalStamps = 3;
-                
-                const percent = document.getElementById('pro-percent');
-
-                const bar_per = Math.round(currentStamps / totalStamps * 100);
-
-                if (progress_bar) {
-                    progress_bar.classList.remove('w-0');
-                    const nowstamp = document.getElementById('current_stamp');
-                    nowstamp.textContent = currentStamps;
-                    const countstamp = document.getElementById('CompletationCount');
-                    countstamp.textContent = totalStamps - currentStamps;
-                    progress_bar.style.width = bar_per + "%";
-                }
-            }
-            updateStampProgress();
-            // add data __NKyotsu
             function AddlocalStorage(id, newStatus) {
                 const storageKey = '{{eventName}}';
 
@@ -1328,8 +1297,43 @@ checkPointMain: `
                 localStorage.setItem(storageKey, JSON.stringify(currentData));
             }
             
-            
             AddlocalStorage('{{stampId}}',true);
+            const exclamation = document.getElementById('exclamation');
+            if(checkAllStamps()) {
+                exclamation.classList.remove('hidden');
+            }
+            function checkAllStamps() {
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                return currentData.length >= {{stampCount}};
+            }
+            // if (checkAllStamps()) {
+            //     window.location.href = 'clear.html?isSound=true';
+            // }
+            const isokElement = document.getElementById('isok');
+            isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
+            function updateStampProgress() {
+                const progress_bar = document.getElementById('progress-bar');
+                const storageKey = 'a';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = currentData.length;
+                const totalStamps = {{stampCount}};
+                
+                const percent = document.getElementById('pro-percent');
+
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
+
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    const nowstamp = document.getElementById('current_stamp');
+                    nowstamp.textContent = currentStamps;
+                    const countstamp = document.getElementById('CompletationCount');
+                    countstamp.textContent = totalStamps - currentStamps;
+                    progress_bar.style.width = bar_per + "%";
+                }
+            }
+            updateStampProgress();
+            // add data __NKyotsu
 
             const body = document.body;
             const isokget =  document.getElementById('isok');
@@ -1369,10 +1373,10 @@ clearPage: `<!DOCTYPE html>
     </head>
     <body>
         <header class="mt-12">
-            <div class="relative rounded-full mt-10 h-fit py-16 shadow-xl mx-6 flex items-center bg-white" >
-                <h1 class="text-6xl text-center absolute left-1/2">
-                   クリア!!
-                </h1>    
+            <div class="relative rounded-full py-16 mt-10 h-fit shadow-xl mx-6 flex items-center bg-white">
+                <h1 class="text-5xl text-center absolute left-1/2 -translate-x-1/2 w-9/10">
+                    {{eventName}}
+                </h1>
             </div>
         </header>
 
@@ -1387,7 +1391,7 @@ clearPage: `<!DOCTYPE html>
                 <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
                 <p class="text-3xl text-center ">{{clearMessage}}</p>
             </div>
-            <img src="img/present_happy_girl.png" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
+            <img src="{{clearImage}}" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
             <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-full ">
                 <p  class="text-5xl text-center font-bold pt-3">終了する</p>
@@ -1462,7 +1466,7 @@ clearPage: `<!DOCTYPE html>
     <div class="h-[90%] w-[86%] rounded-4xl bg-[#FDFDFD] flex justify-center items-center shadow-xl overflow-auto">
         <div class=" flex justify-between items-center flex-col w-[90%] h-[84%]">
             <div class="w-[95%] py-12 ring-4 rounded-4xl ring-gray-300">
-                <p class="text-6xl text-center ">あああ公園前</p>
+                <p class="text-6xl text-center" id="checkpointname"></p>
             </div>
             <div class="py-8">
                 <div>
@@ -1585,7 +1589,7 @@ clearPage: `<!DOCTYPE html>
                 const progress_bar = document.getElementById('progress-bar');
                 const storageKey = 'a';
                 const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-                let currentStamps = currentData.length;
+                let currentStamps = currentData.length - 1;
                 const totalStamps = 3;
                 
                 const percent = document.getElementById('pro-percent');

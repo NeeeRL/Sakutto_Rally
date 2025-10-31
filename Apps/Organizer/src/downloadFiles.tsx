@@ -162,6 +162,7 @@ function downloadFiles () {
                     { 
                         title: data.eventName + "-マップ",
                         eventName: data.eventName,
+                        stampCount: data.checkPoints.length,
                         map: data.map
                     }
                 )
@@ -210,7 +211,7 @@ function downloadFiles () {
                     }
                     return response.blob();
                 });
-                const clearmsc = fetch("../msc/get-coin-351945.mp3")
+                const clearmsc = fetch("../msc/get-item-394523.mp3")
                 .then(response => {
                     if (!response.ok) {
                         console.log(`error status: ${response.status}`);
