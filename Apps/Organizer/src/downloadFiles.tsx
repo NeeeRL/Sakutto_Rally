@@ -239,7 +239,8 @@ function downloadFiles () {
                             stampId: element.id,
                             stampMessage: element.description,
                             stampCount: data.checkPoints.length,
-                            rootURL: data.rootURL
+                            rootURL: data.rootURL,
+                            isokSound : data.isClearSound
                         }
                     )
                     zipHTML.file(element.id + ".html", checkPointPage)

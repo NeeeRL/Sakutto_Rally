@@ -1369,7 +1369,10 @@ checkPointMain: `
                         y : 0.4
                     },
                 });
-                document.getElementById('music').play();
+                if({{isokSound}}) {
+                    const msc = document.getElementById('music');
+                    msc.play();
+                }
             });
         });
     </script> 
