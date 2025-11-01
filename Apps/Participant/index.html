@@ -83,8 +83,9 @@
             </div>            
         </div>
 
-    <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
             <div class="flex flex-col items-center justify-center">
                 <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
@@ -128,6 +129,7 @@
             
             
         </a>
+        </div>
     </footer>
 
 
@@ -161,39 +163,36 @@
 <div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
     <div id="Ur-bar" class="w-full bg-white rounded-t-4xl shadow-2xl pb-20 pt-20 flex flex-col items-center transition-transform translate-y-full">
         <div class="flex items-center justify-between w-[88%] mb-8" id="Ur-bar-1">
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-</svg>
-
+            <svg id="Ur-close-button" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-20 cursor-pointer">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
             <p class="text-[4.2rem]">スキャン</p>
             <div class="size-20"></div>
         </div>
         <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
             <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
                 <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
-                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 w-full h-full z-80 object-contain"></canvas>
                 <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
                 <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
-                        <div class="" style="display: block;">
-                            <div class="flex justify-center flex-col items-center text-center gap-4">
-                                <div class="flex justify-center items-center flex-col">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                                    </svg>
-                                    <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限がありません</h1>
-                                </div>
-                                <p class="text-4xl m-auto py-6 mx-20">
-                                    再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
-                                </p>
-                            </div>  
-                        </div>       
+                    <div class="" style="display: block;">
+                        <div class="flex justify-center flex-col items-center text-center gap-4">
+                            <div class="flex justify-center items-center flex-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-40">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9m12.841 9.091L16.5 19.5m-1.409-1.409c.407-.407.659-.97.659-1.591v-9a2.25 2.25 0 0 0-2.25-2.25h-9c-.621 0-1.184.252-1.591.659m12.182 12.182L2.909 5.909M1.5 4.5l1.409 1.409" />
+                                </svg>
+                                <h1 class="text-6xl font-bold text-slate-800 tracking-tight py-4">権限がありません</h1>
+                            </div>
+                            <p class="text-4xl m-auto py-6 mx-20">
+                                再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
+                            </p>
+                        </div>  
+                    </div>          
                 </div>
             </div>
         </div>
         <div id="URstatus" class="text-5xl mt-12">
-            枠内に収めてください
+            大きくはっきりと
         </div>
     </div>
 </div>
