@@ -1295,7 +1295,7 @@ checkPointMain: `
             isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
             function updateStampProgress() {
                 const progress_bar = document.getElementById('progress-bar');
-                const storageKey = 'a';
+                const storageKey = '{{eventName}}';
                 const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
                 let currentStamps = currentData.length;
                 const totalStamps = {{stampCount}};
