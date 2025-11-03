@@ -275,6 +275,16 @@ const createEvent = () => {
                         </label>
                         {map ? <img src={map} alt="map preview" className="mt-2 rounded-lg" /> : ""}
                     </div>
+                    <div className="flex mt-6 my-2 items-center">
+                        <input 
+                            id="isClearSound" 
+                            checked={isClearSound}
+                            onChange={ (event) => setIsClearSound(event.target.checked) }
+                            type="checkbox"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500"
+                        />
+                        <label htmlFor="isClearSound" className="block">&nbsp;スタンプ獲得時に効果音を再生する</label>
+                    </div>
                     <div>
                         <label htmlFor="clearImage" className="mt-6 my-2 block">クリア時に表示される画像のアップロード</label>
                         <input 
@@ -291,16 +301,6 @@ const createEvent = () => {
                             {clearImage ? "別の画像を選択" : <span>マップページに表示される画像を選択</span> }
                         </label>
                         {clearImage ? <img src={clearImage} alt="clearImage preview" className="mt-2 rounded-lg" /> : ""}
-                    </div>
-                    <div className="flex mt-6 my-2 items-center">
-                        <input 
-                            id="isClearSound" 
-                            checked={isClearSound}
-                            onChange={ (event) => setIsClearSound(event.target.checked) }
-                            type="checkbox"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500"
-                        />
-                        <label htmlFor="isClearSound" className="block">&nbsp;クリア時に効果音を再生する</label>
                     </div>
                     <label htmlFor="clearMessage" className="mt-6 my-2 block">クリア時のメッセージ</label>
                     <textarea 
