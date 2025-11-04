@@ -203,6 +203,7 @@ const createEvent = () => {
                         id="eventName" 
                         value={eventName}
                         onChange={ (event) => setEventName(event.target.value) }
+                        onBlur={saveInput}
                         type="text" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                         placeholder="イベントの名称を入力"
@@ -213,6 +214,7 @@ const createEvent = () => {
                         value={rootURL}
                         // 最後が/ならそのまま，ないなら強制的に追加
                         onChange={ (event) => setRootURL(event.target.value) }
+                        onBlur={saveInput}
                         type="text" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                         placeholder="例)https://example.com/"
@@ -222,6 +224,7 @@ const createEvent = () => {
                         id="startDate" 
                         value={startDate}
                         onChange={ (event) => checkStartDate(event.target.value) }
+                        onBlur={saveInput}
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />
@@ -230,6 +233,7 @@ const createEvent = () => {
                         id="endDate" 
                         value={endDate}
                         onChange={ (event) => checkEndDate(event.target.value) }
+                        onBlur={saveInput}
                         type="date" 
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                     />                
@@ -271,6 +275,7 @@ const createEvent = () => {
                         id="description" 
                         value={description}
                         onChange={ (event) => setDescription(event.target.value) }
+                        onBlur={saveInput}
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full h-30 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" 
                         placeholder="イベントの概要を入力"
                     />
@@ -311,6 +316,7 @@ const createEvent = () => {
                             id="isClearSound" 
                             checked={isClearSound}
                             onChange={ (event) => setIsClearSound(event.target.checked) }
+                            onBlur={saveInput}
                             type="checkbox"
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500"
                         />
@@ -353,6 +359,7 @@ const createEvent = () => {
                         id="clearMessage" 
                         value={clearMessage}
                         onChange={ (event) => setClearMessage(event.target.value) }
+                        onBlur={saveInput}
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full h-30 text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none" 
                         placeholder="イベントの概要を入力"
                     />

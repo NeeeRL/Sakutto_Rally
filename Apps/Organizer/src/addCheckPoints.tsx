@@ -114,6 +114,7 @@ function addCheckPoints () {
 
             return newCheckPoints
         })
+        saveInput()
     }
 
     const changeCheckPoint = (event: React.FormEvent) => {
@@ -148,6 +149,7 @@ function addCheckPoints () {
 
     const removeCheckPoint = (removeId: string) => {
         setCheckPoints(checkPoints.filter(checkPoint => checkPoint.id !== removeId))
+        saveInput()
     }
 
     const saveInput = () => {
@@ -161,7 +163,7 @@ function addCheckPoints () {
             clearMessage: getInitialValue("clearMessage"),
             checkPoints: checkPoints
         }
-
+        
         localStorage.setItem("eventData", JSON.stringify(newData))
     }
 
@@ -217,7 +219,13 @@ function addCheckPoints () {
                                 value={checkPointDesctiption}
                             />
                             <div className="flex my-4 w-full justify-end">
-                                <button type="submit" className="bg-gray-100 text-gray-900 rounded-full px-4 py-2.5 text-xs font-bold">{ editingId ? "更新" : "+ 追加" }</button>
+                                <button 
+                                    type="submit" 
+                                    className="bg-gray-100 text-gray-900 rounded-full px-4 py-2.5 text-xs font-bold"
+                                    onClick={saveInput}
+                                >
+                                        { editingId ? "更新" : "+ 追加" }
+                                </button>
                             </div>
                         </form>
                         <h2 className="font-bold text-lg mt-4 mb-1 block">現在のチェックポイント</h2>
