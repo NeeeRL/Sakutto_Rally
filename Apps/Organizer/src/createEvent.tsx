@@ -208,7 +208,7 @@ const createEvent = () => {
                         className="bg-gray-100 text-gray-900 rounded-lg p-2.5 w-full text-sm focus:border-gray-400 focus:ring-2 focus:ring-gray-400 outline-none"
                         placeholder="イベントの名称を入力"
                     />
-                    <label htmlFor="rootURL" className="mt-4 mb-2 block">ルートURL</label>
+                    <label htmlFor="rootURL" className="mt-4 mb-2 block">トップページのURL</label>
                     <input 
                         id="rootURL" 
                         value={rootURL}
