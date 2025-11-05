@@ -149,6 +149,12 @@ function addCheckPoints () {
 
     const removeCheckPoint = (removeId: string) => {
         setCheckPoints(checkPoints.filter(checkPoint => checkPoint.id !== removeId))
+
+        if (removeId === editingId){
+            setEditingId(null)
+            setNewCheckPoint("")
+            setCheckPointDescription("")
+        }
         saveInput()
     }
 
