@@ -82,7 +82,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     <div class="flex justify-center mt-16 mb-16">
         <img src="{{image}}" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
     </div>
-    <p class="text-5xl w-[90%] m-auto">{{description}}</p>
+    <p class="text-5xl w-[90%] m-auto whitespace-pre-wrap">{{description}}</p>
 
     <div class="mb-20 mt-24 w-[92%] m-auto">
         <a href="progress.html" id="progress_link">
@@ -1179,7 +1179,7 @@ checkPointMain: `
                 <h1 class="text-6xl text-center pb-8">スタンプを獲得しました</h1>
             </div>
             <!-- <img src="img/seikou_syukufuku_man.png" alt="スタンプ1の画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg"> -->
-            <p class="text-4xl">{{stampMessage}}</p>
+            <p class="text-4xl whitespace-pre-wrap">{{stampMessage}}</p>
             <a href="progress.html" class="w-full pt-8 pb-8 rounded-full mt-16 inline-block bg-yellow-300 text-center" id="linkToProOrClear">
                 <p class="rounded-full font-bold text-5xl " >
                     進捗を確認する
@@ -1406,7 +1406,7 @@ clearPage: `<!DOCTYPE html>
 
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
-                <p class="text-3xl text-center ">{{clearMessage}}</p>
+                <p class="text-3xl text-center whitespace-pre-wrap">{{clearMessage}}</p>
             </div>
             <img src="{{clearImage}}" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
             <div class="flex items-center justify-center">
