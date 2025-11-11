@@ -1,5 +1,6 @@
 import Header from './header.tsx'
 import { useRef, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import type { checkPoint, eventData } from './types/event.ts'
 import QRCode from 'react-qr-code'
@@ -61,9 +62,65 @@ const renderTemplate = (template: string, data: Record<string, string>) => {
   return template.replace(/{{(.*?)}}/g, (_, key) => data[key.trim()] ?? "");
 }
 
+const checkJsonKeys = (data: any): boolean => {
+    // JSON形式であることの確認
+    if (typeof data !== "object" || data === null) {
+        return false;
+    }
+    const keys = ["eventName", "rootURL", "startDate", "endDate", "description", "clearMessage", "checkPoints"]
+    for (const key of keys) {
+        if (!(key in data)){
+            return false
+        }
+    }
+    //checkPointsが配列であることの確認
+    if (!Array.isArray(data.checkPoints)){
+        return false
+    }
+    const cpKeys = ["id", "name", "description"]
+    for (const cp of data.checkPoints) {
+        // checkPointの中身が正しいことの確認
+        if (typeof cp !== "object" || cp === null) {
+            return false;
+        }
+        for (const key of cpKeys) {
+            if (!(key in cp)) {
+                return false
+            }
+        }
+    }
+    return true
+}
+
 function downloadFiles () {
 
     const settings = localStorage.getItem("eventData")
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        //入力が不完全であれば/createにリダイレクト
+       if(settings){
+            try{
+                const JSONData = JSON.parse(settings)
+                if(!checkJsonKeys(JSONData)){
+                    navigate("/create")
+                }
+                const checkIDB = async () => {
+                    const mapFile = await getIDB("map")
+                    const thumbnailFile = await getIDB("thumbnail")
+                    const clearImageFile = await getIDB("clearImage")
+                    if(!mapFile || !thumbnailFile || !clearImageFile){
+                        navigate("/create")
+                    }
+                }
+                checkIDB()
+            }
+            catch{
+                navigate("/create")
+            }
+        }
+    }, [])
 
     const generateHTML = async () => {
     
@@ -72,12 +129,17 @@ function downloadFiles () {
                 const data = JSON.parse(settings)
                 const mapFile = await getIDB("map")
                 const thumbFile = await getIDB("thumbnail")
+                const clearImageFile = await getIDB("clearImage")
 
                 if(mapFile){
                     data.map = await blobToBase64(mapFile)
                 }
                 if (thumbFile) {
                     data.thumbnail = await blobToBase64(thumbFile)
+                }
+                //まだ呼び出していない
+                if (clearImageFile) {
+                    data.clearImage = await blobToBase64(clearImageFile)
                 }
 
                 const zipHTML = new JSZip()
@@ -96,10 +158,11 @@ function downloadFiles () {
                     }
                 )
                 const mapPage = renderTemplate(
-                    templates.head + templates.mapPage,
+                    templates.head + templates.mapPage + templates.scriptHead + templates.commonScript + templates.scriptFoot,
                     { 
                         title: data.eventName + "-マップ",
                         eventName: data.eventName,
+                        stampCount: data.checkPoints.length,
                         map: data.map
                     }
                 )
@@ -112,7 +175,7 @@ function downloadFiles () {
                     return ans
                 }
                 const progressPage = renderTemplate(
-                    templates.head + templates.progressPage + templates.scriptHead + templates.progressScript + templates.scriptFoot,
+                    templates.head + templates.progressPage + templates.scriptHead + templates.commonScript + templates.progressScript + templates.scriptFoot,
                     { 
                         title: data.eventName + "-進捗",
                         eventName: data.eventName,
@@ -127,8 +190,9 @@ function downloadFiles () {
                     {
                         title: data.eventName + "-クリア",
                         eventName: data.eventName,
-                        stampCount: data.checkPoints.length
-
+                        stampCount: data.checkPoints.length,
+                        clearMessage: data.clearMessage,
+                        clearImage: data.clearImage
                     }
                 )
                 const error404 = renderTemplate(
@@ -140,6 +204,23 @@ function downloadFiles () {
                     {}
                 )
 
+                const getstampmsc = fetch("../msc/get-coin-351945.mp3")
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(`error status: ${response.status}`);
+                    }
+                    return response.blob();
+                });
+                const clearmsc = fetch("../msc/get-item-394523.mp3")
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(`error status: ${response.status}`);
+                    }
+                    return response.blob();
+                });
+
+                zipHTML.file("getQR.mp3", getstampmsc);
+                zipHTML.file("clear.mp3", clearmsc);
                 zipHTML.file("index.html", topPage)
                 zipHTML.file("map.html", mapPage)
                 zipHTML.file("progress.html", progressPage)
@@ -158,7 +239,8 @@ function downloadFiles () {
                             stampId: element.id,
                             stampMessage: element.description,
                             stampCount: data.checkPoints.length,
-                            rootURL: data.rootURL
+                            rootURL: data.rootURL,
+                            isokSound : data.isClearSound
                         }
                     )
                     zipHTML.file(element.id + ".html", checkPointPage)
@@ -181,12 +263,16 @@ function downloadFiles () {
                 const data = JSON.parse(settings)
                 const mapFile = await getIDB("map")
                 const thumbFile = await getIDB("thumbnail")
+                const clearImageFile = await getIDB("clearImage")
 
                 if(mapFile){
                     data.map = await blobToBase64(mapFile)
                 }
                 if (thumbFile) {
                     data.thumbnail = await blobToBase64(thumbFile)
+                }
+                if (clearImageFile) {
+                    data.clearImage = await blobToBase64(clearImageFile)
                 }
 
                 const jsonString = JSON.stringify(data, null, 2)
@@ -270,7 +356,7 @@ function downloadFiles () {
     }
     return(
         <>            
-            <Header text="ファイルをダウンロード"/>
+            <Header text="ファイルをダウンロード" to="/create"/>
             <div className="w-full flex justify-center items-center flex-col mb-30">
                 <h2 className="font-bold text-lg text-center">ダウンロード可能なファイル</h2>
                 {/* ユーザーには見せないけど二次元コードを描画 */}
@@ -342,7 +428,7 @@ function downloadFiles () {
 
                 <button
                     className="bottom-0 text-white text-center bg-blue-500 font-bold px-12 py-2 rounded-md my-4"
-                    onClick={() => {downloadJsonFile(); downloadQRCode();}}
+                    onClick={() => {generateHTML(); downloadJsonFile(); downloadQRCode();}}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 inline">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />

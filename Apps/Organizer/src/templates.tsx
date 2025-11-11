@@ -5,13 +5,14 @@ head: `<!DOCTYPE html>
     <title>{{title}}</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="スタンプラリーページです。" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script></head>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
 <body>
-    <header>
-        <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white">
-            <h1 class="text-3xl font-bold py-10 absolute left-1/2 -translate-x-1/2">
+    <header class="mt-12">
+        <div class="relative rounded-full py-16 mt-10 h-fit shadow-xl mx-6 flex items-center bg-white">
+            <h1 class="text-5xl text-center absolute left-1/2 -translate-x-1/2 w-9/10">
                 {{eventName}}
             </h1>
         </div>
@@ -22,50 +23,52 @@ head: `<!DOCTYPE html>
     </noscript>
 `,
 stampFoot: `
-        <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                    </div>
+                    <p class="text-4xl">地図</p>
                 </div>
-                <p class="text-4xl">地図</p>
-            </div>
 
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
 
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                            </svg>
-                        </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                            <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                            </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-            
-            
-        </a>
+                
+                
+            </a>
+        </div>
     </footer>`,
 indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     <div class="flex items-center flex-col">
@@ -79,7 +82,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     <div class="flex justify-center mt-16 mb-16">
         <img src="{{image}}" alt="イベントのイメージ画像" class="w-[83vw] h-auto border rounded-lg shadow-md">
     </div>
-    <p class="text-5xl w-[90%] m-auto">{{description}}</p>
+    <p class="text-5xl w-[90%] m-auto whitespace-pre-wrap">{{description}}</p>
 
     <div class="mb-20 mt-24 w-[92%] m-auto">
         <a href="progress.html" id="progress_link">
@@ -124,7 +127,7 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
         <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
             <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
                 <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
-                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 w-full h-full z-80 object-contain"></canvas>
                 <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
                 <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
                     <div class="" style="display: block;">
@@ -149,49 +152,51 @@ indexMain: `<main class="mr-16 ml-16 mt-20" id="mains">
     </div>
 </div>
 
-    <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                    </div>
+                    <p class="text-4xl">地図</p>
                 </div>
-                <p class="text-4xl">地図</p>
-            </div>
-            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
-                    </svg>
+                
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                            <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                            <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                        </svg>
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                        <div class="absolute top-0 right-0 hidden" id="exclamation">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                            </svg>
-                        </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                            <div class="absolute top-0 right-0 hidden" id="exclamation">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                            </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-            
-        </a>
+                
+            </a>
+        </div>
     </footer>
 
 
@@ -222,59 +227,77 @@ mapPage: `<main class="mt-10 mx-16" id="mains">
     <img src="{{map}}" alt="スタンプラリーの地図" class="w-full h-auto border">
     {{stamps}}
 </main>
-    <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                        <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">        
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                    <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">        
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                            <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
+                </div>            
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-        </a>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">        
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
+                </div>
+            </a>
+        </div>
     </footer>`,
 commonScript:`
 const fotter = document.getElementById('fotter-items');
+const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
+function handleOrientation(mediaQueryResult) {
+
+    if (!isPC && mediaQueryResult.matches) {
+        // 横向きの場合
+        fotter.classList.remove('fixed');
+        fotter.classList.add( 'w-[96%]');
+        
+    } else {
+        // 縦向き
+        fotter.classList.add('fixed');
+        fotter.classList.remove('w-[96%]');
+    }
+}
+
+const mediaQuery = window.matchMedia("(orientation: landscape)");
+
+handleOrientation(mediaQuery);
+
+mediaQuery.addEventListener("change", handleOrientation);
+
 let FotterHeight = fotter.offsetHeight;
 
 const mainElement = document.getElementById('mains');
-// 7vh
-const amari = (window.innerHeight * 7) / 100;
+// 12vh
+const amari = (window.innerHeight * 12) / 100;
 mainElement.style.marginBottom = (FotterHeight + amari) + "px";
 
-window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-    if (e.matches) {
-        alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-    } 
-});
 
 const exclamation = document.getElementById('exclamation');
 function checkAllStamps() {
@@ -691,57 +714,59 @@ progressPage : `
                 
             </div>
         </div>
-        <div class="flex items-center justify-center hidden" id="clear-btn-box">
+        <div class="m-auto hidden" id="clear-btn-box">
             <div id="sent-clear-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer py-8  w-full ">
                 <p  class="text-5xl text-center font-bold py-4">クリア画面を表示する</p>
             </div>
         </div>
     </main>
     
-<footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>            
-            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
-                        <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
-                    </svg>
-
-                    <div class="absolute top-0 right-0 hidden "  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0  w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
+                </div>            
+                
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+
+                    </div>
+                    <p class="text-4xl">ホーム</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-            
-        </a>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] bg-gray-200 flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-16">
+                            <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
+                        </svg>
+
+                        <div class="absolute top-0 right-0 hidden "  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
+                </div>
+                
+            </a>
+        </div>
     </footer>
     
 <div id="UrCodeReader" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
@@ -756,7 +781,7 @@ progressPage : `
         <div class="flex justify-center items-center flex-col w-full h-full " id="Ur-bar-2">
             <div id="wrapper" class="relative w-[90vw] h-full" style="display: block;">
                 <video id="video" autoplay muted playsinline class="w-full h-full z-80 object-contain"></video>
-                <canvas id="camera-canvas" class="absolute top-0 left-0 z-80 w-full h-full z-80 object-contain"></canvas>
+                <canvas id="camera-canvas" class="absolute top-0 left-0 w-full h-full z-80 object-contain"></canvas>
                 <canvas id="rect-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
                 <div id="permission-denied" class="absolute top-0 left-0 bg-gray-100/50 w-[90vw] h-full flex justify-center items-center flex-col z-70">
                     <div class="" style="display: block;">
@@ -771,7 +796,7 @@ progressPage : `
                                 再読み込みをして、ポップアップなどからカメラの使用を許可するか、端末のカメラから二次元コードを読み込んでください。
                             </p>
                         </div>  
-                    </div>          
+                    </div>             
                 </div>
             </div>
         </div>
@@ -780,19 +805,7 @@ progressPage : `
         </div>
     </div>
 </div>`,
-    progressScript: `const fotter = document.getElementById('fotter-items');
-            let FotterHeight = fotter.offsetHeight;
-
-            const mainElement = document.getElementById('mains');
-            const amari = (window.innerHeight * 7) / 100;
-            mainElement.style.marginBottom = FotterHeight + amari + "px";
-
-            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
-                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                }
-            });
-
+    progressScript: `
             // check-pointに関わるコード __NKyotsu
             const checkpoints = [
                 {{checkPoints}}
@@ -899,8 +912,6 @@ progressPage : `
             const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
             return currentData.length >= {{stampCount}};
             }
-            
-            const exclamation = document.getElementById('exclamation');
 
             if(checkAllStamps()) {
                 ClearBox.classList.remove('hidden');
@@ -949,22 +960,6 @@ progressPage : `
                     Urpopbar.classList.remove('transition-transform', 'duration-250', 'ease-in', 'translate-y-0');
                 }, 300);
             }
-            // hiraku
-            preboxItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    if(checkAllStamps() == false) {
-                        startCamera(); // カメラを起動
-                        Urpop.classList.remove('opacity-0',  'pointer-events-none');
-                        body.classList.add('overflow-hidden');
-                    
-                        // 遅延
-                        setTimeout(() => {
-                            Urpopbar.classList.remove('translate-y-full');
-                            Urpopbar.classList.add('translate-y-0', 'transition-transfoUm', 'duration-250', 'ease-in');
-                        }, 10);
-                    } 
-                });
-            });
             // haikei
             Urpop.addEventListener('click', (e) => {
                 if (e.target === Urpop) {
@@ -1159,71 +1154,166 @@ progressPage : `
                         console.error(e);
                         document.getElementById('permission-denied').style.display = 'flex';
                     });
-            };`,
+            };
+            // hiraku
+            preboxItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if(checkAllStamps() == false) {
+                        startCamera(); // カメラを起動
+                        Urpop.classList.remove('opacity-0',  'pointer-events-none');
+                        body.classList.add('overflow-hidden');
+                    
+                        // 遅延
+                        setTimeout(() => {
+                            Urpopbar.classList.remove('translate-y-full');
+                            Urpopbar.classList.add('translate-y-0', 'transition-transfoUm', 'duration-250', 'ease-in');
+                        }, 10);
+                    } 
+                });
+            });
+            `,
 checkPointMain: `
-
+        <audio src="getQR.mp3" id="music"></audio>
         <main class="mr-16 mb-16 ml-16 mt-20 ">
             <div class="mt-6 mp-5">
                 <h1 class="text-6xl text-center pb-8">スタンプを獲得しました</h1>
             </div>
             <!-- <img src="img/seikou_syukufuku_man.png" alt="スタンプ1の画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg"> -->
-            <p class="text-4xl">{{stampMessage}}</p>
-            <div class="w-full pt-8 pb-8 rounded-full mt-16  bg-yellow-300 text-center">
-                <a href="progress.html" class="rounded-full font-bold text-5xl ">
+            <p class="text-4xl whitespace-pre-wrap">{{stampMessage}}</p>
+            <a href="progress.html" class="w-full pt-8 pb-8 rounded-full mt-16 inline-block bg-yellow-300 text-center" id="linkToProOrClear">
+                <p class="rounded-full font-bold text-5xl " >
                     進捗を確認する
-                </a>
-            </div>
+                </p>
+            </a>
         </main>
-        <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">     
-        <div class="flex flex-col items-center justify-center">
-            <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                </svg>
-                    <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0 w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
+                </div>            
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+
+                    </div>
+                    <p class="text-4xl">ホーム</p>
+                </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">     
+            <div class="flex flex-col items-center justify-center">
+                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                    </svg>
+                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                </div>
+                <p class="text-4xl">進捗</p>
             </div>
-            <p class="text-4xl">進捗</p>
+            </a>
         </div>
-        </a>
     </footer>
+    <div id="outer" class="w-full h-full z-100 backdrop-blur-md bg-black/50 m-auto fixed inset-0 flex justify-center items-center">
+        <div class="h-[90%] w-[86%] rounded-4xl bg-[#FDFDFD] flex justify-center items-center shadow-xl overflow-auto">
+            <div class=" flex justify-between items-center flex-col w-[90%] h-[84%]">
+                <div class="w-[95%] py-12 ring-4 rounded-4xl ring-gray-300">
+                    <p class="text-6xl text-center ">
+                        {{cpName}}
+                    </p>
+                </div>
+                <div class="py-8">
+                    <div>
+                        <p class="text-black text-center text-6xl py-6">ボタンをタップしてスタンプをゲットしよう!!</p>
+                        <p class="text-center text-4xl py-2">※音が出ます。ご注意ください。</p>
+                    </div>
+                    <div class="py-20 flex justify-center items-center">
+                            <div class="bg-blue-300 w-[50vw] h-[50vw] rounded-full flex flex-col justify-center items-center" id="isok">
+                            <svg width="200" height="200" viewBox="0 0 100 100" class="size-64">
+                                <!-- <g transform="rotate(340 50 50) translate(5 -6)">
+                                    <path 
+                                        d="M50 80 Q70 80 70 60 Q70 48 50 50 L50 32 A4 5 0 0 0 38 32 L38 60 L32 56 A4 4 0 0 0 24 64 L30 70 Q40 80 50 80 Z" 
+                                        fill="none" stroke="white" stroke-width="4" 
+                                    />
+                                    <path 
+                                        d="M32 42 A18 18 0 1 1 56 42" 
+                                        fill="none" 
+                                        stroke="white" 
+                                        stroke-width="6"
+                                    />
+                                </g> -->
+                                <g transform="translate(0 -4)">
+                                    <path d="M24 68 L76 68 L76 62 A8 8 0 0 0 70 52 L30 52 A8 8 0 0 0 24 62 Z " fill="none" stroke="white" stroke-width="4"> 
+                                    </path>
+                                    <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8 M49 8 L51 8" 
+                                        fill="none" stroke="white" stroke-width="4">
+                                    </path>
+                                    <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8" 
+                                        fill="none" stroke="white" stroke-width="4"
+                                        transform="translate(100, 0) scale(-1, 1)">
+                                    </path>
+                                    <path d="M70 74 L30 74 L30 76 L70 76 Z" fill="white" stroke="white" stroke-width="1">
+                                    </path>
+                                </g>
+                                
+                                <text x="50" y="100" fill="white" text-anchor="middle" font-size="20" class="select-none">タップ</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-fit rounded-2xl ring-4 p-6 ring-gray-300">
+                    <div class="my-4">
+                        <p class="text-5xl text-center">現在のスタンプ保持数: <span id="current_stamp">0</span>/{{stampCount}}個</p>
+                    </div>
+                    <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden relative" id="max-progress-bar">
+                        <div id="progress-bar" class="absolute z-10 l-0 t-0 bg-blue-300 w-0 h-full transition-all duration-1000 linear"></div>
+                    </div> 
+                    <p class="text-5xl text-center mt-12">コンプリートまであと<span id="CompletationCount"></span>個</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
-                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                }                 
-            });
+            const isokElement = document.getElementById('isok');
+            isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
+            function updateStampProgress() {
+                const progress_bar = document.getElementById('progress-bar');
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = currentData.length;
+                const totalStamps = {{stampCount}};
+                
+                const percent = document.getElementById('pro-percent');
 
-            // add data __NKyotsu
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
+
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    const nowstamp = document.getElementById('current_stamp');
+                    nowstamp.textContent = currentStamps;
+                    const countstamp = document.getElementById('CompletationCount');
+                    countstamp.textContent = totalStamps - currentStamps;
+                    progress_bar.style.width = bar_per + "%";
+                }
+            }
+            updateStampProgress();
             function AddlocalStorage(id, newStatus) {
                 const storageKey = '{{eventName}}';
 
@@ -1239,17 +1329,51 @@ checkPointMain: `
 
                 localStorage.setItem(storageKey, JSON.stringify(currentData));
             }
+            
+            AddlocalStorage('{{stampId}}',true);
+            const exclamation = document.getElementById('exclamation');
             function checkAllStamps() {
-            const storageKey = '{{eventName}}';
+                const storageKey = '{{eventName}}';
                 const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
                 return currentData.length >= {{stampCount}};
             }
-            
-            AddlocalStorage('{{stampId}}',true);
-
-            if (checkAllStamps()) {
-                window.location.href = 'clear.html';
+            if(checkAllStamps()) {
+                exclamation.classList.remove('hidden');
+                const ProClear = document.getElementById('linkToProOrClear');
+                ProClear.href="clear.html";
+                ProClear.innerHTML='<p class="rounded-full font-bold text-5xl " >クリア画面へ移動する</p>';
             }
+            
+            // if (checkAllStamps()) {
+            //     window.location.href = 'clear.html?isSound=true';
+            // }
+            // add data __NKyotsu
+
+            const body = document.body;
+            const isokget =  document.getElementById('isok');
+            body.classList.add('overflow-hidden');
+
+            isokget.addEventListener('click', () => {
+                body.classList.remove('overflow-hidden');
+                outer.classList.add('hidden');
+
+                confetti({
+                    angle: 90,
+                    spread: 400,
+                    startVelocity: 60,
+                    scalar: 3,
+                    gravity: 1,
+                    particleCount: 250,
+                    origin: {
+                        x : 0.5,
+                        y : 0.4
+                    },
+                });
+                if({{isokSound}}) {
+                    const msc = document.getElementById('music');
+                    msc.play();
+                }
+            });
         });
     </script> 
     </body>
@@ -1260,15 +1384,16 @@ clearPage: `<!DOCTYPE html>
         <title>クリア</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="contents!!!!!">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     </head>
     <body>
-        <header>
-            <div class="relative rounded-full mt-10 h-[8vh] shadow-xl mr-6 ml-6 flex items-center bg-white" >
-                <h1 class="text-6xl py-10 absolute left-1/2 -translate-x-1/2">
-                   クリア!!
-                </h1>    
+        <header class="mt-12">
+            <div class="relative rounded-full py-16 mt-10 h-fit shadow-xl mx-6 flex items-center bg-white">
+                <h1 class="text-5xl text-center absolute left-1/2 -translate-x-1/2 w-9/10">
+                    {{eventName}}
+                </h1>
             </div>
         </header>
 
@@ -1277,56 +1402,62 @@ clearPage: `<!DOCTYPE html>
     </noscript>
     
         <main class="mr-16 mb-16 ml-16 mt-20 " id="mains">
+                        <audio src="clear.mp3" id="music"></audio>
+
             <div class="mt-6 mp-5">
-                <h1 class="text-6xl text-center pb-8">🎉 報酬を獲得!! 🎉</h1>
-                <p class="text-3xl text-center ">この画面を係員に見せて景品と交換してね!!</p>
+                <h1 class="text-6xl text-center pb-8">🎉 お疲れ様でした!! 🎉</h1>
+                <p class="text-3xl text-center whitespace-pre-wrap">{{clearMessage}}</p>
             </div>
-             <div class="flex items-center justify-center">
+            <img src="{{clearImage}}" alt="クリア画像" class="w-full h-auto mt-10 mb-10 rounded-lg shadow-lg">
+            <div class="flex items-center justify-center">
             <div id="clear-localstorage-button" class="mt-16 rounded-full bg-yellow-300 cursor-pointer pt-6 pb-6 transition-colors duration-300 w-full ">
-                <p  class="text-5xl text-center font-bold pt-3">景品と交換する</p>
+                <p  class="text-5xl text-center font-bold pt-3">終了する</p>
                 <p class="text-3xl text-center ">※スタンプラリーデータは削除されます</p>
             </div>
+            </div>
         </main> 
-       <footer class="h-[8.5vh] shadow-xl bg-white rounded-lg fixed bottom-10 left-8 right-8 flex items-center justify-center " id="fotter-items">
-        <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-                </div>
-                <p class="text-4xl">地図</p>
-            </div>
-            
-        </a>
-        <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
-            <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                </div>
-                <p class="text-4xl">ホーム</p>
-            </div>
-            <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
-        </a>
-        <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
-            <div class="flex flex-col items-center justify-center">
-                <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                    </svg>
-                    <div class="absolute top-0 right-0 hidden"  id="exclamation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    <footer class="h-fit fixed fill-white/50 bottom-0 left-0 right-0 w-full m-auto" id="fotter-items">
+        <div class="h-fit mb-12 mx-6 m-auto flex items-center rounded-lg shadow-xl py-2 bg-white justify-center">
+            <a href="map.html" class="w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                         </svg>
                     </div>
+                    <p class="text-4xl">地図</p>
                 </div>
-                <p class="text-4xl">進捗</p>
-            </div>
-        </a>
+                
+            </a>
+            <a href="index.html" class="relative w-[33%] h-[75%] pt-3 pb-3 flex items-center justify-center">
+                <span class="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] border-l border-gray-500"></span>
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </div>
+                    <p class="text-4xl">ホーム</p>
+                </div>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] border-r border-gray-500"></span>
+            </a>
+            <a href="progress.html" class=" w-[33%] flex flex-col items-center justify-center pt-3 pb-3">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-[19vw] flex justify-center items-center rounded-full pt-2 pb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                        <div class="absolute top-0 right-0 hidden"  id="exclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-4xl">進捗</p>
+                </div>
+            </a>
+        </div>
     </footer> 
         <!-- boyake ha koko -->
         <div id="pop-up" class="transition-opacity duration-[5ms] ease-out opacity-0 pointer-events-none fixed inset-0 z-30 backdrop-blur-md bg-black/50 flex justify-center items-end">
@@ -1350,24 +1481,163 @@ clearPage: `<!DOCTYPE html>
         </div>
     </div>
 </div>
+<div id="outer" class="w-full h-full z-100 backdrop-blur-md bg-black/50 m-auto fixed inset-0 flex justify-center items-center">
+    <div class="h-[90%] w-[86%] rounded-4xl bg-[#FDFDFD] flex justify-center items-center shadow-xl overflow-auto">
+        <div class=" flex justify-between items-center flex-col w-[90%] h-[84%]">
+            <div class="w-[95%] py-12 ring-4 rounded-4xl ring-gray-300">
+                <p class="text-6xl text-center" id="checkpointname"></p>
+            </div>
+            <div class="py-8">
+                <div>
+                    <p class="text-black text-center text-6xl py-6">ボタンをタップしてスタンプをゲットしよう!!</p>
+                    <p class="text-center text-4xl py-2">※音が出ます。ご注意ください。</p>
+                </div>
+                <div class="py-20 flex justify-center items-center">
+                        <div class="bg-blue-300 w-[50vw] h-[50vw] rounded-full flex flex-col justify-center items-center" id="isok">
+                        <svg width="200" height="200" viewBox="0 0 100 100" class="size-64">
+                            <!-- <g transform="rotate(340 50 50) translate(5 -6)">
+                                <path 
+                                    d="M50 80 Q70 80 70 60 Q70 48 50 50 L50 32 A4 5 0 0 0 38 32 L38 60 L32 56 A4 4 0 0 0 24 64 L30 70 Q40 80 50 80 Z" 
+                                    fill="none" stroke="white" stroke-width="4" 
+                                />
+                                <path 
+                                    d="M32 42 A18 18 0 1 1 56 42" 
+                                    fill="none" 
+                                    stroke="white" 
+                                    stroke-width="6"
+                                />
+                            </g> -->
+                            <g transform="translate(0 -4)">
+                                <path d="M24 68 L76 68 L76 62 A8 8 0 0 0 70 52 L30 52 A8 8 0 0 0 24 62 Z " fill="none" stroke="white" stroke-width="4"> 
+                                </path>
+                                <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8 M49 8 L51 8" 
+                                    fill="none" stroke="white" stroke-width="4">
+                                </path>
+                                <path d="M70 52 C40 28 80 24 58 10 A16 16 0 0 0 50 8" 
+                                    fill="none" stroke="white" stroke-width="4"
+                                    transform="translate(100, 0) scale(-1, 1)">
+                                </path>
+                                <path d="M70 74 L30 74 L30 76 L70 76 Z" fill="white" stroke="white" stroke-width="1">
+                                </path>
+                            </g>
+                            
+                            <text x="50" y="100" fill="white" text-anchor="middle" font-size="20" class="select-none">タップ</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full h-fit rounded-2xl ring-4 p-6 ring-gray-300">
+                <div class="my-4">
+                    <p class="text-5xl text-center">現在のスタンプ保持数: <span id="current_stamp">0</span>/3個</p>
+                </div>
+                <div class="bg-gray-300 w-full h-12 rounded-full overflow-hidden relative" id="max-progress-bar">
+                    <div id="progress-bar" class="absolute z-10 l-0 t-0 bg-blue-300 w-0 h-full transition-all duration-1000 linear"></div>
+                </div> 
+                <p class="text-5xl text-center mt-12">コンプリートまであと<span id="CompletationCount"></span>個</p>
+            </div>
+        </div>
+    </div>
+</div>
         <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
             function checkAllStamps() {
-            const storageKey = '{{eventName}}';
-            const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
-            return currentData.length >= {{stampCount}};
+                const storageKey = '{{eventName}}';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                return currentData.length >= {{stampCount}};
             }
 
             if(checkAllStamps() == false) {
                 window.location.href = '403.html';
             }
-
-        document.addEventListener('DOMContentLoaded', () => {
             const fotter = document.getElementById('fotter-items');
+
+            const isPC = window.matchMedia('(pointer: fine)').matches && window.screen.width > 1024;
+            function handleOrientation(mediaQueryResult) {
+
+                if (!isPC && mediaQueryResult.matches) {
+                    // 横向きの場合
+                    fotter.classList.remove('fixed');
+                    fotter.classList.add( 'w-[96%]');
+                    
+                } else {
+                    // 縦向き
+                    fotter.classList.add('fixed');
+                    fotter.classList.remove('w-[96%]');
+                }
+            }
+            const body = document.body;
+
+            const isok = new URLSearchParams(window.location.search);
+            const isokget =  document.getElementById('isok');
+
+            if(isok.get('isSound') == 'true') {
+                // 音声などスタンプの演出を挟む時
+                console.log('aaaa');
+                body.classList.add('overflow-hidden');
+            }else {
+                // 挟まない時
+                document.getElementById('outer').classList.add('hidden');
+
+            }   
+            
+            isokget.addEventListener('click', () => {
+                console.log('aa');
+                    body.classList.remove('overflow-hidden');
+                    document.getElementById('outer').classList.add('hidden');
+                    confetti({
+                        angle: 90,
+                        spread: 400,
+                        startVelocity: 60,
+                        scalar: 3,
+                        gravity: 1,
+                        particleCount: 250,
+                        origin: {
+                            x : 0.5,
+                            y : 0.4
+                        },
+                    });
+                    document.getElementById('music').play();
+            });
+
+            const isokElement = document.getElementById('isok');
+            isokElement.style.boxShadow = '0 0 35px 10px rgb(128 128 128 / 0.4)';
+
+           function updateStampProgress() {
+                const progress_bar = document.getElementById('progress-bar');
+                const storageKey = 'a';
+                const currentData = JSON.parse(localStorage.getItem(storageKey)) || [];
+                let currentStamps = currentData.length - 1;
+                const totalStamps = 3;
+                
+                const percent = document.getElementById('pro-percent');
+
+                const bar_per = Math.round(currentStamps / totalStamps * 100);
+
+                if (progress_bar) {
+                    progress_bar.classList.remove('w-0');
+                    const nowstamp = document.getElementById('current_stamp');
+                    nowstamp.textContent = currentStamps;
+                    const countstamp = document.getElementById('CompletationCount');
+                    countstamp.textContent = totalStamps - currentStamps;
+                    progress_bar.style.width = bar_per + "%";
+                }
+            }
+            updateStampProgress();
+
+
+            const mediaQuery = window.matchMedia("(orientation: landscape)");
+
+            handleOrientation(mediaQuery);
+
+            mediaQuery.addEventListener("change", handleOrientation);
+
             let FotterHeight = fotter.offsetHeight;
 
             const mainElement = document.getElementById('mains');
-            // 10vhを示している。10をxとして、変更していいお　追記：　７vh　なう
-            const amari = (window.innerHeight * 7) / 100;
+            // 12vhを示している。
+            const amari = (window.innerHeight * 12) / 100;
             mainElement.style.marginBottom = FotterHeight + amari + "px";
 
             const popup = document.getElementById('pop-up');
@@ -1375,14 +1645,7 @@ clearPage: `<!DOCTYPE html>
             const YesPop = document.getElementById('yes-pop');
             const NoPopup = document.getElementById('no-pop');
             const clearButton = document.getElementById('clear-localstorage-button');
-            const body = document.body;
 
-            window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
-                if (e.matches) {
-                    alert("このサイトでは縦長で利用することを推奨しています。横向きは推奨されません。");
-                } 
-                
-            });
 
             const exclamation = document.getElementById('exclamation');
 
@@ -1495,10 +1758,8 @@ error404: `<!DOCTYPE html>
 <html lang="ja">
     <head>
         <title>404</title>
-        <link rel="stylesheet" href="src/index.css" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="contents!!!!!">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style type="text/tailwindcss">
     </style>
@@ -1544,10 +1805,8 @@ error403:`<!DOCTYPE html>
 <html lang="ja">
     <head>
         <title>403</title>
-        <link rel="stylesheet" href="src/index.css" />
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="contents!!!!!">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <style type="text/tailwindcss"></style>
     </head>

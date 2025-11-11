@@ -7,16 +7,21 @@ import type { checkPoint, eventData } from './types/event.ts'
 const getInitialValue = (key: string) => {
     const stored = localStorage.getItem("eventData")
     if (!stored) {
-        return []
+        return null
     }
 
     try {
         const parsedData = JSON.parse(stored)
-        return parsedData[key] ? parsedData[key] : []
+        const value = parsedData[key]
+
+        if(value === "true" || value === true) return true
+        if(value === "false" || value === false) return false        
+        if (typeof value === "object" && value.length === 0) return ""
+
+        return value ? value : ""
     }
     catch (event) {
         console.error("JSON is not formatted", event)
-        return []
     }
 }
 //初期値取得，なければ作成
@@ -54,21 +59,24 @@ const getIDB = async (key: string): Promise<File | null> => {
 
 function addCheckPoints () {
     
-    const [ map, setMap ] = useState<string | null>(null)
-    const [ thumbnail, setThumbnail ] = useState<string | null>(null)
+    const [ map, setMap ] = useState<string>("")
+    const [ thumbnail, setThumbnail ] = useState<string>("")
+    const [ clearImage, setClearImage ] = useState<string>("")
 
     useEffect(() => {
         (async () => {
             const mapFile = await getIDB("map")
             const thumbnailFile = await getIDB("thumbnail")
+            const clearImageFile = await getIDB("clearImage")
             if (mapFile) setMap(URL.createObjectURL(mapFile))
             if (thumbnailFile) setThumbnail(URL.createObjectURL(thumbnailFile))
+            if (clearImageFile) setClearImage(URL.createObjectURL(clearImageFile))
         })()
     }, [])
 
     const [ newCheckPoint, setNewCheckPoint] = useState<string>("")
     const [ checkPointDesctiption, setCheckPointDescription ] = useState<string>("")
-    const [ checkPoints, setCheckPoints] = useState<checkPoint[]>(getInitialValue("checkPoints"))
+    const [ checkPoints, setCheckPoints] = useState<checkPoint[]>(Array.isArray(getInitialValue("checkPoints")) ? getInitialValue("checkPoints") : [])
 
     const [ editingId, setEditingId ] = useState<string | null>(null)
 
@@ -77,11 +85,15 @@ function addCheckPoints () {
     const startDate = getInitialValue("startDate") ?? ""
     const endDate = getInitialValue("endDate") ?? ""
     const description = getInitialValue("description") ?? ""
+    const clearMessage = getInitialValue("clearMessage") ?? ""
 
-    const allInput = !!(eventName && rootURL && startDate && endDate && description && checkPoints.length && map && thumbnail)
+    const allInput = !!(eventName.length && rootURL.length >= 2 && startDate && endDate && description.length && map && thumbnail && clearImage && clearMessage.length && checkPoints.length && map && thumbnail && clearImage)
     const sayAllInput = () => {
         alert("すべて入力してください")
     }
+
+    // const [ saveIcon, setSaveIcon ] = useState("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
+
 
     const moveCheckPoint = (id: string, direction: "up" | "down") => {
         setCheckPoints(prev => {
@@ -102,6 +114,7 @@ function addCheckPoints () {
 
             return newCheckPoints
         })
+        saveInput()
     }
 
     const changeCheckPoint = (event: React.FormEvent) => {
@@ -136,7 +149,14 @@ function addCheckPoints () {
 
     const removeCheckPoint = (removeId: string) => {
         setCheckPoints(checkPoints.filter(checkPoint => checkPoint.id !== removeId))
-    } 
+
+        if (removeId === editingId){
+            setEditingId(null)
+            setNewCheckPoint("")
+            setCheckPointDescription("")
+        }
+        saveInput()
+    }
 
     const saveInput = () => {
         const newData: eventData = {
@@ -145,15 +165,25 @@ function addCheckPoints () {
             startDate: getInitialValue("startDate"),
             endDate: getInitialValue("endDate"),
             description: getInitialValue("description"),
+            isClearSound: getInitialValue("isClearSound"),
+            clearMessage: getInitialValue("clearMessage"),
             checkPoints: checkPoints
         }
-
+        
         localStorage.setItem("eventData", JSON.stringify(newData))
     }
 
+        // const saveChangeIcon = () => {
+        // setSaveIcon("m4.5 12.75 6 6 9-13.5")
+        // saveInput
+        // setTimeout(() => {
+        //     setSaveIcon("M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9")
+        // }, 3000)
+    // }
+
     return(
         <>
-            <Header text="チェックポイントの設定"/>
+            <Header text="チェックポイントの設定" to="/"/>
         
             <div className="w-full flex items-center flex-col mb-30">
                 <div className="w-9/10">
@@ -195,11 +225,17 @@ function addCheckPoints () {
                                 value={checkPointDesctiption}
                             />
                             <div className="flex my-4 w-full justify-end">
-                                <button type="submit" className="bg-gray-100 text-gray-900 rounded-full px-4 py-2.5 text-xs font-bold">{ editingId ? "更新" : "+ 追加" }</button>
+                                <button 
+                                    type="submit" 
+                                    className="bg-gray-100 text-gray-900 rounded-full px-4 py-2.5 text-xs font-bold"
+                                    onClick={saveInput}
+                                >
+                                        { editingId ? "更新" : "+ 追加" }
+                                </button>
                             </div>
                         </form>
                         <h2 className="font-bold text-lg mt-4 mb-1 block">現在のチェックポイント</h2>
-                        <p className="text-sm">参加者側で表示される順番を調整できます</p>
+                        <p className="text-xs">参加者側で表示される順番を調整できます</p>
                         <ul className="w-full flex flex-col justify-start overflow-y-scroll h-[calc(100vh-450px)] min-h-32">
                             {checkPoints.map((checkPoint) => (
                                 <li
@@ -246,23 +282,33 @@ function addCheckPoints () {
                             ))}
                         </ul>
                     </div>
+                </div>                
+                <div className="flex w-9/10 fixed bottom-0">
+                    { allInput ? 
+                        <Link 
+                            to="/download" 
+                            onClick={saveInput}
+                            className="w-full text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
+                        >
+                            完了する
+                        </Link>
+                        :
+                        <button
+                            className="w-full text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
+                            onClick={sayAllInput}
+                        >
+                            完了する
+                        </button>
+                    }
+                    {/* <button
+                        className="w-auto text-white text-center font-bold px-2 py-2 rounded-md my-4 bg-blue-500 ml-8"
+                        onClick={() => {saveInput(); saveChangeIcon();}}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d={saveIcon} />
+                        </svg>
+                    </button> */}
                 </div>
-                {/* 下のボタン */}
-                { allInput ? 
-                    <Link 
-                        to="/download" 
-                        onClick={saveInput}
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-blue-500"
-                    >
-                        完了する
-                    </Link> :
-                    <button
-                        className="fixed w-9/10 bottom-0 text-white text-center font-bold px-12 py-2 rounded-md my-4 bg-gray-400"
-                        onClick={sayAllInput}
-                    >
-                        完了する
-                    </button>
-                }
             </div>
         </>
     )
