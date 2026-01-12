@@ -18,12 +18,14 @@ function App() {
 
   return (
     <>
-      <h1 className='mt-4 mb-2 text-4xl text-center'>Sakutto Rally</h1>
+      <h1 className='mt-4 mb-2 text-4xl text-center font-bold'>サクッとラリー</h1>
       <p className='text-center mb-4'>～気軽に運用できるスタンプラリーメーカー～​</p>
-      <img src={mainImage} alt="" className='w-[90%] h-auto m-auto  ' />
-      <p className='text-center w-[84%] m-auto'>スタンプラリーイベントをサクッと気軽に開催できる、ミニマムなスタンプラリーメーカーです。サーバーさえあればファイルの作成も運用にもコストがかかりません。</p>
+      <img src={mainImage} alt="" className='w-[90%] h-auto m-auto max-w-sm' />
+      <p className='w-[84%] m-auto max-w-2xl'>
+      	スタンプラリーイベントをサクッと気軽に開催できる、ミニマムなスタンプラリーメーカーです。サーバーさえあればファイルの作成も運用にもコストがかかりません。
+      </p>
       <div className="w-full flex justify-center items-center flex-col my-8">
-        <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl'>
+        <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl max-w-2xl'>
           
           <div className='flex justify-center items-center gap-4'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
@@ -43,7 +45,7 @@ function App() {
 
         {
             isSaved ? 
-          <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl'>
+          <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl max-w-2xl'>
             <div className='flex justify-center items-center gap-4'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -63,7 +65,7 @@ function App() {
         }
 
 
-        <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl'>
+        <div className='my-4 flex justify-center items-center flex-col bg-gray-100 w-[84%] py-4 rounded-2xl max-w-2xl'>
           
           <div className='flex justify-center items-center gap-4'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
